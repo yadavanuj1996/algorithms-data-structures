@@ -39,7 +39,12 @@ Growth of several common time complexities, and thus help you judge if your algo
 	int x=y.indexOf("mat"); if y="hello mate" then x=6
 	// return first found index match
     similarly lastIndexOf function exist.
-	
+13) Reverse a int using string builder
+	 ```
+	 // n is integer
+	 StringBuilder nInString= new StringBuilder(String.valueOf(n));
+	 System.out.println(nInString.reverse()+"\n");
+	 ```
   
 a)  Bitwise Operators	
 
