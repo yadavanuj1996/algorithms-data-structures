@@ -44,8 +44,15 @@ Growth of several common time complexities, and thus help you judge if your algo
 	 // n is integer
 	 StringBuilder nInString= new StringBuilder(String.valueOf(n));
 	 System.out.println(nInString.reverse()+"\n");
-	 ```
+	```
   
+14) Comapre two string values in java
+	testString.equals("FOXON");
+	
+	( == test the reference not the values) 
+
+
+
 a)  Bitwise Operators	
 
 1)	Bitwise Operators
