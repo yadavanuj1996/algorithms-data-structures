@@ -23,8 +23,8 @@ Growth of several common time complexities, and thus help you judge if your algo
 4) char ch=x.charAt(i); i is int, x is string
 5) String x=y.substring(0,2); if y=abcde then x=ab
 	String x=y.substring(3);  if y=abcde then x=de
-6) 	String array(x) to a
-	int a[]=Arrays.streams(x).mapToInt(Integer::parseInt).toArray();
+6) 	String array(x) to int array (a)
+	int a[]=Arrays.stream(x).mapToInt(Integer::parseInt).toArray();
 7) int to String
 	String a=String.valueOf(b); b is int/long/short
 8) ASCII value  A=65, a=97.  (int)b will return 66
