@@ -5,17 +5,18 @@ String test=Character.toString('c');
 2) 					Big O growth
 		 O(1)<O(log n) < O(sqrt n) < O(n) < O(n log n) < O(n^2) < O(a^n) < O(n!)
 		 
-Growth of several common time complexities, and thus help you judge if your algorithm is fast enough to get  Accepted
-		 Length Of Input(N)	 Worst Accepted Algorithm	 
-		   <= [10..11]			O(N!), O(N^6)
-		   <= [15..18]			O(2^N * N^2)
-		   <= [18..22]			O(2^N * N)
-		   <= 100			O(N^4)
-		   <= 400			O(N^3)
-		   <= 2K			O(N^2 * log N)
-		   <= 10K			O(N^2)
-		   <= 1M			O(N * log N)
-		   <= 100M			O(N), O(log N), O(1)
+Growth of several common time complexities, and thus help you judge if your algorithm is fast enough to get  Accepted  
+		 Length Of Input(N)	 Worst Accepted Algorithm	   
+		   <= [10..11]			O(N!), O(N^6)  
+		   <= [15..18]			O(2^N * N^2)  
+		   <= [18..22]			O(2^N * N)  
+		   <= 100			O(N^4)  
+		   <= 400			O(N^3)  
+		   <= 2K			O(N^2 * log N)  
+		   <= 10K			O(N^2)  
+		   <= 1M			O(N * log N)  
+		   <= 100M			O(N), O(log N), O(1)  
+		   
 		   
 3) Integer.parseInt(br.readLine());
 	Long.parseLong(String x);
@@ -24,7 +25,7 @@ Growth of several common time complexities, and thus help you judge if your algo
 	String x=y.substring(3);  if y=abcde then x=de
 6) 	String array(x) to a
 	int a[]=Arrays.streams(x).mapToInt(Integer::parseInt).toArray();
-7) String to int
+7) int to String
 	String a=String.valueOf(b); b is int/long/short
 8) ASCII value  A=65, a=97.  (int)b will return 66
 9) BufferedReader br=new BufferedReader(new InputStreamReader(System.in))
