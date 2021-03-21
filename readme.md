@@ -17,7 +17,8 @@ Growth of several common time complexities, and thus help you judge if your algo
 		   <= 1M			O(N * log N)  
 		   <= 100M			O(N), O(log N), O(1)  
 		   
-		   
+A computer can roughtly do 10^8 operations per second.
+
 3) Integer.parseInt(br.readLine());
 	Long.parseLong(String x);
 4) char ch=x.charAt(i); i is int, x is string
