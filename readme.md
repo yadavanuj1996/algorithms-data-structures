@@ -16,7 +16,20 @@ Growth of several common time complexities, and thus help you judge if your algo
 		   <= 10K			O(N^2)  
 		   <= 1M			O(N * log N)  
 		   <= 100M			O(N), O(log N), O(1)  
-		   
+
+Rule of Thumb:
+If there are T test cases multiply it to in left side while
+Doing the analysis
+
+1. N <= 10^6 -> O(N)/O(N log N)
+2. N <= 10^5 -> O(N log^2 N)
+3. N <= 10^4 -> O(N^2)/O(N log^2 N)
+4. N <= 1000 -> O(N^2)/O(N^2 log N)
+5. N <= 300/400-> O(N^3)
+6. N <= 200 -> O(2^N))
+7. N <= 15 -> O(N^2 2^N)
+8. N <= 10 -> O(N!)
+
 A computer can roughtly do 10^8 operations per second.
 
 3) Integer.parseInt(br.readLine());
