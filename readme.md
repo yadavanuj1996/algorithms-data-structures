@@ -333,3 +333,13 @@ i) LinkedList
 	addAll​(Collection c)
 	addFirst​(E e) 
 	addLast​(E e)
+	
+j) Stack
+	 Stack <Integer> stack = new Stack<Integer>();
+	 
+	Common methods:
+	push(obj element)
+	pop()
+	empty()  return Boolean
+	peek()
+	search(obj element) 
