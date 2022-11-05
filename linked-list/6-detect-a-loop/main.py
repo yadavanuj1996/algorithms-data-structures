@@ -20,23 +20,6 @@ def detect_loop(lst):
 
 
 """
-FIXME: FInd out why this approach does not work
-detect loop using head 
-def detect_loop(lst):
-    # Write your code here
-    is_loop_detected = False
-    current_node = lst.get_head()
-    current_node = current_node.next_element
-    while current_node is not None:
-        if current_node == lst.get_head():
-            is_loop_detected = True
-            break
-        current_node = current_node.next_element
-    
-    print(is_loop_detected)
-    return is_loop_detected
-
-
 lst = LinkedList()
 lst.insert_at_tail(1)
 lst.insert_at_tail(2)
