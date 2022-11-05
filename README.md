@@ -1,4 +1,8 @@
 # Algorithms and Data structure implementation using python
+- List
+- Linked List
+
+
 ```
                      			Big O growth
 		 O(1)<O(log n) < O(sqrt n) < O(n) < O(n log n) < O(n^2) < O(a^n) < O(n!)
@@ -56,6 +60,5 @@ Some famous Sorting algorithms:-
 	Merge Sort      O(N log N)  O(N log N)        O(N log N)
 
 
-1. List
-2. Linked List
+
 
