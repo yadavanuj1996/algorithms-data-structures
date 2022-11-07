@@ -58,7 +58,39 @@ This is because when an element is removed, the addresses of all the subsequent 
 - front()
 - rear()
 
+```
+from DoublyLinkedList import DoublyLinkedList
 
+class MyQueue:
+    def __init__(self):
+        self.items = DoublyLinkedList()
 
+    def is_empty(self):
+        return self.items.length == 0
+
+    def front(self):
+        if self.is_empty():
+            return None
+        return self.items.get_head()
+
+    def rear(self):
+        if self.is_empty():
+            return None
+        return self.items.tail_node()
+
+    def size(self):
+        return self.items.length
+    
+    def enqueue(self, value):
+        return self.items.insert_tail(value)
+
+    def dequeue(self):
+        return self.items.remove_head()
+
+    def print_list(self):
+        return self.items.__str__()
+```
+
+<img width="977" alt="Screenshot 2022-11-07 at 2 04 50 PM" src="https://user-images.githubusercontent.com/22169012/200263208-f909f945-0157-44d7-ba7e-01c2e051f0fd.png">
 
 
