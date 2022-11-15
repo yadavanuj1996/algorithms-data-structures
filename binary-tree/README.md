@@ -186,3 +186,24 @@ class BinaryTree:
     def find_in_BT(self, node_data):
         return self.find_in_BT_rec(self.root, node_data)
 ```
+
+
+#### Difference between Binary Tree and Binary Search Tree
+
+##### Binary Tree
+- A tree whose elements have at most 2 children is called a binary tree. Since each element in a binary tree can have only 2 children, we typically name them the left and right children. 
+
+![Screenshot 2022-11-15 at 6 28 53 PM](https://user-images.githubusercontent.com/22169012/201925503-63b42764-bc7d-4453-99b5-c381fd901679.png)
+
+
+##### Binary Search Tree
+A binary Search Tree is a node-based binary tree data structure that has the following properties:  
+
+- The left subtree of a node contains only nodes with keys lesser than the node’s key.
+- The right subtree of a node contains only nodes with keys greater than the node’s key.
+- The left and right subtree each must also be a binary search tree.
+- There must be no duplicate nodes.
+
+![Screenshot 2022-11-15 at 6 29 08 PM](https://user-images.githubusercontent.com/22169012/201925563-92af8e52-be36-4068-97c2-e855b7abda0d.png)
+
+
