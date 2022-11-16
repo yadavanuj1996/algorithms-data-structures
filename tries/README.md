@@ -6,6 +6,9 @@
 - The tree trie is derived from “retrieval.” As you can guess, the main purpose of using this structure is to provide fast retrieval. 
 - Tries are mostly used in dictionary word searches, search engine auto-suggestions, and IP routing as well.
 
+![Screenshot 2022-11-16 at 7 29 59 PM](https://user-images.githubusercontent.com/22169012/202200371-1ea62f17-df5e-4e34-92cc-4e4d3961f3e1.png)
+
+
 ## Applications of Tries
 - Autocomplete Words
 - Spell-Checking
