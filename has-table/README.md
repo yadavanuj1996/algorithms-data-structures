@@ -99,6 +99,14 @@ This strategy suggests that if our hash function returns an index that is alread
 
 One drawback of using this strategy is that if we don’t pick an offset wisely, we can end up back where we started and, hence, miss out on so many possible positions in the list.
 
+Example
+Let’s say the size of our list is 20. We pass a key to the hash function which takes the modular and returns 2.
+
+If the second position is already filled, we jump to another location based on the offset value. Let’s say this value is 4. Now we reach the sixth position. If this is also occupied, we repeat the process and move to the tenth position and so on.
+
+![Screenshot 2022-11-16 at 8 17 46 PM](https://user-images.githubusercontent.com/22169012/202212336-0523aa29-a985-484b-8a50-d62be2861815.png)
+
+
 ### Chaining
 In the chaining strategy, each slot of our hash table holds a pointer to another data structure such as a linked list or a tree. Every entry at that index will be inserted into the linked list for that index.
 
@@ -107,3 +115,11 @@ As you can see, chaining allows us to hash multiple key-value pairs at the same 
 This strategy greatly increases performance, but it is costly in terms of space.
 
 ![Screenshot 2022-11-16 at 8 15 54 PM](https://user-images.githubusercontent.com/22169012/202211740-549afe7d-26de-478f-a529-f45fb284ff1d.png)
+
+
+### Resizing the List
+Another way to reduce collisions is to resize the list. We can set a threshold and once it is crossed, we can create a new table which is double the size of the original. All we have to do then is to copy the elements from the previous table.
+
+Resizing the list significantly reduces collisions, but the function itself is costly. Therefore, we need to be careful about the threshold we set. A typical convention is to set the threshold at 0.6, which means that when 60% of the table is filled, the resize operation needs to take place.
+
+Another factor to keep in mind is the content of the hash table. The stored records might be concentrated in one region, leaving the rest of the list empty. However, this behavior will not be picked up by the resize function and you will end up resizing inappropriately.
