@@ -38,3 +38,26 @@ An array of linked lists is used to store all the edges in the graph. The size o
 
 ![Screenshot 2022-11-16 at 7 38 28 PM](https://user-images.githubusercontent.com/22169012/202202251-6556a15a-6bfb-487e-85bb-5d8076b9933f.png)
 
+
+#### Undirected Graph
+- If a graph has n vertices then max possible edges are (n*(n-1))/2 (using formula nC2)
+
+#### Directed Graph
+- If you have n vertices, then all the possible edges become n*(n-1).
+
+
+### Types of graph traversals
+
+#### Breadth First Search (BFS)
+The BFS algorithm earns its name because it grows breadth-wise. All the nodes at a certain level are traversed before moving on to the next level.
+The level-wise expansion ensures that for any starting vertex, you can reach all others, one level at a time.
+
+![Screenshot 2022-11-16 at 7 47 16 PM](https://user-images.githubusercontent.com/22169012/202204319-55a9ba22-8096-490d-8f51-be4d260eb76a.png)
+
+#### Depth First Search (DFS)
+The DFS algorithm is the opposite of BFS in the sense that it grows depth-wise.
+
+Starting from any node, we keep moving to an adjacent node until we reach the farthest level. Then we move back to the starting point and pick another adjacent node. Once again, we probe to the farthest level and move back. This process continues until all nodes are visited.
+
+![Screenshot 2022-11-16 at 7 47 54 PM](https://user-images.githubusercontent.com/22169012/202204441-158c1616-fd57-4d4e-92a9-615d742582ed.png)
+
