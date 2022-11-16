@@ -21,3 +21,20 @@ An edge is the link between two vertices. It can be uni-directional or bi-direct
 - Parallel Edges: Two undirected edges are parallel if they have the same end vertices. Two directed edges are parallel if they have the same starting and ending vertices.
 - Self Loop: This occurs when an edge starts and ends on the same vertex.
 - Adjacency: Two vertices are said to be adjacent if there is an edge connecting them directly.
+
+
+## Representation of Graphs
+
+### Adjacency Matrix
+The adjacency matrix is a two-dimensional matrix where each cell can contain a 0 or 1. If a cell contains 1, there exists an edge between the corresponding vertices e.g., Matrix[0][1]=1
+
+Matrix[0][1]=1 shows that an edge exists between vertex 0 and 1. The row and column headings represent the vertices.
+ 
+![Screenshot 2022-11-16 at 7 37 06 PM](https://user-images.githubusercontent.com/22169012/202201938-b3160c4a-52ef-4fcd-8c60-76a2d6f6c5b6.png)
+
+
+### Adjacency List
+An array of linked lists is used to store all the edges in the graph. The size of the array is equal to the number of vertices in the graph. Each index of the array contains a vertex. This vertex points to a linked list that contains all the vertices connected to this one.
+
+![Screenshot 2022-11-16 at 7 38 28 PM](https://user-images.githubusercontent.com/22169012/202202251-6556a15a-6bfb-487e-85bb-5d8076b9933f.png)
+
