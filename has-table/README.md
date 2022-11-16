@@ -82,3 +82,28 @@ chunk_size = 2
 print("Hash Key: " + str(hash_fold(key, chunk_size)))
 
 ```
+
+## Collisions in Hash Tables
+When you map large keys into a small range of numbers from 0-N, where N is the size of the list, there is a huge possibility that two different keys may return the same index. This phenomenon is called collision.
+
+![Screenshot 2022-11-16 at 8 14 07 PM](https://user-images.githubusercontent.com/22169012/202211210-f5fae953-db78-463d-a602-f6b88a683381.png)
+
+#### Strategies to Handle Collisions
+- There are several ways to work around collisions in the list. The three most common strategies are:
+  - Linear Probing
+  - Chaining
+  - Resizing the list
+  
+### Linear Probing
+This strategy suggests that if our hash function returns an index that is already filled, move to the next index. This increment can be based on a fixed offset value to an already computed index. If that index is also filled, traverse further until a free spot is found.
+
+One drawback of using this strategy is that if we don’t pick an offset wisely, we can end up back where we started and, hence, miss out on so many possible positions in the list.
+
+### Chaining
+In the chaining strategy, each slot of our hash table holds a pointer to another data structure such as a linked list or a tree. Every entry at that index will be inserted into the linked list for that index.
+
+As you can see, chaining allows us to hash multiple key-value pairs at the same index in constant time (insert at head for linked lists).
+
+This strategy greatly increases performance, but it is costly in terms of space.
+
+![Screenshot 2022-11-16 at 8 15 54 PM](https://user-images.githubusercontent.com/22169012/202211740-549afe7d-26de-478f-a529-f45fb284ff1d.png)
