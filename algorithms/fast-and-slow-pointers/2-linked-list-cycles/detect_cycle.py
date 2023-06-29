@@ -10,16 +10,22 @@ Let n be the number of nodes in a linked list.
 - 0 <= n <= 500
 - -10^5 <= node.data <= 10^5
 """
+
+"""
+Time Complexity: O(n)
+Space Complexity: O(1)
+"""
+
 from linked_list import LinkedList
 
 def detect_cycle(head):
-    if head is None or head.next is None:
+    if not head or not head.next:
         return False
-   
+
     slow = head
     fast = head.next
 
-    while not fast.next is None and not fast.next.next is None:
+    while fast.next and fast.next.next:
         if slow == fast:
             return True
         
@@ -45,8 +51,8 @@ def main():
 
 if __name__ == "__main__":
     main()
-"""
 
+"""
 
 """
 Steps of solution

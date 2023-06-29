@@ -43,4 +43,9 @@ def sum_of_squared_digits(n):
 
 
 
-
+"""
+Steps of solution:
+- Initialise a variable slow with the input number and fast with the squared sum of the input number’s digits.
+- If fast is not 1 and also not equal to slow, increment slow by one iteration and fast by two iterations. Essentially, set slow to Sum of Digits(slow) and fast to Sum of Digits(Sum of Digits(fast)).
+- If fast converges to 1, return TRUE, otherwise return FALSE.
+"""
