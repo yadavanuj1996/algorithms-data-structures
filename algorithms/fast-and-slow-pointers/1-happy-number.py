@@ -13,6 +13,18 @@ Return TRUE if n is a happy number, and FALSE if not.
 
 Constraints
 - 1 <= n <= 2^31-1
+
+Test Case:
+Input:
+28
+Output:
+True
+
+Input:
+4
+Output:
+False
+
 """
 
 """

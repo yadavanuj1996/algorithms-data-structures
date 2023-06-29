@@ -8,6 +8,14 @@ If the number of nodes in the linked list is even, there will be two middle node
 
 Constraints:
 - head != Null
+
+Test Case: 
+Note: We have to return the node not the value that node contains
+Input:
+1 -> 2 -> Null
+
+Output:
+2
 """
 
 """

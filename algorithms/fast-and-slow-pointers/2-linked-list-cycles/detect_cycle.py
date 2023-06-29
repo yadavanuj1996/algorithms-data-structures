@@ -9,6 +9,19 @@ Constraints:
 Let n be the number of nodes in a linked list.
 - 0 <= n <= 500
 - -10^5 <= node.data <= 10^5
+
+Test Case:
+Input:
+2 -> 3 -> 4 -> Null
+Output: 
+False
+
+Input:                
+2 -> 4 -> 6 -> 8 -> Point back to node 6
+Output:
+True
+                
+
 """
 
 """
