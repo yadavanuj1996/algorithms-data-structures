@@ -37,3 +37,20 @@ with a cycle.
 The cycle appears because nums contains duplicates. The duplicate node
 is a cycle entrance.
 
+<img width="641" alt="Screenshot 2023-07-01 at 3 54 46 AM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/18e8a3b9-0733-4ba3-a8b3-d2ffa217b96d">
+
+The part 1 will of the solution will find the loop but to find the entrance of the loop we will use Floyd Tortoise and Hare algo
+
+Let’s return to the example we just discussed, using this graphical representation:
+
+
+
+
+A graphical presentation of the array
+
+
+7 is the intersection point where the slow and fast pointers will meet.
+
+8 is the entry point of the cycle, which is our duplicate number.
+
+
