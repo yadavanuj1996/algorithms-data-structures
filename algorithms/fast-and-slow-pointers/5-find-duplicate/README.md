@@ -48,9 +48,42 @@ Let’s return to the example we just discussed, using this graphical representa
 
 A graphical presentation of the array
 
+<img width="641" alt="Screenshot 2023-07-01 at 3 58 03 AM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/dd6fbcba-fa9e-40d4-be55-f849e5e770b5">
 
 7 is the intersection point where the slow and fast pointers will meet.
 
 8 is the entry point of the cycle, which is our duplicate number.
 
+
+The fast pointer is traversing two times faster than the slow pointer. This can be represented by the following equation:
+**d(fast) = 2 d(slow)**
+
+Here, d represents the number of elements traversed (or total steps taken).
+
+<img width="584" alt="Screenshot 2023-07-01 at 4 00 17 AM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/92ce3916-70d5-44f4-bb23-e0ed7ee207be">
+
+
+In the diagram above:
+
+- Green represents the entry point of the cycle.
+- Blue represents the intersection point.
+- Yellow represents the starting point.
+- F represents the steps taken from the starting point to the entry point.
+- a represents the steps taken to reach the intersection point from the entry point.
+- C represents the cycle length, in terms of the number of steps taken to go once around the cycle.
+
+d (slow)= F+a
+d (fast)= F + nC + a
+Also,
+d(fast) = 2 d(slow)
+=> F +nC+a = 2*(F+a)
+
+On simlifying we get
+F = nC - a
+
+Which means the steps between starting point (0) and entry point will be same as steps between intersection point and entry point.
+
+<img width="587" alt="Screenshot 2023-07-01 at 4 04 05 AM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/d7f54e0b-185d-49a4-bcc6-9dd552f9b5ec">
+
+As we can see, nC−a is, in fact, the distance from the intersection point back to the entry point. This illustrates why, when we move one pointer forward, starting at the intersection point, and another pointer from the starting point, the point where they meet is the entry point of the cycle.
 
