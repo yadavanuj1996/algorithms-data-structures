@@ -6,6 +6,8 @@ As the name suggests, the two pointers pattern uses two pointers to iterate over
 
 The pointers can be used to iterate the data structure in one or both directions, depending on the problem statement. For example, to identify whether a string is a palindrome, we can use one pointer to iterate the string from the beginning and the other to iterate it from the end. At each step, we can compare the values of the two pointers and see if they meet the palindrome properties.
 
+<img width="587" alt="Screenshot 2023-07-01 at 6 26 16 PM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/e632d2e9-54db-4a23-bffa-cdaf923612de">
+
 ## Does my problem match this pattern?
 
 ### Yes, if all of these conditions are fulfilled:
