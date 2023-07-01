@@ -8,6 +8,7 @@ Unlike the two pointers approach, which is concerned with data values, the fast 
 
 The key idea is that the pointers start at the same location, but they move forward at different speeds. If there is a cycle, the two are bound to meet at some point in the traversal. To understand the concept, think of two runners on a track. While they start from the same point, they have different running speeds. If the race track is a circle, the faster runner will overtake the slower one after completing a lap. On the other hand, if the track is straight, the faster runner will end the race before the slower one, hence never meeting on the track again. The fast and slow pointers pattern uses the same intuition.
 
+<img width="587" alt="Screenshot 2023-07-01 at 6 27 39 PM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/e824d0c6-bd33-42b0-a898-c973a5a1e5a4">
 
 
 ## Does my problem match this pattern?
