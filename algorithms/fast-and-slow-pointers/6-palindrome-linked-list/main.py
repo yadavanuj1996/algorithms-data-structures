@@ -18,47 +18,67 @@ Output:
 True
 
 """
-from linked_list import LinkedList
+
+"""
+Time Complexity: O(n)
+Space Complexity: O(1)
+"""
+from linked_list import *
 
 def palindrome(head):
+    slow = get_middle_element(head)
+    slow.next = reverse_linked_list(slow.next)
+
+    first_half_iterator = head
+    second_half_iterator = slow.next
+ 
+    while second_half_iterator:
+        if not first_half_iterator.data == second_half_iterator.data:
+            return  False            
+        
+        first_half_iterator = first_half_iterator.next
+        second_half_iterator = second_half_iterator.next
+
+    
+    return True
+    
+   
+
+# Note this middle of linked list code is different than implemented in problem 3-middle-of-the-linked-lise
+# In this problem if linked list has even nodes we will select the earlier one as mid.
+def get_middle_element(head):
     slow = head
     fast = head
-
-    while fast and fast.next:
+    size = 0
+    while fast and fast.next and fast.next.next:
         slow = slow.next
         fast = fast.next.next
+        size = size + 1
 
-    revert_data = reverse_linked_list(slow)
-    check = compare_two_halves(head, revert_data)
-
-    revert_data = reverse_linked_list(revert_data)
-
-    if check:
-        return True
-    return False
+    return slow
 
 
-def compare_two_halves(first_half, second_half):
-    while first_half and second_half:
-        if first_half.data != second_half.data:
-            return False
-        else:
-            first_half = first_half.next
-            second_half = second_half.next
-    return True
+# This function reverse linked list and return the new head pointer
+def reverse_linked_list(head):
+    temp = None
+    current_node = head
+    while current_node:
+        next_node = current_node.next
+        current_node.next = temp
+        temp = current_node
+        current_node = next_node
+    
+    return temp
 
-# Template for traversing a linked list
 
-def reverse_linked_list(slow_ptr):
-    prev = None
-    next = None
-    curr = slow_ptr
-    while curr is not None:
-        next = curr.next
-        curr.next = prev
-        prev = curr
-        curr = next
-    return prev
+def main():
+    input_linked_list = LinkedList()
+    input_linked_list.create_linked_list([1, 2, 3, 3, 2, 1])
+    print(palindrome(input_linked_list.head))
+
+if __name__ == "__main__":
+    main()
+
 
 """
 Steps of solution:
