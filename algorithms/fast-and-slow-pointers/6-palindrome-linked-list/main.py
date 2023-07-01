@@ -70,7 +70,7 @@ def reverse_linked_list(head):
     
     return temp
 
-
+"""
 def main():
     input_linked_list = LinkedList()
     input_linked_list.create_linked_list([1, 2, 3, 3, 2, 1])
@@ -78,7 +78,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+"""
 
 """
 Steps of solution:
