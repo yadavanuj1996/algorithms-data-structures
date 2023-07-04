@@ -22,10 +22,55 @@ Output:
 """
 
 """
-Iteration 1
-# Time Complexity: O(n-k) * k
-# Space Complexity: O(n-k) * k
+# Time Complexity: O(n)
+# Space Complexity: O(n-k)
 """
+def find_repeated_sequences(s, k):
+    size = len(s)
+    if size < k:
+        return result
+    
+    result = set()
+    all_dna_hashes = set()
+    
+    base = 4
+    mapping = {'A': 1, 'C': 2, 'G': 3, 'T': 4}
+
+    # converting characters to numbers
+    nums = []
+    for item in range(size):
+        nums.append(mapping.get(s[item]))
+        
+    # Storing hash value for first k letters and then using it for each next slide in window
+    prev_hash = 0
+    for j in range(k):
+        prev_hash += nums[j] * (base ** (k-j-1))
+    
+    all_dna_hashes.add(prev_hash)
+
+    for i in range(1, size-k+1):
+        current_window_hash = (prev_hash - (nums[i-1] * (4 ** (k-1)))) * 4 + nums[i + k -1]
+        if current_window_hash in all_dna_hashes:
+            result.add(s[i:i+k])
+        else:
+            all_dna_hashes.add(current_window_hash)
+            
+        prev_hash = current_window_hash
+    
+    return result
+
+def main():
+    print(find_repeated_sequences("AAAAACCCCCAAAAACCCCCC", 8))
+
+if __name__ == "__main__":
+    main()
+
+
+"""
+Iteration 1
+# Time Complexity: O( (n-k) * k )
+# Space Complexity: O( (n-k) * k )
+
 def find_repeated_sequences(s, k):
     result = set()
     all_dna_seq = set()
@@ -42,3 +87,5 @@ def find_repeated_sequences(s, k):
             all_dna_seq.add(cur_dna_seq)
     
     return result
+
+"""
