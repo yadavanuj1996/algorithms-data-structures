@@ -21,46 +21,43 @@ Output:
 
 """
 
-"""
 # Time Complexity: O(n)
-# Space Complexity: O(n-k)
-"""
+# Space Complexity: O(n)
 def find_repeated_sequences(s, k):
     size = len(s)
+    # Taking base 4 as there are total 4 characters in dna sequence
+    base = 4
+    # Mapping of character to 4 numbers
+    mapping = {'A': 1, 'C': 2, 'G':3, 'T':4}
+    result = set()
+    all_dna_hash = set()
+    # if k is greater than size then return empty set
     if size < k:
         return result
-    
-    result = set()
-    all_dna_hashes = set()
-    
-    base = 4
-    mapping = {'A': 1, 'C': 2, 'G': 3, 'T': 4}
-
-    # converting characters to numbers
+    # Converting the characters into numbers
     nums = []
-    for item in range(size):
-        nums.append(mapping.get(s[item]))
-        
-    # Storing hash value for first k letters and then using it for each next slide in window
-    prev_hash = 0
+    for i in range(size):
+        nums.append(mapping.get(s[i]))
+    
+    prev_hash = 0 
+    # Making hash of first k characters of string
     for j in range(k):
         prev_hash += nums[j] * (base ** (k-j-1))
-    
-    all_dna_hashes.add(prev_hash)
-
+    all_dna_hash.add(prev_hash)
+    # Starting from 1 to size-k+1 to accommodate all the windows except the first one as it is already done before
     for i in range(1, size-k+1):
-        current_window_hash = (prev_hash - (nums[i-1] * (4 ** (k-1)))) * 4 + nums[i + k -1]
-        if current_window_hash in all_dna_hashes:
-            result.add(s[i:i+k])
-        else:
-            all_dna_hashes.add(current_window_hash)
-            
-        prev_hash = current_window_hash
-    
+        # Calculating hash of current window using prev_hash instead of calculating from scratch, doing it in constant time
+        current_hash = (prev_hash - (nums[i-1]*(base ** (k-1)))) * base + nums[i+k-1]
+        result.add(s[i:i+k]) if current_hash in all_dna_hash else all_dna_hash.add(current_hash)
+        prev_hash = current_hash
+        
     return result
-
+            
 def main():
+    # Case 1
     print(find_repeated_sequences("AAAAACCCCCAAAAACCCCCC", 8))
+    # Case 2
+    #print(find_repeated_sequences("ACTCT", 2))
 
 if __name__ == "__main__":
     main()
