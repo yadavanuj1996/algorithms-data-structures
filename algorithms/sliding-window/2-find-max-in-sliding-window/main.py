@@ -24,6 +24,10 @@ Output:
 
 from collections import deque
 
+# Time Complexity: O(n)
+# Space Complexity O(w) 
+# The size of the deque can grow a maximum up to a size of w.
+
 def find_max_sliding_window(nums, w):
     dq = deque()
     result = []
