@@ -86,3 +86,11 @@ def find_repeated_sequences(s, k):
     return result
 
 """
+
+"""
+Steps of solution:
+- Iterate over the k-length substrings of the input string.
+- Store the hash of the current substring to keep track of all unique substrings.
+- If the hash of a substring has already been stored, the substring is repeated, so we add it to the output.
+- When all substrings have been evaluated, return the output.
+"""
