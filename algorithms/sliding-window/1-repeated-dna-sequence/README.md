@@ -31,3 +31,5 @@ Hash(Current substring) = (Hash(Previous substring) - Hash(first character of pr
 
 ![IMG_6093 (1)](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/5f4c5413-06f2-4e53-b791-0a46ddb1ff1c)
 
+
+![IMG_7132](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/a751a0cc-6d0c-43bd-91ef-9b055eb3471d)
