@@ -66,10 +66,15 @@ if __name__ == "__main__":
 
 """
 Solution Summary
-- We iterate over the input string using two pointers.
-- In each iteration:
-    - If the new character is not present in the hash map, we add it. Otherwise, we increment its frequency by 1
-    - We slide the window one step forward if the number of replacements required in the current window has exceeded our limit.
-    - If the current window is the longest so far, then we update the length of the longest substring that has the same character.
-- Finally, we return the length of the longest substring with the same character after replacements.
+1. Initialize start=0 and end=−1. They represent the indexes of the window's left most and the most characters resepectively.
+2. Initialize a hash map frequencyMap to contain characters and their frequencies.
+3. Initially the size of the window is 0, which we consider as valid. Expand the window by moving endendend pointer forward. We do so until the window becomes invalid.
+4. Every time end moves forward, we update the frquency map of the newly added element. We update maxFrequency if its frequency is the maximum we have seen so far.
+  - We check for validity using the following formula  
+  - end + 1 − start − maxFrequency <= k 
+5. If the window is invalid, move the start pointer ahead by one step. Every time start moves forward, we update the frequency of the outgoing element in the map. At this point the size of the window is equal to the longest valid window we have seen so far. We make a note of the window size in a variable longestSubstringLength.
+6. We repeat the last two steps until the window reaches the right edge of the string.
+7. longestSubstringLength contains the answer.
+
+
 """
