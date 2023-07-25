@@ -1,5 +1,8 @@
 # Repeated DNA Sequences Problem
 
+#### Leetcode Problem Link
+https://leetcode.com/problems/repeated-dna-sequences/description/
+
 ## Statement
 Given a string, s, that represents a DNA subsequence, and a number k, return all the contiguous subsequences
 (substrings) of length k that occur more than once in the string. The order of the returned subsequences does
