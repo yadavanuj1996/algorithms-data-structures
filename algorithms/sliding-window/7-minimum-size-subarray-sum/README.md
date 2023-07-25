@@ -22,7 +22,7 @@ Output:
 
 ## Solution Summary
 - Initialize result_len to positive infinity and l, r, and sum to 0.
-- Use a two-pointer approach (l and r) to traverse the array from the left to the right.
+- Use a sliding window approach (l and r) to traverse the array from the left to the right.
 - While r is less than the array size, do the following:
     - Add the element at r to the sum.
     - While the sum is greater than or equal to the target:
@@ -31,3 +31,6 @@ Output:
     - Increment r to expand the subarray window.
 - After the loop, if result_len remains infinity (never updated), set it to 0 to handle cases when no subarray with a sum greater than or equal to the target is found.
 - Return the result_len as the minimum length of the subarray.
+
+![IMG_7691 (2)](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/9a42443a-b6b1-45eb-9a37-51efe8967e80)
+
