@@ -36,8 +36,8 @@ def find_longest_substring(string):
             l += 1
         
         
-        if result_len < len(string[l:r+1]):
-            result_len = len(string[l:r+1])
+        if result_len < r-l+1 :
+            result_len = r-l+1
             
         r += 1
 
