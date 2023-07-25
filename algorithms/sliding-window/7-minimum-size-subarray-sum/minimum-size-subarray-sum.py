@@ -60,7 +60,7 @@ if __name__ == "__main__":
 """
 Solution Summary
 - Initialize result_len to positive infinity and l, r, and sum to 0.
-- Use a two-pointer approach (l and r) to traverse the array from the left to the right.
+- Use a sliding window approach (l and r) to traverse the array from the left to the right.
 - While r is less than the array size, do the following:
     - Add the element at r to the sum.
     - While the sum is greater than or equal to the target:
