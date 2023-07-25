@@ -20,6 +20,8 @@ Output:
 2
 
 
+<img width="680" alt="Screenshot 2023-07-26 at 4 24 54 AM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/c9798f15-9b0c-4ebb-9b71-a23073a2a324">
+
 ## Solution Summary
 - Initialize result_len to positive infinity and l, r, and sum to 0.
 - Use a sliding window approach (l and r) to traverse the array from the left to the right.
