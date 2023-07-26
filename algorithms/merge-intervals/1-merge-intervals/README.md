@@ -1,5 +1,10 @@
 # Merge Intervals
 
+#### Leetcode problem link
+https://leetcode.com/problems/merge-intervals
+The leetcode solution is solved in the merge-intervals.py file in iteration 2, the solution for leetcode problem
+is slightly different than the original solution.
+
 ## Statement
 We are given an array of closed intervals, intervals, where each interval has a start time and an end time.
 The input array is sorted with respect to the start times of each interval. For example, 
@@ -46,9 +51,34 @@ Output:
 
 
 
+#### Leetcode solution 
+```
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda x: x[0])
+        size = len(intervals)
+        result = []
+        
+        current, next = 0,1 
+        start, end = 0, 1
 
+        while next < size:
+            if intervals[current][start] <= intervals[next][start] <= intervals[current][end]:
+                intervals[current][start] = min(intervals[current][start], intervals[next][start])
+                intervals[current][end] = max(intervals[current][end], intervals[next][end])
 
+                next += 1 
+                continue
+        
+            result.append(intervals[current])
+            current = next
+            next += 1
+        
+        result.append(intervals[current])
 
+        return result
+
+```
 
 
 

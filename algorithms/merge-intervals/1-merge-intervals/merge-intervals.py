@@ -59,3 +59,34 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+"""
+Iteration 2 (This is solution for leetcode version of the problem)
+# https://leetcode.com/problems/merge-intervals/
+# There is an extra step of sorting the intervals as in leetcode the input intervals are not in sorted order
+def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda x: x[0])
+        size = len(intervals)
+        result = []
+        
+        current, next = 0,1 
+        start, end = 0, 1
+
+        while next < size:
+            if intervals[current][start] <= intervals[next][start] <= intervals[current][end]:
+                intervals[current][start] = min(intervals[current][start], intervals[next][start])
+                intervals[current][end] = max(intervals[current][end], intervals[next][end])
+
+                next += 1 
+                continue
+        
+            result.append(intervals[current])
+            current = next
+            next += 1
+        
+        result.append(intervals[current])
+
+        return result
+
+"""
