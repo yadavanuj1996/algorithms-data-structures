@@ -30,3 +30,25 @@ Output:
 - If there is no overlap between the intervals, append the current interval to the result list, and move the pointers to the next interval.
 - After the loop, add the last interval (or the only interval if there is only one) to the result list.
 - Return the result list containing the merged intervals.
+
+
+#### All Cases
+<img width="851" alt="Screenshot 2023-07-27 at 3 15 06 AM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/0495b4d6-4f72-4e72-84f7-72a3e311b3e8">
+
+
+#### Cases that will arise in our problems
+<img width="851" alt="Screenshot 2023-07-27 at 3 13 54 AM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/4a2a42cf-4181-48c6-b16b-47b5b25010bf">
+
+
+<img width="851" alt="Screenshot 2023-07-27 at 3 14 09 AM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/ee26be86-963b-4b95-8a91-a5129d439a21">
+
+![IMG_7774](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/e6fe6e96-6d1a-4f2b-bd78-bce17968e96b)
+
+
+
+
+
+
+
+
+
