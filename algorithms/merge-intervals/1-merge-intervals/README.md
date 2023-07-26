@@ -1,7 +1,7 @@
 # Merge Intervals
 
 #### Leetcode problem link
-https://leetcode.com/problems/merge-intervals
+https://leetcode.com/problems/merge-intervals  
 The leetcode solution is solved in the merge-intervals.py file in iteration 2, the solution for leetcode problem
 is slightly different than the original solution.
 
