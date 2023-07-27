@@ -1,6 +1,9 @@
 
 # Interval List Intersections
 
+#### Leetcode link
+https://leetcode.com/problems/interval-list-intersections/
+
 ## Statement
 For two lists of closed intervals given as input, interval_list_a and interval_list_b, where each interval has 
 its own start and end time, write a function that returns the intersection of the two interval lists.
@@ -38,6 +41,40 @@ Output:
 - Pointer Update: After processing the current intervals, the algorithm updates the pointers first and second based on the end points of the current intervals. The pointer with the smaller end point is incremented, as there can be no further overlaps with the other list for the current interval.
 
 - Final Result: The algorithm continues this process until it reaches the end of either interval_list_a or interval_list_b. The result is a list of intersecting intervals, which is returned as the output.
+
+
+### Leetcode solution
+```
+class Solution:
+    def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
+        interval_list_a = firstList
+        interval_list_b = secondList
+        first,second = 0, 0
+        start, end = 0, 1
+        result = []
+        while first < len(interval_list_a) and second < len(interval_list_b):
+            if self.are_intervals_overlapping(interval_list_a[first], interval_list_b[second]):
+                result.append([
+                        max(interval_list_a[first][start], interval_list_b[second][start]),
+                        min(interval_list_a[first][end], interval_list_b[second][end])
+                ])
+            
+            if interval_list_a[first][end] < interval_list_b[second][end]:
+                first += 1
+            else:
+                second += 1
+        
+        return result
+
+    def are_intervals_overlapping(self, arr1, arr2):
+        start, end = 0, 1
+        if arr2[start] <= arr1[start] <= arr2[end] or arr2[start] <= arr1[end] <= arr2[end] or arr1[start] <= arr2[start] <= arr1[end] or arr1[start] <= arr2[end] <= arr1[end]:
+            return True
+
+        return False
+
+```
+
 
 ![IMG_7783_2](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/60fdf261-8dfb-4167-b8fe-595dbbddbc77)
 
