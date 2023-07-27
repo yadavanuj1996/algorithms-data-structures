@@ -23,6 +23,11 @@ Output:
 [[2, 4], [6, 6], [7, 8], [15, 18]]
 
 
+
+<img width="767" alt="Screenshot 2023-07-27 at 6 37 10 PM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/09e00c37-e1a8-49d0-b58f-b0495d5fe924">
+
+
+
 ## Solution Summary
 - Finding Intersections: The algorithm iterates through both lists simultaneously using two pointers, first and second. It compares intervals at these pointers to identify overlaps.
 
@@ -33,3 +38,7 @@ Output:
 - Pointer Update: After processing the current intervals, the algorithm updates the pointers first and second based on the end points of the current intervals. The pointer with the smaller end point is incremented, as there can be no further overlaps with the other list for the current interval.
 
 - Final Result: The algorithm continues this process until it reaches the end of either interval_list_a or interval_list_b. The result is a list of intersecting intervals, which is returned as the output.
+
+![IMG_7783_2](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/60fdf261-8dfb-4167-b8fe-595dbbddbc77)
+
+
