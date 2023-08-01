@@ -23,51 +23,46 @@ Output:
 
 
 from interval import *
+import heapq
+"""
+Time Complexity: O(n log m), 
+where n is the total number of intervals across all employees and m is the 
+number of employees. This is because the heap can contain a maximum of k elements.
 
+Space Complexity: O(m), 
+where m is the number of employees.
 """
-Time Complexity: O(n log n)
-Space Complexity: O(n)
-"""
+from interval import *
+import heapq
+
 def employee_free_time(schedule):  
-    temp_schedule = []
-    for schedule_item in schedule:
-        for item in schedule_item:
-            temp_schedule.append(Interval(item.start, item.end))
-    
-    temp_schedule.sort(key=lambda x: x.start)
-
-    merged_intervals_result = merge_intervals(temp_schedule)
-    current = 0
-    next = 1
     result = []
-    while next < len(merged_intervals_result):
-        result.append(Interval(merged_intervals_result[current].end, merged_intervals_result[next].start))
-        current = next
-        next += 1
+    min_heap = []
+    
+    size = len(schedule)
+    for i in range(size):
+        min_heap.append((schedule[i][0].start, i, 0))
+        
+    heapq.heapify(min_heap)
+    # Get the first element start time
+    previous = min_heap[0]
+    while min_heap:
+        current_interval_start, i , j = heapq.heappop(min_heap)
+        if current_interval_start > previous[0]:
+            result.append(Interval(schedule[previous[1]][previous[2]].end , schedule[i][j].start) )
+        
+        current_interval_end = schedule[i][j].end
+        if previous[0] < current_interval_end:
+            previous =  (current_interval_end, i , j)
 
+        if j+1 < len(schedule[i]):
+            min_heap.append((schedule[i][j+1].start, i, j+1))
+            heapq.heapify(min_heap)
+
+    
     return result
 
 
-def merge_intervals(intervals):
-    size = len(intervals)
-    result = []
-    current, next = 0,1 
-    
-    while next < size:
-        if intervals[current].start <= intervals[next].start <= intervals[current].end:
-            intervals[current].start = min(intervals[current].start, intervals[next].start)
-            intervals[current].end = max(intervals[current].end, intervals[next].end)
-
-            next += 1 
-            continue
-    
-        result.append(intervals[current])
-        current = next
-        next += 1
-    
-    result.append(intervals[current])
-
-    return result
 
 def main():
     #intervals = [[1, 3], [2, 6], [8, 10], [15, 18], [18, 20]]
@@ -83,10 +78,9 @@ def main():
         [Interval(2, 4), Interval(7, 8)], 
         [Interval(8, 11), Interval(12, 14)]
     ]
-    #employee_free_time(schedule)
-    for item in employee_free_time(schedule):
-        print(item)
-
+    
+    employee_free_time(schedule)
+    
 if __name__ == "__main__":
     main()
 
