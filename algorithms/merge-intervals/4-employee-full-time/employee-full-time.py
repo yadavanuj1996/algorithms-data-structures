@@ -44,8 +44,11 @@ def employee_free_time(schedule):
         min_heap.append((schedule[i][0].start, i, 0))
         
     heapq.heapify(min_heap)
-    # Get the first element start time
-    previous = min_heap[0]
+    # Get the min element end time
+    min_element_employee_index = min_heap[0][1]
+    min_element_employee_interval = min_heap[0][2]
+
+    previous = (schedule[min_element_employee_index][min_element_employee_interval].end, min_element_employee_index, min_element_employee_interval)
     while min_heap:
         current_interval_start, i , j = heapq.heappop(min_heap)
         if current_interval_start > previous[0]:
@@ -61,8 +64,6 @@ def employee_free_time(schedule):
 
     
     return result
-
-
 
 def main():
     #intervals = [[1, 3], [2, 6], [8, 10], [15, 18], [18, 20]]
@@ -80,7 +81,8 @@ def main():
     ]
     
     employee_free_time(schedule)
-    
+        
+        
 if __name__ == "__main__":
     main()
 
