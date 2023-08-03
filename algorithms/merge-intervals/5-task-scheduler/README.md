@@ -27,6 +27,8 @@ n=3
 Output:
 9
 
+<img width="788" alt="Screenshot 2023-08-03 at 7 01 32 AM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/2c205e92-033e-46dd-b521-7f4d50ddc713">
+
 ## Solution Summary
 
 - Create a dictionary current to store the frequency of each task in the input tasks list.
@@ -39,3 +41,8 @@ Output:
 ### Time and Space complexity:
 - Time Complexity: O(m log m), where m is the number of unique tasks in the input list.
 - Space Complexity: O(m), where m is the number of unique tasks in the input list.
+
+![IMG_8302](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/cb73e844-f1de-42f1-9140-c25f8e520721)
+
+![IMG_8303](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/a6027ee3-b688-43c5-ac6e-cb6ff6a0d698)
+
