@@ -13,3 +13,5 @@ Additionally, this pattern also applies when the problem requires reversing sele
     - We specifically need to use additional memory.
     - We aren’t allowed to modify the input linked list.
 
+
+Note: I have solved only 1 problem for now, as i have already solved many such problems in the past.
