@@ -51,3 +51,8 @@ LeftChild=2k+1
 Right Child = 2k+2
 
 
+## Points:
+- heapify: heapify an existing array of n elements: O(n) of time complexity
+- heappush: The help push function performs this operation in O(log(n)) time, where n is the size of the heap.
+- heappop: The heappop function performs this operation in O(log(n)) time, where n is the size of the heap.
+- nlargest, nsmallest: This function returns the k-largest/ k-smallest elements from the heap. This function runs in O(log(k)) time
