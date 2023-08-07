@@ -10,6 +10,7 @@ In some problems, we’re given a set of data such that it can be divided into t
 
 There might be cases where we need to find the two largest numbers from two different data sets. We’ll use two max-heaps to store two different data sets in that case. In other cases, we might need to find the two smallest numbers from two different data sets, and then we would use two min-heaps.
 
+<img width="819" alt="Screenshot 2023-08-08 at 5 07 07 AM" src="https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/897a9194-6732-4699-b147-99bd4518d4e7">
 
 ## Does my problem match this pattern?
 - Yes, if both of these conditions are fulfilled:
