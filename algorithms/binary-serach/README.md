@@ -27,3 +27,6 @@ The below steps will continue until either we found the target or the search spa
 #### Step 3: Trim down the search space:
 - If the target occurs on the left, we should set the high pointer to mid-1. Thus the left half will be the next search space.
 - Similarly, if the target occurs on the right, we should set the low pointer to mid+1. Thus the right half will be the next search space.
+
+#### Video explanation
+https://www.youtube.com/watch?v=MHf6awe89xw
