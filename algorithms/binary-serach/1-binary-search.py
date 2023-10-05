@@ -36,28 +36,27 @@ from collections import deque
 # Space Complexity O(log n) 
 # The size of the deque can grow a maximum up to a size of w.
 class Solution:
-    def __init__(self):
-        self.result = []
-
-    def generateParenthesis(self, n: int) -> list[str]:
-        self.generatePattern(n, 1, 0, "(")
-        return self.result
-
-    def generatePattern(self, n:int, no_of_left_brackets:int, no_of_right_brackets:int, pattern: str):
-        if no_of_left_brackets < no_of_right_brackets or no_of_left_brackets > n or no_of_right_brackets > n:
-            return
-        elif no_of_left_brackets == n and no_of_right_brackets == n: 
-            self.result.append(pattern)
-            return
-        
-        self.generatePattern(n, no_of_left_brackets+1, no_of_right_brackets, pattern+'(')
-        self.generatePattern(n, no_of_left_brackets, no_of_right_brackets+1, pattern+')')
+    def search(self, nums: list[int], target: int) -> int:
+        return self.get_element_using_binary_serach(nums, target, 0, len(nums)-1)
     
+    def get_element_using_binary_serach(self, nums: list[int], target: int, low: int, high: int) -> int:
+        if not low <= high: 
+            return -1
 
+        mid = (low + high) // 2
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            return self.get_element_using_binary_serach(nums, target, mid+1, high)
+        elif nums[mid] > target:
+            return self.get_element_using_binary_serach(nums, target, low, mid-1)
+            
+        
 def main():
-    n = 3
     sol = Solution()
-    print(sol.generateParenthesis(n))
+    input = [-1,0,3,5,9,12]
+    target = 9
+    print(sol.search(input, target))
 
 
 if __name__ == "__main__":
