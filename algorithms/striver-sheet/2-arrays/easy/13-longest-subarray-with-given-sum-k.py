@@ -1,3 +1,12 @@
+"""
+Longest Sub-array With Sum K
+"""
+
+"""
+Time Complexity: O(n)
+Space Complexity: O(1)
+"""
+
 def longestSubarrayWithSumK(a: [int], k: int) -> int:
     # Write your code here
     i = 0
