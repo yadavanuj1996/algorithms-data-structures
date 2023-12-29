@@ -47,6 +47,23 @@ calculation and simply get the value from list (this will save lot of computatio
 
 ![Screenshot 2023-12-29 at 9 31 47 AM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/2ffbacbd-8b3d-48fd-abc2-078193abb293)
 
+
+### How to Identify a DP problem?
+
+When we see a problem, it is very important to identify it as a dynamic programming problem. Generally (but not limited to) if the problem statement asks for the following:
+
+- Count the total number of ways
+- Given multiple ways of doing a task, which way will give the minimum or the maximum output.
+- 
+We can try to apply recursion. Once we get the recursive solution, we can go ahead to convert it to a dynamic programming one.
+
+
+### Pick and not pick technique for recursion problems (used in DP as well)
+
+![IMG_4819](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/573b78e7-af27-496e-a5b8-eab6ab27e9eb)
+
+
+
 ## References
 1. https://takeuforward.org/data-structure/dynamic-programming-introduction/
 2. https://www.youtube.com/watch?v=Hdr64lKQ3e4 (Okayish explaination not best)
