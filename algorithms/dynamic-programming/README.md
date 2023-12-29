@@ -45,6 +45,10 @@ def f(n, dp):
 In DP solution we use a list dp to hold the computed values such that when we require the same value again we won't do the
 calculation and simply get the value from list (this will save lot of computation of problems whose solution we already calculated)
 
+![Screenshot 2023-12-29 at 9 31 47 AM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/2ffbacbd-8b3d-48fd-abc2-078193abb293)
+
 ## References
 1. https://takeuforward.org/data-structure/dynamic-programming-introduction/
 2. https://www.youtube.com/watch?v=Hdr64lKQ3e4 (Okayish explaination not best)
+
+
