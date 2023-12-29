@@ -207,6 +207,9 @@ A binary Search Tree is a node-based binary tree data structure that has the fol
 ![Screenshot 2022-11-15 at 6 29 08 PM](https://user-images.githubusercontent.com/22169012/201925563-92af8e52-be36-4068-97c2-e855b7abda0d.png)
 
 
+#### Pattern to remember Traversal Problems
+![IMG_4817](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/44e8f3c2-fab8-4381-b950-39b6d5b0b6ab)
+
 
 #### Links
 https://takeuforward.org/binary-tree/introduction-to-trees/
