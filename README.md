@@ -61,6 +61,11 @@ Some famous Sorting algorithms:-
 
 
 
+### Python pre defined helper functions
+```
+- ord("a") returns 97 , the ord function takes a string value and returns the ASCII value of character.
+```
+
 ## 15 Leetcode articles I wish I'd read sooner.
 
 - Backtracking Patterns: https://lnkd.in/g9csxVa4
