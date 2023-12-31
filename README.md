@@ -64,6 +64,7 @@ Some famous Sorting algorithms:-
 ### Python pre defined helper functions
 ```
 - ord("a") returns 97 , the ord function takes a string value and returns the ASCII value of character.
+- "a,bcd".find(",") => output 1
 ```
 
 ## 15 Leetcode articles I wish I'd read sooner.
