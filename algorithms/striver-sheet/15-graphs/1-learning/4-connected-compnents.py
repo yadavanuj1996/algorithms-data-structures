@@ -1,6 +1,5 @@
 """
-
- Binary Search
+Find the no of provinces
 
 Problem Link:
 https://www.codingninjas.com/studio/problems/find-the-number-of-states_1377943?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=SUBMISSION
