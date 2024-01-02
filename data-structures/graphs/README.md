@@ -1,6 +1,11 @@
 # Graphs
 
 ## Introduction
+- A graph is a non-linear data structure consisting of nodes that have data and are connected to other nodes through edges.
+- In fact, a tree is a special type of graph with some restriction
+- Nodes are circles represented by numbers. Nodes are also referred to as vertices. They store the data. The numbering of the nodes can be done in any order.
+- Two nodes are connected by a horizontal line called Edge. Edge can be directed or undirected. Basically, pairs of vertices are called edges.
+
 The graph data structure plays a fundamental role in several applications such as GPS, neural networks, peer-to-peer networks, search engine crawlers, garbage collection (Python), and even social networking websites.
 
 ![Screenshot 2022-11-16 at 7 32 32 PM](https://user-images.githubusercontent.com/22169012/202200917-11cbf05e-d4ba-49b7-b249-5065e1ffbc7f.png)
@@ -36,6 +41,8 @@ Matrix[0][1]=1 shows that an edge exists between vertex 0 and 1. The row and col
 ### Adjacency List
 An array of linked lists is used to store all the edges in the graph. The size of the array is equal to the number of vertices in the graph. Each index of the array contains a vertex. This vertex points to a linked list that contains all the vertices connected to this one.
 
+- Adjacency List representation is one we will prefer as it saves more space as compare to matrix representation
+  
 ![Screenshot 2022-11-16 at 7 38 28 PM](https://user-images.githubusercontent.com/22169012/202202251-6556a15a-6bfb-487e-85bb-5d8076b9933f.png)
 
 
@@ -61,3 +68,31 @@ Starting from any node, we keep moving to an adjacent node until we reach the fa
 
 ![Screenshot 2022-11-16 at 7 47 54 PM](https://user-images.githubusercontent.com/22169012/202204441-158c1616-fd57-4d4e-92a9-615d742582ed.png)
 
+
+**Note: Please note the breadth is measured by how far it is from the selected node. The level is measured not by whether it is down or above in graph it is judged by how far it is from the node we are selectin in Graph. Similar concept applies in DFS as well.**
+
+## Connected Components
+
+![Screenshot 2024-01-02 at 12 33 20 PM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/f5f8c6de-e56f-43bc-acde-98efb3f51426)
+
+The above is one graph with 4 components.
+Note: The graph might have nodes that are not connected to any other node of graph.
+
+The graph can be represented using
+```
+N = 10 (total nodes)
+E = 8 (Total edges)
+
+Adjacency List of above graph
+1 2
+1 3
+2 4 
+3 4
+5 6
+5 7
+6 7 
+8 9
+```
+
+### References & Links:
+- https://www.youtube.com/watch?v=M3_pLsDdeuU&list=PLgUwDviBIf0rGEWe64KWas0Nryn7SCRWw&index=1 (striver)
