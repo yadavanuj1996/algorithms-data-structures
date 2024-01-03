@@ -53,6 +53,7 @@ def bfsTraversal(n: int, adj: List[List[int]]) -> List[int]:
     return res
 
 
-adjList = [[1, 2, 3], [4, 7], [5], [6], [], [], [], []]  # [[1,2, 3], [2], [], []]
+#adjList = [[1, 2, 3], [4, 7], [5], [6], [], [], [], []]  # [[1,2, 3], [2], [], []]
+adjList = [ [1, 2, 3], [4, 5, 6], [0, 8], [9], [], [], [7], [], [], [] ]
 n = len(adjList)
 print(bfsTraversal(n, adjList))

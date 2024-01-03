@@ -31,7 +31,7 @@ True
 """
 
 """
-Time complexity: O(N + 2E) + O(N) , roughly equal to O(N+E)
+Time complexity: O(N + 2E) + O(N) roughly equal to O(N+E)
 Space Complexity: O(N) , n is no of nodes
 """
 
@@ -59,44 +59,77 @@ from math import *
 V, E = input().split()
 V, E = int(V), int(E)
 
-node_graph = [[] for i in range(V)]
+node_graph = [[]for i in range(V)]
 
 for i in range(E):
-	a, b = input().split()
-	a, b = int(a), int(b)
-	node_graph[a].append(b)
-	node_graph[b].append(a)
-	
+	first_input, second_input = input().split()
+	first_input, second_input = int(first_input), int(second_input)
+	node_graph[first_input].append(second_input)
+	node_graph[second_input].append(first_input)
+
+
+
 visited_nodes = [0] * V
 
-dq = deque()
+def dfs(node, parent_node):
+	res = False
+	if not visited_nodes[node]:
+		visited_nodes[node] = 1
 
-def bfs(node: int, parent_node: int) -> bool:
-	dq.append((node, parent_node))
+		for adj_node in node_graph[node]:
+			if not adj_node == parent_node and not adj_node == node:
+				if dfs(adj_node, node):
+					res = True
+					break
+	else:
+		res = True
+	
+	return res
 
-	while dq:
-		cur_node = dq[0][0]
-		parent_node = dq[0][1]
-
-		if not visited_nodes[cur_node]:
-			visited_nodes[cur_node] = 1
-			dq.popleft()
-
-			for adj_node in node_graph[cur_node]:
-				if not adj_node == parent_node and not adj_node == cur_node:
-					dq.append((adj_node, cur_node))
-		else:
-			return True
-		
-	return False
 
 
 result = False
 for item in range(V):
 	if not visited_nodes[item]:
-		if bfs(item, item):
+		is_cycle_detected = dfs(item, item)
+		if is_cycle_detected:
 			result = True
 			break
 
-
 print(result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

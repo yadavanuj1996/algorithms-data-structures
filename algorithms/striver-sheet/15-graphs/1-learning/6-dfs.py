@@ -55,11 +55,16 @@ class Solution:
         return result
     
         
+sol = Solution()
+adj_list = [ [1, 2, 3], [4, 5, 6], [8], [9], [], [], [7], [], [], []]
+val = sol.dfsOfGraph(len(adj_list) ,adj_list)
 
+for item in val:
+    print(item, end=" ")
 
 #{ 
  # Driver Code Starts
-
+"""
 if __name__ == '__main__':
     T=int(input())
     while T>0:
@@ -76,3 +81,4 @@ if __name__ == '__main__':
         print()
         T-=1
 # } Driver Code Ends
+"""
