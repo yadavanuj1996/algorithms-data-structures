@@ -90,5 +90,35 @@ def topoSort(node):
 ![IMG_4852](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/15975f3a-bc0c-454c-abab-9b8b35a976c9)
 
 
-![Screenshot 2024-01-04 at 10 03 58 AM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/2127ca99-0ec6-43c8-90a8-2764241bb5d6)
+### Topo sort using BFS (Kahn Algorithm)
+Here we are using a Queue and in-degree array to do topo sort
 
+![IMG_4857_2](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/6ca410d5-c357-4f43-b91b-b6da23b3967c)
+
+```
+    def topoSort(self, V, adj):
+        # Code here
+        in_degree = [0] * V
+        dq = deque()
+        result = []
+        
+        for i in range(len(adj)):
+            for item in adj[i]:
+                in_degree[item] += 1
+        
+        for i in range(len(in_degree)):
+            if in_degree[i] == 0:
+                dq.append(i)
+        
+        while dq:
+            node = dq.popleft()
+            for adj_node in adj[node]:
+                in_degree[adj_node] -= 1
+                if in_degree[adj_node] == 0:
+                    dq.append(adj_node)
+                        
+            result.append(node)
+        
+        return result  
+    
+```
