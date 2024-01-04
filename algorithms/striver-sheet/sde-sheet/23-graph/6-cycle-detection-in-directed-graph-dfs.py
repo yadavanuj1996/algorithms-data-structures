@@ -1,6 +1,4 @@
 """
-Note: This problem is from original SDE sheet not a2z sheet
-
 Course Schedule
 
 Problem Link:
