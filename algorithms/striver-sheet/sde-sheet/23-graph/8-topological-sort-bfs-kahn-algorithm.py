@@ -29,45 +29,38 @@ return an list with topo sorted elements
 """
 
 """
-Time complexity: 
-Space Complexity:
+Time complexity: O(V + E)
+Space Complexity: O(E)
 """
 
-from os import *
-from sys import *
 from collections import deque
-from math import *
-
-def topologicalSort(adj, v, e):
-    node_graph = [ [] for i in range(v) ]
-    for item in adj:
-        # None check for input issue in coding ninjas
-        if item[0] is not None:
-            node_graph[item[0]].append(item[1])
-
+class Solution:
     
-    visited_nodes = [0] * v
-    # stack implementation of deque
-    dq = deque()
-
-    def topoSort(node):
-        if visited_nodes[node]:
-            return 
-
-        visited_nodes[node] = 1
-        for adj_node in node_graph[node]:
-            topoSort(adj_node)
-
-        dq.append(node)
-    
-    for cur_node in range(v):
-        topoSort(cur_node)
-
-    
-    res = []
-    
-    while dq:
-        val = dq.pop()
-        res.append(val)
-    
-    return res
+    #Function to return list containing vertices in Topological order.
+    def topoSort(self, V, adj):
+        # Code here
+        in_degree = [0] * V
+        dq = deque()
+        result = []
+        
+        for i in range(len(adj)):
+            for item in adj[i]:
+                in_degree[item] += 1
+        
+        for i in range(len(in_degree)):
+            if in_degree[i] == 0:
+                dq.append(i)
+        
+        while dq:
+            node = dq.popleft()
+            for adj_node in adj[node]:
+                in_degree[adj_node] -= 1
+                if in_degree[adj_node] == 0:
+                    dq.append(adj_node)
+                        
+            result.append(node)
+        
+        return result  
+                
+                
+                
