@@ -35,9 +35,6 @@ Initial Configuration:
 - All the unvisited adjacent nodes from ‘v’ are visited next and are pushed into the queue. The list of adjacent neighbors of the node can be accessed from the adjacency list.
 - Repeat steps 2 and 3 until the queue becomes empty, and this way you can easily traverse all the nodes in the graph.
 
-![Screenshot 2024-01-04 at 9 01 37 AM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/f3ea899d-ade9-430a-9ee3-c277ec052413)
-
-
 ```
 def bfsTraversal(n: int, adj: List[List[int]]) -> List[int]:
     dq = deque()
@@ -64,7 +61,6 @@ vertex u comes before v in the ordering.
 
 Note: Topological Sorting for a graph is not possible if the graph is not a DAG.\
 
-
 **Exapmple:**  
 Input:   
 ![topological-example](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/83c459ec-8171-46d7-a7d2-01ecc8a33b86)
@@ -74,8 +70,24 @@ Input:
 **Explanation**: The first vertex in topological sorting is always a vertex with an in-degree of 0 (a vertex with no incoming edges).  A topological sorting of the following graph is “5 4 2 3 1 0”. There can be more than one topological sorting for a 
 graph. Another topological sorting of the following graph is “4 5 2 3 1 0”.
 
-![Screenshot 2024-01-04 at 9 19 38 AM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/085b9bc0-bde6-436e-9b86-3f4d5ed8bc32)
 
+### Topo sort using DFS
+Stack based approach 
+Here we are exploring all the adjacent nodes before printing/ selecting the node itself( this is different from simple DFS)
+
+```
+def topoSort(node):
+    if visited[node]:
+        return
+
+    visited[node] = True
+    for adj_node in graph[node]:
+        topoSort(adj_node)
+
+    stack.append(node)
+```
+
+![IMG_4852](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/15975f3a-bc0c-454c-abab-9b8b35a976c9)
 
 
 ![Screenshot 2024-01-04 at 10 03 58 AM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/2127ca99-0ec6-43c8-90a8-2764241bb5d6)
