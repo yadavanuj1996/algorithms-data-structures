@@ -71,4 +71,12 @@ Input:
 
 
 **Output**: 5 4 2 3 1 0  
-**Explanation**: The first vertex in topological sorting is always a vertex with an in-degree of 0 (a vertex with no incoming edges).  A topological sorting of the following graph is “5 4 2 3 1 0”. There can be more than one topological sorting for a graph. Another topological sorting of the following graph is “4 5 2 3 1 0”.
+**Explanation**: The first vertex in topological sorting is always a vertex with an in-degree of 0 (a vertex with no incoming edges).  A topological sorting of the following graph is “5 4 2 3 1 0”. There can be more than one topological sorting for a 
+graph. Another topological sorting of the following graph is “4 5 2 3 1 0”.
+
+![Screenshot 2024-01-04 at 9 19 38 AM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/085b9bc0-bde6-436e-9b86-3f4d5ed8bc32)
+
+
+
+![Screenshot 2024-01-04 at 10 03 58 AM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/2127ca99-0ec6-43c8-90a8-2764241bb5d6)
+
