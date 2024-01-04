@@ -94,5 +94,9 @@ Adjacency List of above graph
 8 9
 ```
 
+## Graph Algorithms
+[Graph Algorithm README](https://github.com/yadavanuj1996/algorithms-data-structures/blob/master/data-structures/graphs/graph-algorithms.md)
+
+
 ### References & Links:
 - https://www.youtube.com/watch?v=M3_pLsDdeuU&list=PLgUwDviBIf0rGEWe64KWas0Nryn7SCRWw&index=1 (striver)
