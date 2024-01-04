@@ -1,20 +1,22 @@
 """
-Note: This problem is from original SDE sheet not a2z sheet
+Note: This problem is from a2z sheet and is solved using code mentioned in file 14-cycle-detection-in-directed-graph.py
+This is the next part of that problem
 
-Course Schedule
+Course Schedule II
 
 Problem Link:
-https://leetcode.com/problems/course-schedule/description/
+https://leetcode.com/problems/course-schedule-ii/description/
 
 Statement
-There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [a, b] indicates that you must take course b first if you want to take course a.
+There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1. You are given an array prerequisites where prerequisites[i] = [ai, bi] indicates that you must take course bi first if you want to take course ai.
 
 For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
-Return true if you can finish all courses. Otherwise, return false.
+Return the ordering of courses you should take to finish all courses. If there are many valid answers, return any of them. If it is impossible to finish all courses, return an empty array.
+
 
 Constraints:
 - 1 <= numCourses <= 2000
-- 0 <= prerequisites.length <= 5000
+- 0 <= prerequisites.length <= numCourses * (numCourses - 1)
 - prerequisites[i].length == 2
 - 0 <= ai, bi < numCourses
 - All the pairs prerequisites[i] are unique.
@@ -28,14 +30,14 @@ numCourses = 2
 prerequisites = [[1,0]]
 
 Output:  
-True
+[0,1]
 
 Input: 
-numCourses = 2
-prerequisites = [[1,0],[0,1]]
+numCourses = 4
+prerequisites = [[1,0],[2,0],[3,1],[3,2]]
 
 Output: 
-False
+[0,2,1,3]
 
 """
 
