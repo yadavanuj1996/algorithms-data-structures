@@ -183,16 +183,65 @@ class Trie:
             node.reduce_count_prefix()
         node.reduce_end_with()
 
+```
 
 
+### Trie Xor related problems approach
+We will use a TrieNode with links length 2, 0 and 1 index to represent the two allowed bits of a binary no.
 
-
+![Screenshot 2024-01-06 at 1 17 45 PM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/0af5505c-4f49-4447-aaa1-ff39aec17915)
 
 
 ```
 
+class TrieNode:
+    def __init__(self):
+        self.links = [None]*2
+    
+    def contains_key(self, bit: int)->bool:
+        return self.links[bit] is not None
+
+    def get(self, bit: int)-> "TrieNode":
+        return self.links[bit]
+    
+    def put(self, bit: int, node: "TrieNode")->None:
+        self.links[bit] = node
+    
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+    
+    def insert(self, num: int):
+        binary_str = '{:032b}'.format(num)
+        node = self.root
+        for cur_char in binary_str:
+            cur_bit = int(cur_char)
+            if not node.contains_key(cur_bit):
+                node.put(cur_bit, TrieNode())
+
+            node = node.get(cur_bit)
+    
+    def find_max_xor(self, num: int):
+        binary_str = '{:032b}'.format(num)
+        node = self.root
+        result = ""
+        for cur_char in binary_str:
+            cur_bit = int(cur_char)
+            reverse_bit = 1 - cur_bit   # 0 for 1 and 1 for 0, flipping the bit
+
+            if node.contains_key(reverse_bit):
+                result += "1"                # cur_bit^reverse_bit will alwasy give 1
+                node = node.get(reverse_bit)
+            else:
+                result += "0"                 # cur_bit^cur_bit will alwasy give 0
+                node = node.get(cur_bit)
+            
+        return int(result, 2)
 
 
+```
+
+![Screenshot 2024-01-06 at 1 18 41 PM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/e4be2d8f-58b2-4100-b4cb-dd6751e2bed7)
 
 
 
