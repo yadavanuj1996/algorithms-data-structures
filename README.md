@@ -65,6 +65,9 @@ Some famous Sorting algorithms:-
 ```
 - ord("a") returns 97 , the ord function takes a string value and returns the ASCII value of character.
 - "a,bcd".find(",") => output 1
+- "a" < "z", return true lexicographically comparsion
+- ["z", "w", "p"].sort() , return the array in lexicographically sorted order. ["p", "w", "z"]
+- '{:032b}'.format(3) , return '00000000000000000000000000000011' 32 bit binary string.
 ```
 
 ## 15 Leetcode articles I wish I'd read sooner.
