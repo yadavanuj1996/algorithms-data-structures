@@ -54,13 +54,18 @@ When we see a problem, it is very important to identify it as a dynamic programm
 
 - Count the total number of ways
 - Given multiple ways of doing a task, which way will give the minimum or the maximum output.
-- 
+
 We can try to apply recursion. Once we get the recursive solution, we can go ahead to convert it to a dynamic programming one.
 
+### Steps to form the recursive solution
+- Express the problem in terms of indexes.
+- Explore all possibilities at a given index
+- Return the maximum of the choices
 
 ### Pick and not pick technique for recursion problems (used in DP as well)
 
 ![IMG_4819](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/573b78e7-af27-496e-a5b8-eab6ab27e9eb)
+
 
 
 
