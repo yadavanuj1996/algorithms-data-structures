@@ -1,8 +1,8 @@
 """
-Count Distinct Substrings
+Maximum xor of two numbers in an array
 
 Problem Link:
-https://www.codingninjas.com/studio/problems/count-distinct-substrings_985292?utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_tries_videos&leftPanelTabValue=PROBLEM
+https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/submissions/
 
 Statement
 Given an integer array nums, return the maximum result of nums[i] XOR nums[j], where 0 <= i <= j < n.
