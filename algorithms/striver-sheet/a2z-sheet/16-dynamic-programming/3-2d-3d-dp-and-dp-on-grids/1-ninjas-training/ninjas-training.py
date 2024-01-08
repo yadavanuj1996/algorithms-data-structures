@@ -38,33 +38,47 @@ Output:
 
 
 """
-Time Complexity: O(N),  Because we’ll be traversing the entire array twice.
-Space Complexity: O(N ),  Because we’ll be creating an auxiliary array to store the maximum amount robbed for every house.
+Time Complexity: O(N) 
+Space Complexity: O(N )
 
 """
-class Solution:
-    def rob(self, nums: List[int]) -> int:
-        n = len(nums)
+from typing import *
 
-        if len(nums) == 1:
-            return nums[0]
+  
+def ninjaTraining(n: int, points: List[List[int]]) -> int:
+    
+    memo = []
+    for item in range(n):
+        memo.append([-1, -1, -1])
+    
+    def get_max_point(i:int, j:int)->int:
+        if i == n:
+            return 0
         
-        def robMax(n, min_index, memo):
-            if n < min_index:
-                return 0
-            
-            if not memo[n] == -1:
-                return memo[n]
-            
-            pick = nums[n] + robMax(n-2, min_index, memo)
-            not_picked = 0 + robMax(n-1, min_index, memo)
+        if not memo[i][j] == -1:
+            return memo[i][j]
+        
+        child_indexes = [0,1,2]
+        child_indexes.remove(j)
+        
+        temp_max = float("-inf")
 
-            memo[n] = max(pick, not_picked)
+        for child_index in child_indexes:
+            temp = points[i][j] + get_max_point(i+1, child_index)
+            temp_max = max(temp_max, temp)
+        
+        memo[i][j] = temp_max
 
-            return memo[n]
-            
-        return max(
-            robMax(n-1, 1, [-1] * (n)),
-            robMax(n-2, 0, [-1] * (n))
-        )
-            
+        return memo[i][j]
+    
+    
+    memo = [[-1, -1, -1] for item in range(n)]   
+    result = float("-inf")
+    for activity_no in range(3):
+        result = max(result, get_max_point(0, activity_no))
+    
+    
+    return result
+    
+
+    
