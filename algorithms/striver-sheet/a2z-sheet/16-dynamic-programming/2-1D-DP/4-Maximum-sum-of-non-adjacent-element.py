@@ -39,9 +39,6 @@ class Solution:
         memo = [-1] * (n)
     
         def robMax(n):
-            if n == 0:
-                return nums[n]
-
             if n < 0:
                 return 0
             
