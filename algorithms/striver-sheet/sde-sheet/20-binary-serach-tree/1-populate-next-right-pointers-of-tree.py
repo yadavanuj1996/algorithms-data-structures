@@ -31,8 +31,8 @@ Output: [1,#,2,3,#,4,5,6,7,#]
 
 
 """
-Time Complexity: 
-Space Complexity: 
+Time Complexity: O(N),      while loop
+Space Complexity: O(N),     size of dq
 """
 """
 # Definition for a Node.
