@@ -32,7 +32,7 @@ Explanation: From the top-left corner, there are a total of 3 ways to reach the 
 
 """
 Time Complexity: O(N*M)    ,     it is O(m+1 * n+1)       
-Space Complexity: O(M*N) ,       as size of memo is mxn
+Space Complexity: O(M*N) + O((n-1) + (m-1)),       O((n-1) + (m-1)) is recursion stack space
 
 """
 
