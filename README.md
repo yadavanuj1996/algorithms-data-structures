@@ -68,6 +68,9 @@ Some famous Sorting algorithms:-
 - "a" < "z", return true lexicographically comparsion
 - ["z", "w", "p"].sort() , return the array in lexicographically sorted order. ["p", "w", "z"]
 - '{:032b}'.format(3) , return '00000000000000000000000000000011' 32 bit binary string.
+- sort() func has 2 parameters
+	- reverse=True will return list sorted in decreasing order
+	- key will take a function as input and on the basis of return value it will sort it.
 ```
 
 ## 15 Leetcode articles I wish I'd read sooner.
