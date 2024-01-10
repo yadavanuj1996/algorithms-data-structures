@@ -31,10 +31,12 @@ Output: -1
 
 
 """
+Solution 1: Memorization Solution
+
 Time Complexity: O(N*T), T is amount/target, n is size of coins array
 Space Complexity: O(N*T) + O(T), where O(T) is auxilary space used for solving problem 
 
-"""
+
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         dp = [[-1 for i in range(amount+1)] for j in range(len(coins))]
@@ -64,9 +66,79 @@ class Solution:
         res = get_min_coins(len(coins)-1, amount) 
         res = -1 if res == float("inf") else res
         return int(res)
-            
 
+"""
+
+"""
+Solution 2: Tabulation Solution
+
+Time Complexity: O(N*T), Reason: There are two nested loops
+Space Complexity: O(N*T) , Reason: We are using an external array of size ‘N*T’. Stack Space is eliminated.
+"""
+
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [[-1 for i in range(amount+1)] for j in range(len(coins))]
+        # step 1:  setting up base case dp values in tabulation
+        for target in range(amount+1):
+            if target % coins[0] == 0:
+                dp[0][target] = target // coins[0]
+            else:
+                dp[0][target] = float("inf")
+
+        # step 2, check the accomode changing parameters i.e., index and n using two for loops
+        for index in range(1, len(coins)):
+            for target in range(amount+1):
+                # step 3 copy the recurence
+                # we are handling the second base case of n < = 0 here in for loop
+                pick_coins = float("inf")
+                if coins[index] <= target:
+                    pick_coins = 1 + dp[index][target-coins[index]]
+                # unpick
+                unpick_coins = 0 + dp[index-1][target]
+                dp[index][target] = min(pick_coins, unpick_coins)
                 
+            
+        res = dp[len(coins)-1][amount]
+        res = -1 if res == float("inf") else res
+        return int(res)
+
+
+
+"""
+Solution 3: Space Optimization with Tabulation Solution
+
+Time Complexity: O(N*T), Reason: There are two nested loops
+Space Complexity: O(T) , Reason: We are using two external arrays of size ‘T+1’.
+
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [[-1 for i in range(amount+1)] for j in range(len(coins))]
+        # step 1:  setting up base case dp values in tabulation
+        for target in range(amount+1):
+            if target % coins[0] == 0:
+                dp[0][target] = target // coins[0]
+            else:
+                dp[0][target] = float("inf")
+
+        # step 2, check the accomode changing parameters i.e., index and n using two for loops
+        for index in range(1, len(coins)):
+            for target in range(amount+1):
+                # step 3 copy the recurence
+                # we are handling the second base case of n < = 0 here in for loop
+                pick_coins = float("inf")
+                if coins[index] <= target:
+                    pick_coins = 1 + dp[index][target-coins[index]]
+                # unpick
+                unpick_coins = 0 + dp[index-1][target]
+                dp[index][target] = min(pick_coins, unpick_coins)
+                
+            
+        res = dp[len(coins)-1][amount]
+        res = -1 if res == float("inf") else res
+        return int(res)
+"""
+
 
 
 """
