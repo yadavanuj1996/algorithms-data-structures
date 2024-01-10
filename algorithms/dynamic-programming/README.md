@@ -75,6 +75,7 @@ Tabulation is a ‘bottom-up’ approach where we start from the base case and r
 - Look at changing parameters
 - Copy the recurence
 
+[Refer Leetcode Problem solution with both memorization and tabulation in detail](../striver-sheet/a2z-sheet/16-dynamic-programming/4-dp-on-subsequences/7-minimum-coins/7-minimum-coins.py)
 
 
 ## References
