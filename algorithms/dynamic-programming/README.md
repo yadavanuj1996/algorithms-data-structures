@@ -54,6 +54,7 @@ When we see a problem, it is very important to identify it as a dynamic programm
 
 - Count the total number of ways
 - Given multiple ways of doing a task, which way will give the minimum or the maximum output.
+- Creating/ doing actions on all/ specific subsequence or subsets.
 
 We can try to apply recursion. Once we get the recursive solution, we can go ahead to convert it to a dynamic programming one.
 
@@ -66,6 +67,13 @@ We can try to apply recursion. Once we get the recursive solution, we can go ahe
 
 ![IMG_4819](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/573b78e7-af27-496e-a5b8-eab6ab27e9eb)
 
+## Tabulation
+Tabulation is a ‘bottom-up’ approach where we start from the base case and reach the final answer that we want.
+
+**3 steps to convert memorization solution to tabulation solution**
+- Base case (Update dp according to base case)
+- Look at changing parameters
+- Copy the recurence
 
 
 
