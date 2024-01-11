@@ -1,113 +1,153 @@
 """
-0 1 Knapsack
+Coin Change
 
 Problem Link:
-https://www.codingninjas.com/studio/problems/0-1-knapsack_920542
+https://leetcode.com/problems/coin-change/description/
 
 Statement
-A thief is robbing a store and can carry a maximal weight of W into his knapsack. There are N items and the
-ith item weighs wi and is of value vi. Considering the constraints of the maximum weight that a knapsack can
-carry, you have to find and return the maximum value that a thief can generate by stealing items.
+You are given an integer array coins representing coins of different denominations and an integer amount
+representing a total amount of money.
+
+Return the fewest number of coins that you need to make up that amount. If that amount of money cannot be 
+made up by any combination of the coins, return -1.
+
+You may assume that you have an infinite number of each kind of coin.
 
 Constraints:
-- 1 <= T <= 10
-- 1 <= N <= 10^2
-- 1<= wi <= 50
-- 1 <= vi <= 10^2
-- 1 <= W <= 10^3
+- 1 <= coins.length <= 12
+- 1 <= coins[i] <= 2^31 - 1
+- 0 <= amount <= 10^4
 
 Test Case:
 
-Sample Input:
-1 
-4
-1 2 4 5
-5 4 8 6
-5
+Input: coins = [1,2,5], amount = 11
+Output: 3
+Explanation: 11 = 5 + 5 + 1
 
-Sample Output:
-13
+Input: coins = [2], amount = 3
+Output: -1
+
 """
 
 
 """
 Solution 1: Memorization Solution
 
-Time Complexity: O(N*W), Reason: There are N*W states therefore at max ‘N*W’ new problems will be solved.
-Note: The two for loops that fill dp value to -1, run the code n*w times, also the func get_max_knapsack_val
-has two params index and w, so the function can be called with any combination
-of index (0 to n) and w (0 to max_weight), thus the time complexity is O(N*W)
+Time Complexity: O(N*T), T is amount/target, n is size of coins array
+Space Complexity: O(N*T) + O(T), where O(T) is auxilary space used for solving problem 
 
-Space Complexity: O(N*W) + O(W), We are using a recursion stack space(O(N)) and a 2D array ( O(N*W)).
-Dp array has size N*W and recursion stack space is O(W) because we are reducing the val of w
-and calling the function again and again.
+
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [[-1 for i in range(amount+1)] for j in range(len(coins))]
+
+        def get_min_coins(index, n):
+            if n < 0:
+                return float("inf")
+
+            if index == 0:
+                if n % coins[0] == 0:
+                    return n / coins[0]
+                else:
+                    return float("inf")
+            
+            if not dp[index][n] == -1:
+                return dp[index][n]
+            
+            
+            
+            #pick
+            pick_min_coins = 1 + get_min_coins(index, n-coins[index])
+            # unpick
+            unpick_coins = 0 + get_min_coins(index-1, n)
+            dp[index][n] = min(pick_min_coins, unpick_coins)
+            return dp[index][n]
+        
+        res = get_min_coins(len(coins)-1, amount) 
+        res = -1 if res == float("inf") else res
+        return int(res)
+
 """
 
-from os import *
-from sys import *
-from collections import *
-from math import *
+"""
+Solution 2: Tabulation Solution
 
-## Read input as specified in the question.
-## Print output as specified in the question.
-test_cases = int(input())
+Time Complexity: O(N*T), Reason: There are two nested loops
+Space Complexity: O(N*T) , Reason: We are using an external array of size ‘N*T’. Stack Space is eliminated.
+"""
 
-
-for _ in range(test_cases):
-    n = int(input())
-    weights = input().strip().split(" ")
-    values = input().strip().split(" ")
-    max_weight = int(input())
-    for i in range(len(weights)):
-        if weights[i]:
-            weights[i] = int(weights[i])
-        if values[i]:
-            values[i] = int(values[i])
-
-
-    dp = [[-1 for _ in range(max_weight+1)] for _ in range(len(weights))]
-
-    def get_max_knapsack_val(index, w):
-        if index == 0:
-            if weights[index] <= w:
-                return values[index]
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [[-1 for i in range(amount+1)] for j in range(len(coins))]
+        # step 1:  setting up base case dp values in tabulation
+        for target in range(amount+1):
+            if target % coins[0] == 0:
+                dp[0][target] = target // coins[0]
             else:
-                return 0
-        
-        
-        if not dp[index][w] == -1:
-            return dp[index][w]
-        
-        # pick
-        pick = 0
-        if w-weights[index] >= 0:
-            pick = values[index] + get_max_knapsack_val(index-1, w-weights[index])
-        #unpick
-        unpick = 0 + get_max_knapsack_val(index-1, w)
+                dp[0][target] = float("inf")
 
-        dp[index][w] = max(pick, unpick)
-        return dp[index][w]
-    
-    print(get_max_knapsack_val(n-1, max_weight))
-        
-    
-
+        # step 2, check the accomode changing parameters i.e., index and n using two for loops
+        for index in range(1, len(coins)):
+            for target in range(amount+1):
+                # step 3 copy the recurence
+                # we are handling the second base case of n < = 0 here in for loop
+                pick_coins = float("inf")
+                if coins[index] <= target:
+                    pick_coins = 1 + dp[index][target-coins[index]]
+                # unpick
+                unpick_coins = 0 + dp[index-1][target]
+                dp[index][target] = min(pick_coins, unpick_coins)
+                
+            
+        res = dp[len(coins)-1][amount]
+        res = -1 if res == float("inf") else res
+        return int(res)
 
 
 
+"""
+Solution 3: Space Optimization with Tabulation Solution
+
+Time Complexity: O(N*T), Reason: There are two nested loops
+Space Complexity: O(N*T) , Reason: We are using an external array of size ‘N*T’. Stack Space is eliminated.
+
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [[-1 for i in range(amount+1)] for j in range(len(coins))]
+        # step 1:  setting up base case dp values in tabulation
+        for target in range(amount+1):
+            if target % coins[0] == 0:
+                dp[0][target] = target // coins[0]
+            else:
+                dp[0][target] = float("inf")
+
+        # step 2, check the accomode changing parameters i.e., index and n using two for loops
+        for index in range(1, len(coins)):
+            for target in range(amount+1):
+                # step 3 copy the recurence
+                # we are handling the second base case of n < = 0 here in for loop
+                pick_coins = float("inf")
+                if coins[index] <= target:
+                    pick_coins = 1 + dp[index][target-coins[index]]
+                # unpick
+                unpick_coins = 0 + dp[index-1][target]
+                dp[index][target] = min(pick_coins, unpick_coins)
+                
+            
+        res = dp[len(coins)-1][amount]
+        res = -1 if res == float("inf") else res
+        return int(res)
+"""
+
+                
 
 
+                
 
 
+"""
 
-
-
-
-
-
-
-
-
-
-
+Note:
+Time Complexity for simple recursion solution will be greater than O(2^n), as in pick case we are repeating it multiple times so it is greater than 2^n, we can call it exponential in this case
+Space complexity for simple recursion problem O(amount) as even it is reduced by 1 it will run amount times
 """
