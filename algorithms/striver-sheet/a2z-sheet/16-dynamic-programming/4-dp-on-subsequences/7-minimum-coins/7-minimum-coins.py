@@ -109,7 +109,7 @@ class Solution:
 Solution 3: Space Optimization with Tabulation Solution
 
 Time Complexity: O(N*T), Reason: There are two nested loops
-Space Complexity: O(N*T) , Reason: We are using an external array of size ‘N*T’. Stack Space is eliminated.
+Space Complexity: O(T) , Reason: We are using an external array of size ‘N*T’. Stack Space is eliminated.
 
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
