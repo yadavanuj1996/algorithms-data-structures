@@ -1,5 +1,5 @@
 Intuition
-- A array can only be divided into two subsets (such that combinigly both contain all the the elements of the
+- A array can only be divided into two subsets (such that combiningly both contain all the the elements of the
 original array) of equal sum if the total sum of all elements in original array in even (Note: array contain
 integers only)
 
