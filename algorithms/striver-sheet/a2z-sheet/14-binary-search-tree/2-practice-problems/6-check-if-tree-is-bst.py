@@ -42,14 +42,7 @@ simply have run the in order traversal on the given binary tree and checked if i
 #         self.val = val
 #         self.left = left
 #         self.right = right
-"""
-Time Complexity: O(N),  actually O(2N) - O(n) for inorder traversal and o(n) for looping over the res
-Space complexity: O(N), again O(2N) - O(n) for recursion stack and O(n) for storing in order result
-Space Complexity: 
 
-We have used the logic that if we run a inorder traversal on BST it returns an sorted array, so we 
-simply have run the in order traversal on the given binary tree and checked if it's sorted or not
-"""
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         res = []
