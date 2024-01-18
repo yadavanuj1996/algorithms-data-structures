@@ -41,19 +41,27 @@ from collections import deque
 class MyStack:
 
     def __init__(self):
-        self.dq = deque()
+        self.queue_1 = deque()
+        self.queue_2 = deque()
 
     def push(self, x: int) -> None:
-        self.dq.append(x)
+        self.queue_2.append(x)
+        while self.queue_1:
+            self.queue_2.append(self.queue_1.popleft())
+        # Swapping the q1 and q2
+        temp = self.queue_1
+        self.queue_1 = self.queue_2
+        self.queue_2 = temp
+
 
     def pop(self) -> int:
-        return self.dq.pop()
+        return self.queue_1.popleft()
 
     def top(self) -> int:
-        return self.dq[-1]
+        return self.queue_1[0]
 
     def empty(self) -> bool:
-        return True if not self.dq else False
+        return not self.queue_1
 
 
 # Your MyStack object will be instantiated and called as such:
