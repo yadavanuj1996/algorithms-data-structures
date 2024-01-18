@@ -36,6 +36,10 @@ Output
 [null, null, null, 2, 2, false]
 """
 
+"""
+Time Complexity: O(N)
+Space Complexity: O(N)
+"""
 from collections import deque
 
 class MyStack:
