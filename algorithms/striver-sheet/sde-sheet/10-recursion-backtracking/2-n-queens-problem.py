@@ -25,6 +25,8 @@ Explanation: There exist two distinct solutions to the 4-queens puzzle as shown 
 # Time Complexity: O(N!)
 # Space Complexity: O(N^2)
 
+"""
+Solution 1
 
 class Solution:
     def solveNQueens(self, n: int) -> List[List[str]]:
@@ -105,7 +107,7 @@ class Solution:
         return result
 
 
-
+"""
 
 
 
