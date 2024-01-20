@@ -43,9 +43,12 @@ lRUCache.get(4);    // return 4
 
 """
 """
+Solution 1:
+Please look for solution 2 as it is far shorter and better for interview perspective
+
 Time Complexity: O(1) , for both get and put operation
 Space Complexity: O(capacity) , for maintaining doubly linked list
-"""
+
 class DoublyLinkedList:
     def __init__(self):
         self.head = DoublyLinkedListNode(None, None)
@@ -137,6 +140,53 @@ class LRUCache:
         self.key_holders[key] = newly_created_node
         self.key_size += 1
 
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
+
+
+"""
+"""
+Time Complexity: O(1) , for both get and put
+Space Complexity: O(capacity), size of LRU cache
+"""        
+from collections import OrderedDict
+
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.ordered_dict = OrderedDict()
+        self.capacity = capacity
+        self.key_size = 0
+          
+
+    def get(self, key: int) -> int:
+        value = self.ordered_dict.get(key) # this will return memory address of the node
+        if value is None:
+            return -1
+    
+        del self.ordered_dict[key]
+        # Note: we are not increasing size here as the element already exists 
+        # in the ordered dict before
+        self.ordered_dict[key] = value
+        return value
+        
+        
+
+    def put(self, key: int, value: int) -> None:
+        if self.ordered_dict.get(key) is not None:
+            del self.ordered_dict[key]
+            self.key_size -= 1
+            
+        if self.key_size == self.capacity:
+            self.ordered_dict.popitem(last=False)
+            self.key_size -= 1
+        
+        
+        self.ordered_dict[key] = value
+        self.key_size += 1
+
         
         
 
@@ -145,3 +195,4 @@ class LRUCache:
 # obj = LRUCache(capacity)
 # param_1 = obj.get(key)
 # obj.put(key,value)
+
