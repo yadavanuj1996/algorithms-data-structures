@@ -37,7 +37,7 @@ Window position                Max
 
 Time Complexity: O(n^2)
 Space Complexity: O(n)
-"""
+
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         res = []
@@ -50,3 +50,35 @@ class Solution:
             res.append(max_val)
         
         return res
+"""
+"""
+Optimized Solution (All test cases passed), using decreasing deque approach
+Time Complexity: O(n)
+Space Complexity: O(n)
+"""
+from collections import deque
+
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        result = []
+        dq = deque()
+        
+        for i in range(len(nums)):
+            # before adding we are removing all the index whose values are less than newly 
+            # added index value as we need to maintain a decreasing order deque
+            while dq and nums[dq[-1]] < nums[i]:
+                dq.pop()
+
+            dq.append(i)
+
+            # popping from head if the head index is less than window start value
+            # here i-k-1 represents the current window start value
+            window_start = i - (k - 1)
+            while dq and dq[0] < window_start:
+                dq.popleft()
+            
+            # Adding the head element in the result
+            if i >= k-1:
+                result.append(nums[dq[0]])
+            
+        return result
