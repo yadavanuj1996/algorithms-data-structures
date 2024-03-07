@@ -1,4 +1,4 @@
-
+![Screenshot 2024-03-07 at 4 15 47 AM](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/acd8d361-b759-4396-8f01-a31cf79877e4)
 
 Algorithm Steps:
 - Initially take two pointers, fast and slow. The fast pointer takes two steps ahead while the slow pointer will take a single step ahead for each iteration.
