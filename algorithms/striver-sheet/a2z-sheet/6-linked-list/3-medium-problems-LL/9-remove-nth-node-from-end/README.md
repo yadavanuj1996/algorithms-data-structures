@@ -1,14 +1,4 @@
-Sure, here's a succinct summary of the algorithm for a GitHub readme:
-
-- **Algorithm**: Remove Nth Node From End of List
-- **Input**: 
-  - `head`: Head node of a singly-linked list.
-  - `n`: Position of the node to remove from the end of the list.
-- **Output**: 
-  - Head of the linked list after removal.
-
-**Steps**:
-
+**Algorithm Summary**
 1. Initialize two pointers, `slow` and `fast`, both pointing to the head of the linked list.
 2. Move the `fast` pointer n steps ahead.
 3. Handle the case where the node to be removed is the head of the linked list:
