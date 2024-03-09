@@ -1,4 +1,4 @@
-**Algorithm Summary**
+**Algorithm Summary** (Approach 2 Summary)
 1. Initialize two pointers, `slow` and `fast`, both pointing to the head of the linked list.
 2. Move the `fast` pointer n steps ahead.
 3. Handle the case where the node to be removed is the head of the linked list:
