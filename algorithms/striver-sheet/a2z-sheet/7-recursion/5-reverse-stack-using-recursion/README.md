@@ -16,3 +16,4 @@
   - The recursion depth is proportional to the number of elements in the stack.
   - Each recursive call consumes a constant amount of space on the function call stack.
 
+![IMG_7069](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/8caa14a4-ed86-4f40-8aba-42a7fd5f897e)
