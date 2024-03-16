@@ -9,3 +9,4 @@
 ## Complexity:
 - **Time Complexity:** O(N^2) - Recursion involves potentially O(N) operations for each element in the stack.
 - **Space Complexity:** O(N) - Due to recursion stack and space used by the stack representation.
+![IMG_7068](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/adeeadcd-7e07-4536-8aee-5192ed7c27ec)
