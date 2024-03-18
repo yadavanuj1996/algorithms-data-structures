@@ -1,6 +1,9 @@
 """
 Sort Stack
 
+Problem Link:
+https://www.codingninjas.com/studio/problems/sort-stack_1229505
+
 Statement
 You are given a stack ‘S’. Your task is to sort the sack recursively.
 Note:

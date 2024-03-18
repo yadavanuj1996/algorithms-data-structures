@@ -1,6 +1,9 @@
 """
 Count Good Numbers
 
+Problem Link:
+https://leetcode.com/problems/count-good-numbers/description/
+
 Statement
 A digit string is good if the digits (0-indexed) at even indices are even and the digits at odd indices are
 prime (2, 3, 5, or 7).

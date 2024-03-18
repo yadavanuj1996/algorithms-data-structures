@@ -1,6 +1,8 @@
-
 """
 Pow(x, n)
+
+Problem Link:
+https://leetcode.com/problems/powx-n/
 
 Statement
 Implement pow(x, n), which calculates x raised to the power n (i.e., x^n).

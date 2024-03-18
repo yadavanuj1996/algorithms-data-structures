@@ -1,6 +1,9 @@
 """
 Reverse Stack Using Recursion
 
+Problem Link:
+https://www.codingninjas.com/studio/problems/reverse-stack-using-recursion_631875
+
 Statement
 Reverse a given stack of 'N' integers using recursion. You are required to make changes in the input 
 parameter itself.
