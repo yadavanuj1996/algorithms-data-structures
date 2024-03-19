@@ -16,27 +16,28 @@ Space Complexity: O(n)
 from typing import *
 
 def isSubsetPresent(n:int, k: int, a: List[int]) -> bool:
-    # Write your code here.
-    return find(0, 0 , a, n, k)
+    n = len(a)
 
-def find(index, sum, nums, n, k):
-    if sum > k: 
-        return False
-        
-    if index == n:
-        if sum == k:
-            return True
-        else:
+    def find_subset_with_given_sum(index=0, sum=0):
+        if sum > k:
             return False
 
-    # pick 
-    if find(index+1, sum+nums[index], nums, n, k):
-        return True
-    # unpick
-    if find(index+1, sum, nums, n, k):
-        return True
+        if index == n:
+            if sum == k:
+                return True
+                
+            return False
+        
+        # pick
+        if find_subset_with_given_sum(index+1, sum+a[index]):
+            return True
+        # unpick
+        if find_subset_with_given_sum(index+1, sum):
+            return True
+
+        return False
     
-    return False
+    return find_subset_with_given_sum()
 
 """
 
