@@ -1,3 +1,7 @@
+![IMG_7202](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/cb9877fd-2f4f-4b04-9140-5c2210528137)
+![IMG_7203](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/9ac7f0f5-ea34-447c-9a8d-de5162e7b3ef)
+![IMG_7204](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/828f9f1e-867e-4d88-bad8-43ce6a60dfd7)
+
 ### Algorithm Summary
 To solve this problem efficiently, we use a prefix sum technique combined with a dict.
 
