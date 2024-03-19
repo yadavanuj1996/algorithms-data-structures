@@ -1,5 +1,5 @@
 """
-Subarrays with Sum k'
+Subarrays with Sum k
 
 Problem Link:
 https://www.codingninjas.com/studio/problems/subarrays-with-sum-%E2%80%98k'_6922076
@@ -43,24 +43,75 @@ Explanation: Subarrays whose sum = 3 are:
 
 
 """
-Time Complexity: O(2^n) 
-Space Complexity: O(n) 
-"""
-from typing import List
+Brute Force Solution (Not all test cases will pass)
 
-def generateString(N: int) -> List[str]:
-    # write your code here
+Time Complexity: O(N^2)
+Space Complexity: O(N) 
+
+
+def subarraysWithSumK( a:[int], k:int) ->[[int]]:
+    # Write your code here
     result = []
-    def generate_string(index, sub_string, last=None):
-        if index == N:
-            result.append(sub_string)
-            return
-        
-        # pick
-        if not last == 1:
-            generate_string(index+1, sub_string+"1", 1)
-        #unpick
-        generate_string(index+1, sub_string+"0", 0)
-
-    generate_string(0, "")
+    for i in range(len(a)):
+        sum = 0
+        for j in range(i, len(a)):
+            sum += a[j]
+            
+            if sum == k:
+                result.append(a[i:j+1])
+    
     return result
+"""
+
+
+"""
+Two pointer Recursion based Solution
+Time complexity: O(n)
+Space Complexity: O(n)
+
+def subarraysWithSumK( a:[int], k:int) ->[[int]]:
+        result = []
+        n = len(a)
+        def subarray_with_sum_k(start, end, sum):
+            if start >= n or end >= n:
+                return 
+
+            if sum <= k:
+                if sum == k:
+                    result.append(a[start:end+1])
+                    
+                if end + 1 == n:
+                    return
+
+                subarray_with_sum_k(start, end+1, sum + a[end+1])
+            elif sum > k:
+                subarray_with_sum_k(start+1, end, sum - a[start])
+           
+        subarray_with_sum_k(0,0,a[0])
+        #print(result)
+        return result
+
+"""
+
+
+"""
+Prefix sum approach 
+Time Complexity: O(N)
+Space Complexity: O(N) 
+"""
+
+def subarraysWithSumK( a:[int], k:int) ->[[int]]:
+    # Write your code here
+    pre_sum = 0 # prefix sum
+    old_pre_sums = {0: -1}
+    result = []
+    for i in range(len(a)):
+        pre_sum += a[i]
+        if pre_sum - k in old_pre_sums:
+            result.append(a[old_pre_sums[pre_sum - k]+1:i+1])
+
+        old_pre_sums[pre_sum] = i
+
+    return result
+            
+
