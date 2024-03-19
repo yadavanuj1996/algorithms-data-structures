@@ -1,8 +1,31 @@
 """
-Note: This problem was solved using recursion alone in first iteration, but we have imporoved time
-complexity by adding Dynamic programming solutin in iteration 2
+Subset Sum
+
 Problem Link:
 https://www.codingninjas.com/studio/problems/subset-sum_630213?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTabValue=PROBLEM
+
+Statement:
+You are given an array 'A' of 'N' integers. You have to return true if there exists a subset of elements
+of 'A' that sums up to 'K'. Otherwise, return false.
+
+For Example
+'N' = 3, 'K' = 5, 'A' = [1, 2, 3]. Subset [2, 3] has sum equal to K. So our answer is True.
+
+
+Note: This problem was solved using recursion alone in first iteration, but we have imporoved time
+complexity by adding Dynamic programming solution in iteration 2
+
+Sample Input 1 :
+4 13
+4 3 5 2
+Sample Output 1 :
+No
+
+Constraints :
+- 1 <= 'N' <= 10^3
+- 1 <= 'A[i]' <= 10^3
+- 1 <= 'K' <= 10^3
+- Time Limit: 1 sec
 
 """
 

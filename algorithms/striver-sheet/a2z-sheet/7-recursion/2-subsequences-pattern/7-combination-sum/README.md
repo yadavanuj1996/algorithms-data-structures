@@ -1,0 +1,11 @@
+## Algorithm Summary
+- Initialize an empty list to store valid combinations.
+- Define a recursive function `combination_sum(index, sum, arr)` to explore combinations.
+  - At each step, the function evaluates whether the current combination satisfies the target sum or if it has exhausted the available candidates.
+  - If the target sum is achieved, the current combination is appended to the result list.
+  - If the sum becomes negative or the index exceeds the length of the candidates list, the function backtracks.
+  - Recursively explore two possibilities:
+    - Include the current candidate in the combination and adjust the sum accordingly.
+    - Move to the next candidate without including the current one.
+- Start the recursive function with initial parameters: index = 0, sum = target, and an empty combination array.
+- Return the list of valid combinations found during the exploration.
