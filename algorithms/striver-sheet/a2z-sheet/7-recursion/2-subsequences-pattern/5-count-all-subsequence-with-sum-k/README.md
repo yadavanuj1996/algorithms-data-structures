@@ -1,6 +1,9 @@
+
+![IMG_7205](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/b5daca94-9dc7-41f2-8a58-6d522d1b0787)
+
 ## Prefix Sum approach (optimized)
 
-## Algorithm Summary:
+### Algorithm Summary:
 
 1. **Initialization:** Initialize variables `pre_sum` to track the prefix sum, `old_pre_sums` as a dictionary to store previously encountered prefix sums along with their indices, and `result` as an empty list to store the resulting subarrays.
 2. **Prefix Sum Calculation:** Compute the prefix sum by adding the current element `a[i]` to the previous prefix sum `pre_sum`.
