@@ -1,5 +1,6 @@
-## Approach
+![IMG_7242](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/672dd79e-4820-4882-9491-fdc053959944)
 
+## Approach
 1. Sort the list of candidates to ensure that duplicates are adjacent.
 2. Implement a recursive function `combination_sum_use_once` to find combinations:
    - Start with an empty array to hold the current combination.
