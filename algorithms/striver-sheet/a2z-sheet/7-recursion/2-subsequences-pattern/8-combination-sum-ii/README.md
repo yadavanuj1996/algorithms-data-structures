@@ -1,5 +1,19 @@
-## Approach
+![IMG_7242](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/672dd79e-4820-4882-9491-fdc053959944)
 
+For array and recursion problems there are two patterns-
+1. pick/ unpick
+2. try all combinations (loop thorugh the indexes)
+
+We have used approach 2 in this problem.
+
+We have sorted the input array before approaching the actual problem as we need to print unique 
+subsequences but the elements in candidates are not unique so let's say
+if candidates = [1,2,1] it will give (1,2) and (2,1) subsequences but both contain the same elements and we thus it is not unique
+so we sort candidate [1,1,2] and while printing subsequences we will skip the duplicate element (only 1 at index 0 will be picked
+but the 1 at index 1 will not be picked to avoid the duplicate subsequence). The sorting will make it easy for us to remove
+the picking of duplicate items.
+
+## Approach
 1. Sort the list of candidates to ensure that duplicates are adjacent.
 2. Implement a recursive function `combination_sum_use_once` to find combinations:
    - Start with an empty array to hold the current combination.
