@@ -1,20 +1,14 @@
-**Algorithm Summary:**
+## Algorithm: Subsets with Duplicates
 
-This is simple implementation of pick/ unpick approach.
-
-1. **Inputs:** A list of integers `num`.
-2. **Outputs:** A list of integers representing subset sums.
-3. **Initialization:** 
-    - `n`: Length of the input list `num`.
-    - `result`: List to store subset sums.
-4. **Helper Function `sum_of_subset`**:
-    - Parameters: `index`, `num`, `sum`.
-    - Base Case: If `index` equals `n`, append the current sum to `result` and return.
-    - Recursively call `sum_of_subset`:
-        - Pick the current element (`num[index]`) and add it to the current sum.
-        - Don't pick the current element (`num[index]`) and continue.
-5. **Call `sum_of_subset(0, num, 0)`** to start generating subset sums.
-6. **Sort the `result` list**.
-7. **Return the sorted `result` list**.
-
-This algorithm utilizes a recursive approach to generate all possible combinations of subset sums.
+1. **Input**: A list of integers `nums`.
+2. Initialize an empty list `result` to store the subsets.
+3. Get the length of the input list `n`.
+4. Sort the input list `nums`.
+5. Define a recursive function `get_subset_with_dup(index, arr)` to generate subsets with duplicates:
+    - Base case: If `index` reaches `n`, append the current subset `arr` to `result`.
+    - Pick the current element at `index` and recurse by calling `get_subset_with_dup(index + 1, arr + [nums[index]])`.
+    - Unpick the current element if there are duplicates:
+        - Increment `index` as long as the next element is a duplicate.
+    - Recurse without picking the current element by calling `get_subset_with_dup(index + 1, arr)`.
+6. Start recursion with initial parameters `get_subset_with_dup(0, [])`.
+7. Return the `result` list containing all generated subsets with duplicates.
