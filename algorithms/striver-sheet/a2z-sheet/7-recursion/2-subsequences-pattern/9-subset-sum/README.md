@@ -1,3 +1,5 @@
+![IMG_7281](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/17e7c05a-695d-47a0-9f4e-bd60e1fa6b91)
+
 **Algorithm Summary:**
 
 This is simple implementation of pick/ unpick approach.
