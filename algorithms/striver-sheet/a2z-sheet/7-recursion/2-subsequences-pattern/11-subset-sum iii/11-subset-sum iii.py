@@ -1,99 +1,61 @@
 """
-Combination Sum III
+Letter Combinations of a Phone Number
 
 Problem Link:
-https://leetcode.com/problems/combination-sum-iii/
+https://leetcode.com/problems/letter-combinations-of-a-phone-number
 
 Statement
-Find all valid combinations of k numbers that sum up to n such that the following conditions are true:
+Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number
+could represent. Return the answer in any order.
 
-Only numbers 1 through 9 are used. Each number is used at most once.
-
-Return a list of all possible valid combinations. The list must not contain the same combination twice, 
-and the combinations may be returned in any order.
+A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not
+map to any letters.
 
 Constraints:
-- 2 <= k <= 9
-- 1 <= n <= 60
+- 0 <= digits.length <= 4
+- digits[i] is a digit in the range ['2', '9'].
 
 
 Test Case:
 
-Input: k = 3, n = 9
-Output: [[1,2,6],[1,3,5],[2,3,4]]
-
-Explanation:
-1 + 2 + 6 = 9
-1 + 3 + 5 = 9
-2 + 3 + 4 = 9
-There are no other valid combinations.
+Input: digits = "23"
+Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
 """
-
-"""
-Approach 1: Simple pick/ unpick approach with digit in arr
-Time Complexity:
-Space Complexity:
-
-class Solution:
-    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
-        result= []
-        input = [1,2,3,4,5,6,7,8,9]
-        size = len(input)
-
-        def combination_sum_3(index, sum, arr):
-            if sum < 0 or len(arr) > k:
-                return
-
-            if index == size:
-                if sum == 0 and len(arr) == k:
-                    print(arr)
-                    result.append(arr.copy())
-
-                return
-            
-            # pick 
-            combination_sum_3(index+1, sum-input[index], arr+[input[index]])
-            # unpick
-            combination_sum_3(index+1, sum, arr)
-        
-        combination_sum_3(0, n, [])
-        return result
-            
-
-"""
-
 
 """
 Time complexity: O(2^9)
 Space complexity: O(k)
 """
 class Solution:
-    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
-        result= []
-        size = 10
+    def letterCombinations(self, digits: str) -> List[str]:
+        phone_dict = {
+            2: ["a", "b", "c"],
+            3: ["d", "e", "f"],
+            4: ["g", "h", "i"],
+            5: ["j", "k", "l"],
+            6: ["m", "n", "o"],
+            7: ["p", "q", "r", "s"],
+            8: ["t", "u", "v"],
+            9: ["w", "x", "y", "z"]
+        }
 
-        def combination_sum_3(index, sum, arr):
-            if sum < 0 or len(arr) > k:
-                return
-
-            if index == size:
-                if sum == 0 and len(arr) == k:
-                    result.append(arr.copy())
-
-                return
-            
-            # pick 
-            combination_sum_3(index+1, sum - index, arr+[index])
-            # unpick
-            combination_sum_3(index+1, sum, arr)
+        n = len(digits)
+        result = []
         
-        combination_sum_3(1, n, [])
+        def letter_combinations(index, cur_seq):
+            if index == n:
+                # if is used to handle the case of digits being empty ""
+                if cur_seq:
+                    result.append(cur_seq)
+
+                return 
+            
+            for item in phone_dict[int(digits[index])]:
+                letter_combinations(index+1, cur_seq+item)
+        
+        letter_combinations(0, "")
+    
         return result
-            
-                
-            
 
             
 
-            
-            
