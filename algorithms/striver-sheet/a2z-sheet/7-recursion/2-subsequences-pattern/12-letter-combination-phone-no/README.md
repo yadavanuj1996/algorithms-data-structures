@@ -1,10 +1,12 @@
+![IMG_7282](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/38660dee-827f-4222-a947-95e4129afb1c)
+
 Algorithm Summary:
 
 1. **Create a dictionary `phone_dict`** that maps each digit to the corresponding letters on a phone keypad.
-
-2. **Initialize an empty list `result`** to store the generated combinations.
-
-3. **Define a recursive function `letter_combinations`** that takes two parameters: `index` and `cur_seq`. 
+2. 
+3. **Initialize an empty list `result`** to store the generated combinations.
+4. 
+5. **Define a recursive function `letter_combinations`** that takes two parameters: `index` and `cur_seq`. 
     - `index` represents the current index in the digits string.
     - `cur_seq` represents the current combination being generated.
     
@@ -14,6 +16,6 @@ Algorithm Summary:
     - Iterate through the letters corresponding to the digit at the current index, obtained from the `phone_dict`.
     - Recursively call `letter_combinations` with the incremented `index` and the updated `cur_seq` by appending the current letter.
 
-4. **Call `letter_combinations`** with initial parameters `index=0` and `cur_seq=""`.
+6. **Call `letter_combinations`** with initial parameters `index=0` and `cur_seq=""`.
 
-5. **Return the `result` list** containing all the generated combinations.
+7. **Return the `result` list** containing all the generated combinations.
