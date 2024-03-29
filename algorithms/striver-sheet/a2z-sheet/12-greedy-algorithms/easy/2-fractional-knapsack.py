@@ -55,7 +55,6 @@ import atexit
 import io
 import sys
 
-#Contributed by : Nagendra Jha
 
 class Item:
     def __init__(self,val,w):
