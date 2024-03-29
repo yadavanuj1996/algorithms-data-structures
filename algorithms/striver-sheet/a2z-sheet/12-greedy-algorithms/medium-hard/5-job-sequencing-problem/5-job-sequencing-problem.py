@@ -50,8 +50,8 @@ Sample Output 1 :
 """
 
 """
-Time complexity: 
-Space complexity: 
+Time complexity: O(N log N) + O(N*M),       N is length of jobs arr and M is deadline worst case value (max value of deadline)
+Space complexity: O(M),                     M is the maximum deadline available
 """
 from os import *
 from sys import *
