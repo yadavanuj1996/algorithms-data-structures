@@ -1,3 +1,5 @@
+![IMG_7511](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/d68aef2b-b513-4e57-bede-8fa256fde535)
+
 Algorithm Summary: Calculate Minimum Platforms
 
 Description:
