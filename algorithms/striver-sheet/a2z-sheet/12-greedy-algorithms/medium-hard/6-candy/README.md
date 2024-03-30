@@ -1,4 +1,7 @@
 ### Intuition
+
+![IMG_7572](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/284ace25-cf07-4ba8-bfa1-5124e1492013)
+
 We will go from left to right and compare each value to it's left ratings and if the cur rating is greater than
 it's left neighbour rating, we will increase it candy val 1 more than the left candy value
 
