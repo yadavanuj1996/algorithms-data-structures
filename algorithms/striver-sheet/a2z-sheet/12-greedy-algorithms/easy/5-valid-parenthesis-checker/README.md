@@ -1,3 +1,5 @@
+![github vid update](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/ed6668f3-3283-4199-b3cb-3f11aa7d2261)
+
 **Algorithm Summary**
 
 - Initialize counters and stacks to keep track of left parentheses indices and star indices.
