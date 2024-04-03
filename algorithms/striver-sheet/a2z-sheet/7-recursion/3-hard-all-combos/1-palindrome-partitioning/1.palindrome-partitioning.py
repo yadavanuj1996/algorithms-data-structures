@@ -1,7 +1,7 @@
 class Solution:
     result = []
 
-    def partition(self, s: str) -> list[list[str]]:
+    def partition(self, s: str) -> List[List[str]]:
         self.result = []
         if len(s) == 1:
             return [[s]]
@@ -10,17 +10,9 @@ class Solution:
      
 
     def is_valid_palindrome(self, arr: list) -> bool:
-        def is_palindrome(s: str, l: int, r:int)->bool:
-            if not s[l] == s[r]:
-                return False
-            
-            if l<r:
-                return is_palindrome(s, l+1, r-1)
-            
-            return True
-
         for item in arr:
-            if not is_palindrome(item, 0, len(item)-1):
+            # checking if a str is palindrome or not
+            if not item == item[::-1]:
                 return False
         
         return True
@@ -37,7 +29,3 @@ class Solution:
         self.valid_palindrome_partition(cur_seq[0:index+2]+"|"+cur_seq[index+2:])   
         self.valid_palindrome_partition(cur_seq[0:index]+cur_seq[index+1:index+2]+"|"+cur_seq[index+2:])
         return self.result
-
-s = "aab"
-sol = Solution()
-print(sol.partition(s))
