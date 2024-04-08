@@ -3,6 +3,7 @@ We are using Breadth First Approach (BFS)
 We have used BFS because we are finding for min distance and we do not want to go dfs way as it will go in depth
 rather than looking for min this will make unnecessary recursion calls and would not solve our purpose
 
+![IMG_7856](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/549b7a9e-5f60-4083-bc14-e16f3b09ac6e)
 
 
 ## Algorithm Summary:
