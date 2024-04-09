@@ -1,3 +1,5 @@
+![IMG_7945](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/11416505-7f24-4bd8-8819-588ef1f7d566)
+
 1. **Finding Boundary 'O' Regions**:
    - A nested function `mark_boundary_o(row, col)` recursively marks 'O' regions connected to the boundary.
    - It marks the boundary 'O' regions as `None` to differentiate them from captured regions and prevent reprocessing.
