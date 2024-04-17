@@ -52,6 +52,7 @@ Right Child = 2k+2
 
 
 ## Points:
+- To use in built heap of python import heapq module
 - heapify: heapify an existing array of n elements: O(n) of time complexity
 - heappush: The help push function performs this operation in O(log(n)) time, where n is the size of the heap.
 - heappop: The heappop function performs this operation in O(log(n)) time, where n is the size of the heap.
