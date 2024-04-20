@@ -269,3 +269,64 @@ def minimumSpanningTree(adj_list, V, E):
 ![IMG_8583](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/29647080-33e9-4b97-b615-d5d96990bf99)
 ![IMG_8584](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/b6b5caa9-1c07-4162-9ed7-e3b6bf5eb992)
 
+### Kruskal's Algorithm
+![IMG_8585](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/2399620e-a3e1-4628-8a20-0fb6769ab58e)
+
+```from typing import List
+
+def kruskalMST(n: int, edges: List[List[int]]) -> int:
+    # Write your code here
+    # First we will write algorithm for finding disjoint sets
+    # initializng rank and parent for dijoint sets
+    rank = [0] * (n+1)
+    parent = [i for i in range(n+1)]
+
+    # get ultimate parent fn
+    def get_ulti_par(node):
+        # base case
+        if parent[node] == node:
+            return node
+        
+        ultimate_parent = get_ulti_par(parent[node])
+        parent[node] = ultimate_parent
+        return parent[node]
+    
+    # union by rank fn
+    def union_by_rank(u, v):
+        # step 1 : find ultimate parent of u and v
+        u_ult_par = get_ulti_par(u)
+        v_ult_par = get_ulti_par(v)
+
+        # check if the ultimate parents are same then do nothing
+        # as it means the nodes ultimate parent are already connected
+        if u_ult_par == v_ult_par:
+            return
+        
+        if rank[u_ult_par] < rank[v_ult_par] :
+            parent[u_ult_par] = v_ult_par
+        elif rank[u_ult_par] > rank[v_ult_par] :
+            parent[v_ult_par] = u_ult_par
+        # if rank are same add any one 
+        else:
+            parent[v_ult_par] = u_ult_par
+            rank[u_ult_par] += 1
+
+    # Krushkal's main MST algo start here
+    mst_weight = 0
+    # Step 1: sort all edges according to weights
+    edges.sort(key=lambda element: element[2])
+
+    # Step 2: iterate over each edge in increasing weight order
+    for edge in edges:
+        u, v, weight = edge
+        # Step 3: condition check if it's not already connected in MST
+        # if not then add the edge to mst and weight to mst weight
+        # and call union by rank to merge the two node's ultimate 
+        # parents with each other
+        if not get_ulti_par(u) == get_ulti_par(v):
+            mst_weight += weight
+            union_by_rank(u, v)
+    
+    return mst_weight
+        
+```
