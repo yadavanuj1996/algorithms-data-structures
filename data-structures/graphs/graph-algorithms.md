@@ -122,3 +122,89 @@ Here we are using a Queue and in-degree array to do topo sort
         return result  
     
 ```
+
+## Dijstras Algorithm
+![IMG_8351](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/93cef1a9-eb00-4fd5-ac0e-dffe6e37e5a9)
+
+```
+# setting up dist and priority queue
+dist = [float("inf")] * vertices
+priority_queue = []             # Add (dist, node)
+
+# setting up source node distance and adding it to priority queue
+dist[source] = 0
+heappush(priority_queue, (dist[source], source))
+
+while priority_queue:
+    # this will pop the item that will have min distance
+    cur_path_dis, cur_node = heappop(priority_queue)
+    
+    for adj_node_detail in adj_list[cur_node]:
+        adj_node = adj_node_detail[0]
+        adj_node_dist = adj_node_detail[1]
+        
+        if cur_path_dis + adj_node_dist < dist[adj_node]:
+            dist[adj_node] = cur_path_dis + adj_node_dist
+            
+            heappush(priority_queue, (dist[adj_node], adj_node))
+            
+return dist
+```
+
+## Bellman Ford
+![IMG_8502](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/e4bfbd2e-463c-42b3-8268-27b506b5307d)
+![IMG_8503](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/6a008d33-88e2-42cc-bcdb-137bc50b53a5)
+![IMG_8504](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/97e5a3b3-3820-4365-9253-900e42fab51c)
+
+```
+def bellmonFord(n, m, src, edges):
+    dist = [10**8] * (n+1)
+    # for source node dist is 0
+    dist[src] = 0
+    # for n-1 relaxation 
+    for i in range(n-1):
+        # sequentially relaxing each edge
+        for edge in edges:
+            s_node, d_node, weight = edge
+            if dist[s_node] + weight < dist[d_node]:
+                dist[d_node] = dist[s_node] + weight
+
+    return dist
+```
+
+## Floyd Warshal
+![IMG_8505](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/12c9a5dd-47be-440c-aa70-f17b69d14cd6)
+![IMG_8506](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/8dbdb1fc-158f-4ca3-94ef-54be807d717f)
+![IMG_8508](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/23c44172-c476-4557-b414-d0ef1fb0fbd3)
+
+```
+def floydWarshall(n, m, src, dest, edges):
+    # Write your code here.
+    # Note we are using n+1 as the node index start from 1 and not 0
+    # Step 1: Create a dist_matrix 2d array with unreachable values infinity
+    dist_matrix = [[float("inf") for _ in range(n+1)] for _ in range(n+1)]
+
+    # Step 2: set all nodes that point to themselves as 0, as reaching itself takes 0 
+    # distance and no self loop is possible
+    for s_node in range(1, n+1):
+            for d_node in range(1, n+1):
+                if s_node == d_node:
+                    dist_matrix[s_node][d_node] = 0
+    
+    # Step 3: set values if edges directly connect two nodes, setup dist_matrix values 
+    # on the basis of edges
+    for edge in edges:
+        s_node, d_node, weight = edge
+        dist_matrix[s_node][d_node] = weight
+
+    # Step 4: travel from each node to all other nodes using a via node logic
+    for via_node in range(1, n+1):
+        for s_node in range(1, n+1):
+            for d_node in range(1, n+1):
+                dist_matrix[s_node][d_node] = min(dist_matrix[s_node][d_node], dist_matrix[s_node][via_node] + dist_matrix[via_node][d_node])
+
+    # Note: in the problem if the node cannot be reached we need to return 10^9
+    return dist_matrix[src][dest] if not dist_matrix[src][dest] == float("inf") else 10**9
+    
+    
+```
