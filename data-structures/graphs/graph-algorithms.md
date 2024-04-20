@@ -215,6 +215,9 @@ def floydWarshall(n, m, src, dest, edges):
 **Minimum Spanning Tree:**
 Among all possible spanning trees of a graph, the minimum spanning tree is the one for which the sum of all the edge weights is the minimum.
 
+Two algorithms are present for finding minimum spanning tree
+- Prim's algorithm
+- Krushkal's algorithm
 
 Graph:  
 ![1](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/72b275de-90c9-42e8-bef6-25dc7a4f6400)
@@ -222,4 +225,47 @@ Graph:
 Minimum Spanning Tree:  
 ![2](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/d479685a-776f-477e-b362-40744f7a1616)
 
+### Prim's Algorithm
+![IMG_8511](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/71c21459-ad77-492b-a0eb-0f79740be8e2)
+![IMG_8512](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/f2255bfe-a30c-43c6-92f7-0d1c2dfc1ac1)
+
+```
+def minimumSpanningTree(adj_list, V, E):
+    # your code goes here
+    visited = [False] * V
+    priority_queue = []
+    mst_edges = []
+    mst_weight = 0
+
+
+    heappush(priority_queue, (0, 0, -1)) # (dist, cur_node, parent_node)
+    
+    while priority_queue:
+        edge_weight, cur_node, parent_node = heappop(priority_queue)
+        if visited[cur_node]:
+            continue
+        
+        visited[cur_node] = True
+
+        if not parent_node == -1:
+            mst_edges.append((parent_node, cur_node))
+            mst_weight += edge_weight
+        
+        for adj_node_details in adj_list[cur_node]:
+            adj_node, adj_node_weight = adj_node_details
+            # we are checking again to not add extra edges in PQ thus improving time complexity
+            if not visited[adj_node]:
+                heappush(priority_queue, (adj_node_weight, adj_node, cur_node))
+
+
+
+
+    return mst_weight
+```
+
+#### Disjoint set (Prerequisite for kruskal's algorithm)
+
+![IMG_8582](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/9b107d28-36eb-4fcd-812c-1f5590c25fe4)
+![IMG_8583](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/29647080-33e9-4b97-b615-d5d96990bf99)
+![IMG_8584](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/b6b5caa9-1c07-4162-9ed7-e3b6bf5eb992)
 
