@@ -208,3 +208,18 @@ def floydWarshall(n, m, src, dest, edges):
     
     
 ```
+
+## Minimum Spanning Tree
+- Spanning Tree: A spanning tree is a tree in which we have N nodes(i.e. All the nodes present in the original graph) and N-1 edges and all nodes are reachable from each other.
+
+**Minimum Spanning Tree:**
+Among all possible spanning trees of a graph, the minimum spanning tree is the one for which the sum of all the edge weights is the minimum.
+
+
+Graph:  
+![1](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/72b275de-90c9-42e8-bef6-25dc7a4f6400)
+
+Minimum Spanning Tree:  
+![2](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/d479685a-776f-477e-b362-40744f7a1616)
+
+
