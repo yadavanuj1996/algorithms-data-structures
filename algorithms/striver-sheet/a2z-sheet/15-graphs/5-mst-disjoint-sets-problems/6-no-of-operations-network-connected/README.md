@@ -1,3 +1,7 @@
+![IMG_8671](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/73cc3e22-66e7-4c70-b059-d28a76c7459b)
+![IMG_8672](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/86abf8a8-ecf1-4644-9944-eaeb5fe9fb53)
+
+
 This Python solution tackles the challenge of determining whether it's feasible to connect all nodes in a network by removing some edges. Here's a breakdown of the algorithm:
 
 1. **Initialization**: The algorithm initializes two arrays:
