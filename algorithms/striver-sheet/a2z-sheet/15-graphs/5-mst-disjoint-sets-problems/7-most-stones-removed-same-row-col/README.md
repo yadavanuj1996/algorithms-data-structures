@@ -1,3 +1,8 @@
+![IMG_8706](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/1ad8b042-1cc2-42dc-a048-9e0ca2e6e2c2)
+![IMG_8707](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/372630d4-a8a3-4edc-8d1f-d029c80a0dc6)
+![IMG_8708](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/212346ff-fb3b-440c-96ff-529003cec334)
+
+
 1. **Initialization**:
    - Initialize `max_row` and `max_col` to 0. These variables will keep track of the maximum row and column indices of the stones.
    - Initialize `stone_count` to 0, representing the number of stones.
