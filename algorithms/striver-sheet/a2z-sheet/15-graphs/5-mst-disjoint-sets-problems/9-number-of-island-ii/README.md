@@ -1,3 +1,5 @@
+![IMG_8723](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/9fed1a7c-2ae2-476e-b0c2-c11e4794fe4f)
+
 ### Algorithm Steps:
 
 1. **Initialization of Data Structures**:
