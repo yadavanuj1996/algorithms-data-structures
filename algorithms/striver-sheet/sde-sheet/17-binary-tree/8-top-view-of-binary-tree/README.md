@@ -1,3 +1,5 @@
+![IMG_9441](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/f49f457a-f0c9-4da3-8b66-e21e920fcc00)
+
 ## Top View of Binary Tree
 
 This algorithm aims to find the nodes visible from the top view of a binary tree, from left to right. The top view of a binary tree is the set of nodes visible when looking at the tree from the top.
@@ -60,7 +62,7 @@ Considering that N > K, the dominant term in the time complexity is O(N).
 
 ### Space Complexity
 
-- **Queue**: O(W), where W is the maximum width of the binary tree, i.e., the number of nodes at the maximum level.
-- **Dictionary**: O(W), where W is the number of distinct vertical lines. The dictionary stores node values mapped to vertical line numbers.
+- **Queue**: O(N), all nodes will be inserted in the Queue
+- **Dictionary**: O(N)
 
-The space complexity is dominated by the queue and the dictionary, both of which are O(W).
+The space complexity is dominated by the queue and the dictionary, both of which are O(N).
