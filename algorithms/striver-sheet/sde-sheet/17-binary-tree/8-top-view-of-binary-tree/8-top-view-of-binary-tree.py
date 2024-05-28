@@ -27,7 +27,7 @@ Sample Output 1
 """
 
 """
-Time Complexity: O(N),
+Time Complexity: O(N) + O (K log K), k is no of vertical lines (worst case N)
 Space Complexity: O(N) , We are using queue and dict
 
 Note: Although the recursion call is being made for each node the recursion stack at once will in
