@@ -27,8 +27,8 @@ Explanation: The maximum width exists in the third level with length 4 (5,3,null
 """
 
 """
-Time Complexity:    
-Space Complexity: 
+Time Complexity: O(N) 
+Space Complexity: O(N)
 """
 
 # Definition for a binary tree node.
