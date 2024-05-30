@@ -1,3 +1,4 @@
+![IMG_9450](https://github.com/yadavanuj1996/algorithms-data-structures/assets/22169012/7f19729d-d4f6-4111-a427-48c2a6a6d300)
 ## Vertical Order Traversal of a Binary Tree
 
 This algorithm performs a vertical order traversal of a binary tree. The nodes are grouped and displayed based on their horizontal distance from the root. Nodes at the same horizontal distance are displayed from top to bottom, and if two nodes share the same position, they are sorted by their values.
