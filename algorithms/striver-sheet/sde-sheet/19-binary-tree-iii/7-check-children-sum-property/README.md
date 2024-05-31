@@ -48,7 +48,3 @@ root.right.right = Node(3)
 solution = Solution()
 print(solution.isSumProperty(root))  # Output: 1 (True)
 ```
-
----
-
-This summary provides an overview of the implementation, the algorithm used, and the complexities associated with the method.
