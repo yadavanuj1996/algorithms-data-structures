@@ -57,3 +57,97 @@ Right Child = 2k+2
 - heappush: The help push function performs this operation in O(log(n)) time, where n is the size of the heap.
 - heappop: The heappop function performs this operation in O(log(n)) time, where n is the size of the heap.
 - nlargest, nsmallest: This function returns the k-largest/ k-smallest elements from the heap. This function runs in O(log(k)) time
+
+
+Detailed Implementation of Heap DS using my own code for better understanding.
+```
+"""
+Time complexity:
+- Insertion  (insert(val)): O(log N), where N is the number of elements in the heap.
+- Extraction (pop_min()):   O(log N), where N is the number of elements in the heap.
+
+Space Complexity: The space complexity is O(N), where N is the number of elements stored in the heap at any given time.
+"""
+from sys import *
+from collections import *
+from math import *
+from heapq import *
+
+def minHeap(N: int, Q: [[]]) -> []:
+
+    min_heap = []
+    res = []
+    
+    # Get the parent index of a child node
+    def get_parent(child_index):
+        return (child_index - 1) // 2
+    
+    # Get the left child index of a parent node
+    def get_left_child(par_index):
+        return 2 * par_index + 1
+    
+    # Get the right child index of a parent node
+    def get_right_child(par_index):
+        return 2 * par_index + 2
+    
+    # Check if the index is within the bounds of the heap
+    def is_index_in_heap(cur_index):
+        return 0 <= cur_index < len(min_heap)
+
+    # Ensure the heap property is maintained from cur_index downwards
+    def heapify(cur_index):
+        left_child = get_left_child(cur_index)
+        right_child = get_right_child(cur_index)
+        is_left_child_present = is_index_in_heap(left_child)
+        is_right_child_present = is_index_in_heap(right_child)
+
+        smallest = cur_index  # Index with the smallest value among the current node and its children
+
+        if is_left_child_present and min_heap[left_child] < min_heap[smallest]:
+            smallest = left_child
+        
+        if is_right_child_present and min_heap[right_child] < min_heap[smallest]:
+            smallest = right_child
+
+        if smallest != cur_index:
+            # Swap the current node with the smallest child and heapify the affected subtree
+            min_heap[cur_index], min_heap[smallest] = min_heap[smallest], min_heap[cur_index]
+            heapify(smallest)
+        
+
+    # Ensure the heap property is maintained from cur_index upwards
+    def check_with_par(cur_index):
+        if cur_index <= 0:
+            return 
+
+        par_index = get_parent(cur_index)
+
+        if min_heap[par_index] > min_heap[cur_index]:
+            # Swap the current node with its parent and continue checking up the tree
+            min_heap[par_index], min_heap[cur_index] = min_heap[cur_index], min_heap[par_index]
+            check_with_par(par_index)
+
+    # Insert a new value into the heap and maintain the heap property
+    def insert(val):
+        min_heap.append(val)
+        check_with_par(len(min_heap) - 1)
+
+    # Remove and return the minimum element from the heap, maintaining the heap property
+    def pop_min():
+        if len(min_heap) == 1:
+            return min_heap.pop()
+
+        min_val = min_heap[0]
+        min_heap[0] = min_heap.pop()
+        heapify(0)
+        return min_val
+
+    # Process each query
+    for query in Q:
+        if len(query) == 1:
+            res.append(pop_min())
+        else:
+            insert(query[1])
+            
+    return res
+```
