@@ -1,7 +1,3 @@
-Certainly! Here is a summary of the algorithm for the `minimizeCost` function, including time complexity (TC) and space complexity (SC), suitable for a GitHub README:
-
----
-
 ## minimizeCost Algorithm
 
 The `minimizeCost` function calculates the minimum energy required for a frog to jump to the last stone, given an array of stone heights and the maximum number of stones the frog can jump over at once.
@@ -53,6 +49,3 @@ The time complexity of this algorithm is **O(n * k)**, where `n` is the number o
 
 The space complexity of this algorithm is **O(n)** due to the memoization array `memo` used to store the minimum energy required to reach each stone.
 
----
-
-Feel free to include this summary in your GitHub README to provide a clear and concise explanation of the `minimizeCost` function.
