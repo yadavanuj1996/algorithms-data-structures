@@ -47,17 +47,28 @@ def minimizeCost(n : int, k : int, heights : List[int]) -> int:
     memo = [-1]*n
 
     def min_energy_req(n):
-        if n == 1:
+        if n == 0:
             return 0
+        
+        if not memo[n] == -1:
+            return memo[n]
 
-        memo[0] = 0
-        memo[1] = abs(heights[1] - heights[0])
-        for i in range(2, n):
-            for j in range(i, k)
-            memo[i] = min(
-                abs(heights[i] - heights[i-1]) + memo[i-1], 
-                abs(heights[i] - heights[i-2]) + memo[i-2]
-                )
+        if n == 1:
+            memo[1] = abs(heights[1]-heights[0])
+            return memo[1]
+        
+        minimum = float("inf")
 
-        return memo[n-1]
+        for i in range(1, k+1):
+            if n-i >= 0 :
+                val = abs(heights[n]-heights[n-i]) + min_energy_req(n-i)
+                minimum = min(minimum, val)
+        
+        memo[n] = minimum
+        return memo[n]
+    
+    return min_energy_req(n-1)
 
+        
+        
+    
