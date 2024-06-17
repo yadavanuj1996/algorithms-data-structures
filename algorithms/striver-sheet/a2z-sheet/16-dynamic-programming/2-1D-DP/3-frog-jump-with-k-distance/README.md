@@ -1,3 +1,7 @@
+Certainly! Here is a summary of the `minimizeCost` function including time complexity (TC) and space complexity (SC) suitable for a GitHub README:
+
+---
+
 ## minimizeCost Algorithm
 
 The `minimizeCost` function calculates the minimum energy required for a frog to jump to the last stone, given an array of stone heights and the maximum number of stones the frog can jump over at once.
@@ -5,47 +9,58 @@ The `minimizeCost` function calculates the minimum energy required for a frog to
 ### Algorithm
 
 1. **Initialization:**
-   - Create a memoization array `memo` of size `n` initialized with `-1`.
-   - Base cases: 
-     - `memo[0]` is `0` because no energy is needed to stay on the first stone.
-     - `memo[1]` is the absolute difference between the heights of the first and second stones.
+   - Create a memoization array `memo` of size `n` initialized with `-1` to store the minimum energy required to reach each stone.
 
-2. **Iterative Calculation:**
-   - For each stone from the third to the nth stone:
-     - Calculate the minimum energy required to reach the current stone by considering all possible jumps from previous stones within the allowed range (up to `k` stones).
+2. **Recursive Function (`min_energy_req`):**
+   - Base cases:
+     - If the frog is already on the first stone (`n == 0`), the energy required is `0`.
+     - If the energy required to reach the current stone is already calculated (`memo[n] != -1`), return the stored value.
+     - If the frog is on the second stone (`n == 1`), calculate the energy required and store it in `memo[1]`.
+   - Recursively calculate the minimum energy required to reach the current stone by considering all possible jumps from previous stones within the allowed range (up to `k` stones).
 
 3. **Result:**
    - The minimum energy required to reach the last stone is stored in `memo[n-1]`.
 
-### Pseudocode
+### Code
 
 ```python
-def minimizeCost(n : int, k : int, heights : List[int]) -> int:
-    # Write your code here.
-    memo = [-1]*n
+from typing import *
+
+def minimizeCost(n: int, k: int, heights: List[int]) -> int:
+    memo = [-1] * n
 
     def min_energy_req(n):
-        if n == 1:
+        if n == 0:
             return 0
+        
+        if memo[n] != -1:
+            return memo[n]
 
-        memo[0] = 0
-        memo[1] = abs(heights[1] - heights[0])
-        for i in range(2, n):
-            for j in range(i, k)
-            memo[i] = min(
-                abs(heights[i] - heights[i-1]) + memo[i-1], 
-                abs(heights[i] - heights[i-2]) + memo[i-2]
-                )
+        if n == 1:
+            memo[1] = abs(heights[1] - heights[0])
+            return memo[1]
+        
+        minimum = float("inf")
 
-        return memo[n-1]
-
+        for i in range(1, k + 1):
+            if n - i >= 0:
+                val = abs(heights[n] - heights[n - i]) + min_energy_req(n - i)
+                minimum = min(minimum, val)
+        
+        memo[n] = minimum
+        return memo[n]
+    
+    return min_energy_req(n - 1)
 ```
 
 ### Time Complexity
 
-The time complexity of this algorithm is **O(n * k)**, where `n` is the number of stones and `k` is the maximum number of stones the frog can jump over at once. This is because for each stone (from 2 to n), the algorithm checks up to `k` previous stones to calculate the minimum energy required.
+The time complexity of this algorithm is **O(n * k)**. Each stone requires checking up to `k` previous stones, and this check is performed for all `n` stones.
 
 ### Space Complexity
 
 The space complexity of this algorithm is **O(n)** due to the memoization array `memo` used to store the minimum energy required to reach each stone.
 
+---
+
+Feel free to include this summary in your GitHub README to provide a clear and concise explanation of the `minimizeCost` function.
