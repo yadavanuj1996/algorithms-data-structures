@@ -19,9 +19,7 @@ Quick revision notes for coding interview problems.
 | 11  | Number of 1 Bits | Bit Manipulation | Bit Counting | Count set bits by checking n % 2, then right shift with n // 2 or n >> 1 | O(log n) | O(1) |
 | 12  | Counting Bits | Bit Manipulation | Bit Counting | For each number 0 to n, count 1-bits using modulo and right shift operations | O(n log n) | O(1) |
 | 13  | Missing Number | Array | XOR Trick | XOR all indices (0 to n) with all array values. Missing number will remain as XOR cancels out pairs | O(n) | O(1) |
-   
-  
-
+| 14  | Climbing Stairs | Dynamic Programming | Fibonacci | ways(i) = ways(i-1) + ways(i-2). Use two variables to track prev values for O(1) space optimization | O(n) | O(1) |
 
 
   
@@ -46,3 +44,4 @@ Quick revision notes for coding interview problems.
 | 15  | Reverse Bits | https://leetcode.com/problems/reverse-bits/ |
 | 16  | Climbing Stairs | https://leetcode.com/problems/climbing-stairs/ |
 | 17  | Coin Change | https://leetcode.com/problems/coin-change/ |
+
