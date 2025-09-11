@@ -19,7 +19,9 @@ Quick revision notes for coding interview problems.
 | 11  | Number of 1 Bits | Bit Manipulation | Bit Counting | Count set bits by checking n % 2, then right shift with n // 2 or n >> 1 | O(log n) | O(1) |
 | 12  | Counting Bits | Bit Manipulation | Bit Counting | For each number 0 to n, count 1-bits using modulo and right shift operations | O(n log n) | O(1) |
 | 13  | Missing Number | Array | XOR Trick | XOR all indices (0 to n) with all array values. Missing number will remain as XOR cancels out pairs | O(n) | O(1) |
-| 14  | Climbing Stairs | Dynamic Programming | Bottom-Up DP (Backwards) | Start with both n and n-1 base cases = 1. Loop from n-2 to 0: ways(i) = ways(i+1) + ways(i+2). Use 2 vars to optimize space | O(n) | O(1) |
+| 14  | Reversing Bits | NOT ATTEMPTED |  |  | |  |
+| 15  | Climbing Stairs | Dynamic Programming | Bottom-Up DP (Backwards) | Start with both n and n-1 base cases = 1. Loop from n-2 to 0: ways(i) = ways(i+1) + ways(i+2). Use 2 vars to optimize space | O(n) | O(1) |
+| 16  | Coin Change | NOT ATTEMPTED |  |  | |  |
 
   
 ## Problem Links
@@ -39,9 +41,9 @@ Quick revision notes for coding interview problems.
 | 11  | Sum of Two Integers | https://leetcode.com/problems/sum-of-two-integers/ |
 | 12  | Number of 1 Bits | https://leetcode.com/problems/number-of-1-bits/ |
 | 13  | Counting Bits | https://leetcode.com/problems/counting-bits/ |
-| 14  | Missing Number | https://leetcode.com/problems/missing-number/ |
-| 15  | Reverse Bits | https://leetcode.com/problems/reverse-bits/ |
-| 16  | Climbing Stairs | https://leetcode.com/problems/climbing-stairs/ |
-| 17  | Coin Change | https://leetcode.com/problems/coin-change/ |
+| 14  | Reverse Bits | https://leetcode.com/problems/reverse-bits/ |
+| 15  | Climbing Stairs | https://leetcode.com/problems/climbing-stairs/ |
+| 16  | Coin Change | https://leetcode.com/problems/coin-change/ |
+
 
 
