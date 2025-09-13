@@ -50,4 +50,9 @@ Quick revision notes for coding interview problems.
 
 
 
+Revise:
+1. Coin change - faced issues
+2. LCS tabulation (not attempted)
+3. Bits problems
+
 
