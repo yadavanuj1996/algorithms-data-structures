@@ -45,7 +45,8 @@ Quick revision notes for coding interview problems.
 | 14  | Reverse Bits | https://leetcode.com/problems/reverse-bits/ |
 | 15  | Climbing Stairs | https://leetcode.com/problems/climbing-stairs/ |
 | 16  | Coin Change | https://leetcode.com/problems/coin-change/ |
-| 16  | Longest Increasing Subsequence | https://leetcode.com/problems/longest-increasing-subsequence/ |
+| 17  | Longest Increasing Subsequence | https://leetcode.com/problems/longest-increasing-subsequence/ |
+| 17  | Longest Common Subsequence | https://leetcode.com/problems/longest-common-subsequence/ |
 
 
 
@@ -54,5 +55,6 @@ Revise:
 1. Coin change - faced issues
 2. LCS tabulation (not attempted)
 3. Bits problems
+
 
 
