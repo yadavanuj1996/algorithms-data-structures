@@ -22,8 +22,8 @@ Quick revision notes for coding interview problems.
 | 14  | Reversing Bits | NOT ATTEMPTED |  |  | |  |
 | 15  | Climbing Stairs | Dynamic Programming | Bottom-Up DP (Backwards) | Start with both n and n-1 base cases = 1. Loop from n-2 to 0: ways(i) = ways(i+1) + ways(i+2). Use 2 vars to optimize space | O(n) | O(1) |
 | 16  | Coin Change | NOT ATTEMPTED |  |  | |  |
+| 17  | Longest Increasing Subsequence | Dynamic Programming | Bottom-Up DP with Nested Pointers | Outer pointer j (0→n), inner pointer i (0→j). When nums[i] < nums[j], update dp[j] = max(dp[i]+1, dp[j]) | O(n²) | O(n) |
 
-  
 ## Problem Links
 
 | No. | Problem Name | LeetCode Link |
@@ -44,6 +44,8 @@ Quick revision notes for coding interview problems.
 | 14  | Reverse Bits | https://leetcode.com/problems/reverse-bits/ |
 | 15  | Climbing Stairs | https://leetcode.com/problems/climbing-stairs/ |
 | 16  | Coin Change | https://leetcode.com/problems/coin-change/ |
+| 16  | Longest Increasing Subsequence | https://leetcode.com/problems/longest-increasing-subsequence/ |
+
 
 
 
