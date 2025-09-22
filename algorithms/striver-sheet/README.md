@@ -3,7 +3,8 @@
 ### Link
 https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/
 
-
+### Quick Algorithm Revision
+📝 [**Algorithm Core Code Snippets**](./REVISION.md){:target="_blank"} - Core algorithm implementations for quick revision
 
 # Striver Sheets Quick Revision Guide
 
