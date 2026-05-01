@@ -24,6 +24,7 @@ Quick revision notes for coding interview problems.
 | 16  | Coin Change | NOT ATTEMPTED |  |  | |  |
 | 17  | Longest Increasing Subsequence | Dynamic Programming | Bottom-Up DP with Nested Pointers | Outer pointer j (0→n), inner pointer i (0→j). When nums[i] < nums[j], update dp[j] = max(dp[i]+1, dp[j]) | O(n²) | O(n) |
 | 18  | Longest Common Subsequence | Dynamic Programming | Top-Down DP with Memoization | Start from both string ends. If chars match: 1 + solve remaining strings. If chars differ: skip char from either string, take maximum result | O(n*m) | O(n*m) |
+| 19  | Word Break | Dynamic Programming | Top-Down DP with Memoization | memo[i] = can s[0..i] be segmented using wordDict. For each index, try matching every word in dict starting at that position. If match found, recurse from index+word_len. Memoize result at each index | O(n * m * k) | O(n) |
 
 ## Problem Links
 
@@ -47,6 +48,7 @@ Quick revision notes for coding interview problems.
 | 16  | Coin Change | https://leetcode.com/problems/coin-change/ |
 | 17  | Longest Increasing Subsequence | https://leetcode.com/problems/longest-increasing-subsequence/ |
 | 18  | Longest Common Subsequence | https://leetcode.com/problems/longest-common-subsequence/ |
+| 19  | Word Break | https://leetcode.com/problems/word-break/ |
 
 
 
