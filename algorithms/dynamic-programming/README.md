@@ -78,6 +78,17 @@ Tabulation is a ‘bottom-up’ approach where we start from the base case and r
 [Refer Leetcode Problem solution with both memorization and tabulation in detail](../striver-sheet/a2z-sheet/16-dynamic-programming/4-dp-on-subsequences/7-minimum-coins/7-minimum-coins.py)
 
 
+## Common Patterns
+
+| # | Pattern | Problems | `dp[i]` / `dp[i][j]` means | Hook / Key Trick |
+|---|---|---|---|---|
+| 1 | **1D DP** | Climbing Stairs, Frog Jump, House Robber I & II, Decode Ways, Coin Change, Word Break | `dp[i]` = answer for first `i` steps/stones/houses/chars | **Hook:** Count changing params — if only index changes → 1D. **Trick:** `dp[i] = dp[i-1] + dp[i-2]` or variations with min/max |
+| 2 | **2D/Grid DP** | Ninja Training, Unique Paths, Min Path Sum | `dp[i][j]` = answer at cell `(i,j)` or with two states `(day i, last activity j)` | **Hook:** Two params change → 2D table. **Trick:** Always arrive from top `dp[i-1][j]` or left `dp[i][j-1]` |
+| 3 | **0/1 Knapsack** | Subset Sum, Partition Equal Subset, Classic Knapsack | `dp[i][j]` = answer using first `i` items with target/capacity `j` | **Hook:** Pick/not pick, each item used **once**. **Trick:** Pick → `dp[i-1][target-val]` (move to previous item) |
+| 4 | **Unbounded Knapsack** | Coin Change I & II, Word Break | `dp[i][j]` = answer using first `i` items with target `j` (items reusable) | **Hook:** Pick/not pick, items **reusable unlimited times**. **Trick:** Pick → `dp[i][target-val]` (stay at same item) |
+| 5 | **String DP (LCS)** | LCS, Longest Common Substring, Longest Palindromic Subsequence, Min Insertions | `dp[i][j]` = answer for `s1[0..i-1]` and `s2[0..j-1]` | **Hook:** Two strings, match/skip chars. **Trick:** Match → `1 + dp[i-1][j-1]`, No match → `max(dp[i-1][j], dp[i][j-1])` |
+| 6 | **Array DP (Left-Right Scan)** | Maximum Product Subarray | No table — track `prefix`, `suffix` or `minProd`, `maxProd` | **Hook:** Negatives flip signs, zeros reset. **Trick:** Scan left→right (prefix), right→left (suffix), reset to 1 on zero. OR track min+max simultaneously |
+
 ## References
 1. https://takeuforward.org/data-structure/dynamic-programming-introduction/
 2. https://www.youtube.com/watch?v=Hdr64lKQ3e4 (Okayish explaination not best)
