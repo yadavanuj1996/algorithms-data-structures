@@ -19,7 +19,7 @@ Quick revision notes for coding interview problems.
 | 11  | Number of 1 Bits | Bit Manipulation | Bit Counting | Count set bits by checking n % 2, then right shift with n // 2 or n >> 1 | O(log n) | O(1) |
 | 12  | Counting Bits | Bit Manipulation | Bit Counting | For each number 0 to n, count 1-bits using modulo and right shift operations | O(n log n) | O(1) |
 | 13  | Missing Number | Array | XOR Trick | XOR all indices (0 to n) with all array values. Missing number will remain as XOR cancels out pairs | O(n) | O(1) |
-| 14  | Reversing Bits | NOT ATTEMPTED |  |  | |  |
+| 14  | Reversing Bits | Bit Manipulation | Bit-by-bit Reconstruction | Loop 32 times, shift result left then OR in last bit of n, right shift n each iteration | O(1) | O(1) |
 | 15  | Climbing Stairs | Dynamic Programming | Bottom-Up DP (Backwards) | Start with both n and n-1 base cases = 1. Loop from n-2 to 0: ways(i) = ways(i+1) + ways(i+2). Use 2 vars to optimize space | O(n) | O(1) |
 | 16  | Coin Change | NOT ATTEMPTED |  |  | |  |
 | 17  | Longest Increasing Subsequence | Dynamic Programming | Bottom-Up DP with Nested Pointers | Outer pointer j (0→n), inner pointer i (0→j). When nums[i] < nums[j], update dp[j] = max(dp[i]+1, dp[j]) | O(n²) | O(n) |
