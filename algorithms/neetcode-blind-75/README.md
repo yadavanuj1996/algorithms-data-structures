@@ -25,6 +25,7 @@ Quick revision notes for coding interview problems.
 | 17  | Longest Increasing Subsequence | Dynamic Programming | Bottom-Up DP with Nested Pointers | Outer pointer j (0→n), inner pointer i (0→j). When nums[i] < nums[j], update dp[j] = max(dp[i]+1, dp[j]) | O(n²) | O(n) |
 | 18  | Longest Common Subsequence | Dynamic Programming | Top-Down DP with Memoization | Start from both string ends. If chars match: 1 + solve remaining strings. If chars differ: skip char from either string, take maximum result | O(n*m) | O(n*m) |
 | 19  | Word Break | Dynamic Programming | Top-Down DP with Memoization | memo[i] = can s[0..i] be segmented using wordDict. For each index, try matching every word in dict starting at that position. If match found, recurse from index+word_len. Memoize result at each index | O(n * m * k) | O(n) |
+| 20  | Combination Sum | Backtracking | Pick / Not-Pick Recursion | Same element can be reused, so on "pick" stay on the same index (don't move ahead), add the number to the current array and add its value to the current sum. On "not pick" move to the next index without adding anything. When the sum equals the target, save the current array into the result | O(k * 2^(n + k)) | O(n + k²) |
 | 21  | Longest Palindromic Substring | String | Expand Around Center | For each index i, expand outward for odd (expand(i,i)) and even (expand(i,i+1)) palindromes. While s[left]==s[right] keep expanding left-1, right+1. After loop, slice s[left+1:right] gives the palindrome | O(n²) | O(1) |
 
 ## Problem Links
@@ -50,6 +51,7 @@ Quick revision notes for coding interview problems.
 | 17  | Longest Increasing Subsequence | https://leetcode.com/problems/longest-increasing-subsequence/ |
 | 18  | Longest Common Subsequence | https://leetcode.com/problems/longest-common-subsequence/ |
 | 19  | Word Break | https://leetcode.com/problems/word-break/ |
+| 20  | Combination Sum | https://leetcode.com/problems/combination-sum/ |
 | 21  | Longest Palindromic Substring | https://leetcode.com/problems/longest-palindromic-substring/ |
 
 
