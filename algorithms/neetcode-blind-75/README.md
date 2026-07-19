@@ -34,6 +34,28 @@ Quick revision notes for coding interview problems.
 | 26  | Clone Graph | Graph | NOT ATTEMPTED |  |  | |  |
 | 27  | Course Schedule | Graph | DFS Cycle Detection | Build adjacency list (course -> prereqs). DFS each node tracking the current path (visited). If a node is revisited while still on the path (not yet completed) => cycle => can't finish. Mark completed after exploring all neighbours | O(V + E) | O(V + E) |
 | 28  | Pacific Atlantic Water Flow | Graph | Reverse-Flow DFS from Borders | Instead of testing every cell "can it reach both oceans" (expensive), invert it: water flows downhill, so in reverse it climbs to neighbours with height >= current. Seed one visited-set per ocean from its border cells (Pacific = top row + left col, Atlantic = bottom row + right col) and DFS inward. A cell in BOTH sets can drain to both oceans => add to result. Two passes, each cell visited at most twice | O(m * n) | O(m * n) |
+| 29  | Valid Anagram | String | Frequency Map | If lengths differ, return False. Build a char->count map for each string, then compare the two maps for equality. (Or use one map: increment for s, decrement for t, all counts must be 0) | O(m + n) | O(m + n) |
+| 30  | Top K Frequent Elements | Array | Frequency Map + Sort | Build a num->count map, sort items by count descending, take the first k keys. (Optimal O(n) uses bucket sort: index buckets by frequency 1..n, then read buckets from high to low until k collected) | O(n log n) | O(n) |
+| 31  | Longest Consecutive Sequence | Array | Hash Set (Sequence Start) | Put all nums in a set. Only start counting from a sequence START (num-1 not in set), then walk num+1, num+2... while present, tracking the longest run. The start-check ensures each number is visited at most twice => O(n) overall despite the inner while | O(n) | O(n) |
+| 32  | Valid Palindrome | String | Two Pointers | Keep only alphanumeric chars (lowercased), then two pointers from both ends moving inward: if chars differ return False, else shrink. (Can skip non-alphanumeric in-place to get O(1) space instead of building a filtered string) | O(n) | O(n) |
+| 33  | Longest Substring Without Repeating Characters | String | Sliding Window | Expand right pointer adding chars to a count map. When the new char's count > 1, shrink from left (decrement counts) until no duplicate. Track max window size (r-l+1) each step | O(n) | O(min(n, charset)) |
+| 34  | Longest Repeating Character Replacement | String | Sliding Window + Max Freq | Window is valid when (window_len - count of most frequent char) <= k, meaning the other chars can be replaced within k changes. Expand right and update max_freq; when invalid, shrink left. Answer = longest valid window | O(n) | O(charset) |
+| 35  | Minimum Window Substring | String | Sliding Window + Need Count | Build required-char counts from t and track how many required chars are currently satisfied (have >= need). Expand right; once all requirements met, shrink left while still valid, recording the smallest window. Return the min window covering all of t | O(m + n) | O(charset) |
+| 36  | Valid Parentheses | Stack | Matching Stack | Push opening brackets; on a closing bracket check it matches the top opening (pop if so). Valid only if every closer matched and the stack is empty at the end. (Cleanest: map closer->opener) | O(n) | O(n) |
+| 37  | Reverse Linked List | Linked List | Pointer Reversal | Walk the list keeping prev and cur; each step save next, point cur.next back to prev, then advance prev=cur, cur=next. Return prev as the new head. (Recursive form: pass (prev, cur) and flip pointers on the way down) | O(n) | O(1) iterative / O(n) recursive |
+| 38  | Linked List Cycle | Linked List | Fast & Slow Pointers | Move slow by 1 and fast by 2. If there's a cycle they eventually meet; if fast (or fast.next) hits None, the list ends => no cycle | O(n) | O(1) |
+| 39  | Remove Nth Node From End of List | Linked List | Two Pointers (Gap of n) | Advance fast n steps first. If fast is None, the head itself is the target (return head.next). Else move slow and fast together until fast.next is None; slow now sits just before the target, so slow.next = slow.next.next | O(n) | O(1) |
+| 40  | Maximum Depth of Binary Tree | Tree | DFS Recursion | Depth of a node = 1 + max(depth of left subtree, depth of right subtree). Base case: null node => 0. Recurse and bubble up the max | O(n) | O(h) recursion stack |
+| 41  | Same Tree | Tree | Parallel DFS | Recurse both trees in lockstep. Both null => True; one null or values differ => False; else recurse left-with-left AND right-with-right | O(n) | O(h) recursion stack |
+| 42  | Lowest Common Ancestor of a BST | Tree (BST) | BST Property Walk | Use the ordering: if both p and q are less than node, go left; if both greater, go right; otherwise they split (or one equals node) => this node is the LCA | O(h) | O(1) iterative / O(h) recursive |
+| 43  | Binary Tree Level Order Traversal | Tree | BFS (Level Tracking) | BFS with a queue, grouping nodes by level. Either process the whole queue size at a time (one level per outer iteration), or tag each node with its level and append to res[level]. Enqueue left then right children | O(n) | O(n) |
+| 44  | Validate Binary Search Tree | Tree (BST) | Min/Max Bounds DFS | Recurse carrying an open (min, max) range each node must fall strictly inside. Going left tightens the max to node.val; going right tightens the min to node.val. Any node outside its range => invalid. (Alt: inorder traversal must be strictly increasing) | O(n) | O(h) |
+| 45  | Kth Smallest Element in a BST | Tree (BST) | Inorder Traversal | Inorder (left, node, right) of a BST visits values in sorted order, so the kth visited node is the answer. Collect into a list and return res[k-1], or stop early once k nodes are counted | O(n) | O(n) |
+| 46  | Construct Binary Tree from Preorder and Inorder Traversal | Tree | Recursive Split | preorder[0] is always the root. Find it in inorder: everything left of it is the left subtree, everything right is the right subtree. Split both arrays by that count and recurse. (Optimal: pass index ranges + a value->inorder-index hash map to avoid slicing/search, giving O(n)) | O(n²) | O(n²) |
+| 47  | Binary Tree Maximum Path Sum | Tree | DFS (Return vs Update) | Each DFS returns the best straight-line path going DOWN one side (node + max(left, right), clamping negatives to 0). Separately, update a global max with the best path THROUGH the node (node + left + right) since a path can bend at a node but can't be returned upward | O(n) | O(h) |
+| 48  | Word Search | Backtracking | Grid DFS + Backtrack | From each cell matching word[0], DFS in 4 directions matching one char per step. Mark the cell visited before recursing and unmark after (backtrack) so the same letter isn't reused within one path but stays free for other paths. Return True the moment cur_index reaches word length | O(m * n * 4^L) | O(L) recursion (+ O(m*n) visited) |
+| 49  | Implement Trie (Prefix Tree) | Trie | Nodes with 26 Children | Each node holds 26 child links + an is_end flag. insert: walk chars creating missing child nodes, mark last node as end. search: walk chars, fail if any link missing, at the end require is_end True. startsWith: same walk but no is_end check | insert/search O(L) | O(total chars) |
+| 50  | Number of Islands | Graph | Grid DFS (Flood Fill) | Scan every cell; when you hit an unvisited '1', increment the island count and DFS/flood-fill all connected land (4 directions), marking cells visited so each island is counted once. Each cell visited at most once | O(m * n) | O(m * n) |
 | 55  | Longest Palindromic Substring | String | Expand Around Center | For each index i, expand outward for odd (expand(i,i)) and even (expand(i,i+1)) palindromes. While s[left]==s[right] keep expanding left-1, right+1. After loop, slice s[left+1:right] gives the palindrome | O(n²) | O(1) |
 
 ## Problem Links
@@ -68,6 +90,28 @@ Quick revision notes for coding interview problems.
 | 26  | Clone Graph | https://leetcode.com/problems/clone-graph/ |
 | 27  | Course Schedule | https://leetcode.com/problems/course-schedule/ |
 | 28  | Pacific Atlantic Water Flow | https://leetcode.com/problems/pacific-atlantic-water-flow/ |
+| 29  | Valid Anagram | https://leetcode.com/problems/valid-anagram/ |
+| 30  | Top K Frequent Elements | https://leetcode.com/problems/top-k-frequent-elements/ |
+| 31  | Longest Consecutive Sequence | https://leetcode.com/problems/longest-consecutive-sequence/ |
+| 32  | Valid Palindrome | https://leetcode.com/problems/valid-palindrome/ |
+| 33  | Longest Substring Without Repeating Characters | https://leetcode.com/problems/longest-substring-without-repeating-characters/ |
+| 34  | Longest Repeating Character Replacement | https://leetcode.com/problems/longest-repeating-character-replacement/ |
+| 35  | Minimum Window Substring | https://leetcode.com/problems/minimum-window-substring/ |
+| 36  | Valid Parentheses | https://leetcode.com/problems/valid-parentheses/ |
+| 37  | Reverse Linked List | https://leetcode.com/problems/reverse-linked-list/ |
+| 38  | Linked List Cycle | https://leetcode.com/problems/linked-list-cycle/ |
+| 39  | Remove Nth Node From End of List | https://leetcode.com/problems/remove-nth-node-from-end-of-list/ |
+| 40  | Maximum Depth of Binary Tree | https://leetcode.com/problems/maximum-depth-of-binary-tree/ |
+| 41  | Same Tree | https://leetcode.com/problems/same-tree/ |
+| 42  | Lowest Common Ancestor of a Binary Search Tree | https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/ |
+| 43  | Binary Tree Level Order Traversal | https://leetcode.com/problems/binary-tree-level-order-traversal/ |
+| 44  | Validate Binary Search Tree | https://leetcode.com/problems/validate-binary-search-tree/ |
+| 45  | Kth Smallest Element in a BST | https://leetcode.com/problems/kth-smallest-element-in-a-bst/ |
+| 46  | Construct Binary Tree from Preorder and Inorder Traversal | https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/ |
+| 47  | Binary Tree Maximum Path Sum | https://leetcode.com/problems/binary-tree-maximum-path-sum/ |
+| 48  | Word Search | https://leetcode.com/problems/word-search/ |
+| 49  | Implement Trie (Prefix Tree) | https://leetcode.com/problems/implement-trie-prefix-tree/ |
+| 50  | Number of Islands | https://leetcode.com/problems/number-of-islands/ |
 | 55  | Longest Palindromic Substring | https://leetcode.com/problems/longest-palindromic-substring/ |
 
 
