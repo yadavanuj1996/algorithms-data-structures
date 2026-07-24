@@ -5743,3 +5743,2320 @@ class Solution:
 ```
 
 ---
+
+## SDE Sheet Problems
+
+### Arrays
+
+#### 1. Pow(x, n)
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Math | Fast Exponentiation | If n is even: x^n = (x^(n/2))^2, if odd: x^n = x * x^(n-1) | O(log n) | O(log n) |
+
+**Problem Statement:**
+Implement `pow(x, n)` which calculates `x` raised to the power `n`.
+
+Example:
+```
+Input:  x = 2.0, n = 10   ->  Output: 1024.0
+Input:  x = 2.0, n = -2   ->  Output: 0.25
+```
+
+**Solution:**
+```python
+# Time: O(n) | Space: O(n)
+
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        if n == 0:
+            return 1
+        if n > 0:
+            return x * pow(x, n-1)
+        else:
+            return pow(x, n+1) / x
+```
+
+---
+
+#### 2. Two Sum
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Array | Hash Map | Store target-current in dict, check if current exists | O(n) | O(n) |
+
+**Problem Statement:**
+Given an array of integers `nums` and an integer `target`, return the indices of the two numbers that add up to `target`.
+
+Example:
+```
+Input:  nums = [2,7,11,15], target = 9   ->  Output: [0,1]
+```
+
+**Solution:**
+```python
+# Time: O(n log n) | Space: O(n)  (repo uses sort + two-pointer)
+import copy
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        original_input = copy.deepcopy(nums)
+        nums.sort()
+        i, j = 0, len(nums) - 1
+        fir_ind, sec_ind = -1, -1
+        while i < j:
+            if nums[i] + nums[j] == target:
+                break
+            elif nums[i] + nums[j] < target:
+                i += 1
+            elif nums[i] + nums[j] > target:
+                j -= 1
+
+        for ind in range(len(original_input)):
+            if original_input[ind] == nums[i] and fir_ind == -1:
+                fir_ind = ind
+            elif original_input[ind] == nums[j]:
+                sec_ind = ind
+
+        return [fir_ind, sec_ind]
+```
+
+---
+
+### Linked Lists
+
+#### 1. Reverse Linked List
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Linked List | Three Pointers | Track prev, current, next. Reverse links one by one | O(n) | O(1) |
+
+**Problem Statement:**
+Given the head of a singly linked list, reverse the list and return the reversed list.
+
+Example:
+```
+Input:  head = [1,2,3,4,5]   ->  Output: [5,4,3,2,1]
+```
+
+**Solution:**
+```python
+# Time: O(n) | Space: O(1)
+
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return None
+
+        prev_node = None
+        current_node = head
+        next_node = current_node.next
+
+        while current_node:
+            current_node.next = prev_node
+            prev_node = current_node
+            current_node = next_node
+            next_node = current_node.next if current_node else None
+
+        return prev_node
+```
+
+---
+
+#### 2. Find Middle of Linked List
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Linked List | Two Pointers (Tortoise & Hare) | Slow pointer moves 1 step, fast moves 2 steps. When fast reaches end, slow is at middle | O(n) | O(1) |
+
+**Problem Statement:**
+Given the head of a singly linked list, return the middle node. If there are two middle nodes, return the second one.
+
+Example:
+```
+Input:  head = [1,2,3,4,5]   ->  Output: node 3
+```
+
+**Solution:**
+```python
+# Time: O(N) | Space: O(1)
+
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        first = head
+        second = head
+
+        while not (second == None or second.next == None):
+            first = first.next
+            second = second.next.next
+
+        return first
+```
+
+---
+
+### Greedy Algorithms
+
+#### 1. N Meetings in One Room
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Greedy | Activity Selection | Sort by end time, greedily pick meetings that end earliest | O(n log n) | O(n) |
+
+**Problem Statement:**
+Given `N` meetings with start and end times and one room, return the maximum number of non-overlapping meetings that can be organized.
+
+Example:
+```
+Input:  start = [1,3,0,5,8,5], end = [2,4,6,7,9,9]   ->  Output: 4
+```
+
+**Solution:**
+```python
+# Time: O(n log n) | Space: O(n)
+
+def maximumMeetings(start: List[int], end: List[int]) -> int:
+    interval = []
+    for i in range(len(start)):
+        interval.append([start[i], end[i]])
+
+    interval.sort(key=lambda x: x[0])
+    if len(interval) == 1:
+        return 1
+
+    cur, next = 0, 1
+    while next < len(interval):
+        if interval[cur][0] <= interval[next][0] <= interval[cur][1]:
+            if interval[cur][1] <= interval[next][1]:
+                interval.pop(next)
+                continue
+            else:
+                interval.pop(cur)
+                continue
+        cur += 1
+        next += 1
+
+    return len(interval)
+```
+
+---
+
+#### 2. Fractional Knapsack
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Greedy | Value/Weight Ratio | Sort by value/weight ratio, pick highest ratio items first | O(n log n) | O(1) |
+
+**Problem Statement:**
+Given weights and values of `N` items and a knapsack capacity `W`, maximize the total value; items may be broken (fractions allowed).
+
+Example:
+```
+Input:  N=3, W=50, value=[60,100,120], weight=[10,20,30]   ->  Output: 240.00
+```
+
+**Solution:**
+```python
+# Time: O(n log n) | Space: O(1)
+
+class Solution:
+    def sort_by_val_to_weight_ratio(self, element):
+        return element[2]
+
+    def fractionalknapsack(self, W, arr, n):
+        w = W
+        inp = []
+        result = 0
+        for item in arr:
+            inp.append((item.weight, item.value, item.value / item.weight))
+        inp.sort(reverse=True, key=self.sort_by_val_to_weight_ratio)
+
+        i = 0
+        while w > 0 and i < len(inp):
+            cur_weight, cur_value = inp[i][0], inp[i][1]
+            if cur_weight <= w:
+                result += cur_value
+                w -= cur_weight
+            else:
+                result += (cur_value / cur_weight) * w
+                w = 0
+            i += 1
+
+        return result
+```
+
+---
+
+#### 3. Maximum Activities
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Greedy | Activity Selection | Same as N meetings - sort by finish time, greedily select non-overlapping activities | O(n log n) | O(n) |
+
+**Problem Statement:**
+Given `N` activities with start and finish times, return the maximum number a single person can perform (start time may coincide with another's end time).
+
+Example:
+```
+Input:  start = [1,6,2,4], finish = [2,7,5,8]   ->  Output: 3
+```
+
+**Solution:**
+```python
+# Time: O(N log N) | Space: O(N)
+
+def maximumActivities(start, finish):
+    n = len(start)
+    tasks = []
+    for i in range(n):
+        tasks.append([start[i], finish[i]])
+
+    tasks.sort(key=lambda arr: arr[1])       # sort by finish time
+    task_pos_count = 0
+    cur_int_end = -1
+
+    for cur_task in tasks:
+        if cur_task[0] >= cur_int_end:
+            task_pos_count += 1
+            cur_int_end = cur_task[1]
+
+    return task_pos_count
+```
+
+---
+
+### Recursion & Backtracking
+
+#### 1. Subset Sums
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Recursion | Pick / Not Pick | Generate all possible subset sums using pick/not-pick pattern | O(2^n) | O(2^n) |
+
+**Problem Statement:**
+Given an array `nums` of `n` integers, return all subset sums in non-decreasing order.
+
+Example:
+```
+Input:  nums = [1,2,3]   ->  Output: 0 1 2 3 3 4 5 6
+```
+
+**Solution:**
+```python
+# Time: O(n * 2^n) | Space: O(2^n)
+
+def subsetSum(num: List[int]) -> List[int]:
+    n = len(num)
+    result = []
+    def sum_of_subset(index, num, sum):
+        if index == n:
+            result.append(sum)
+            return
+        sum_of_subset(index+1, num, sum + num[index])   # pick
+        sum_of_subset(index+1, num, sum)                # unpick
+
+    sum_of_subset(0, num, 0)
+    result.sort()
+    return result
+```
+
+---
+
+#### 2. Subsets II
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Recursion | Backtracking with Duplicates | Sort array, skip duplicates at same recursion level | O(2^n) | O(2^n) |
+
+**Problem Statement:**
+Given an integer array `nums` that may contain duplicates, return all unique subsets (the power set).
+
+Example:
+```
+Input:  nums = [1,2,2]   ->  Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+```
+
+**Solution:**
+```python
+# Time: O(2^n) | Space: O(2^n)
+
+from copy import deepcopy
+
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        n = len(nums)
+        nums.sort()
+        def get_subset_with_dup(index, num, arr):
+            if index == n:
+                if arr not in result:            # dedupe subsets
+                    result.append(deepcopy(arr))
+                return
+            arr.append(num[index])               # pick
+            get_subset_with_dup(index+1, num, arr)
+            arr.remove(num[index])               # unpick
+            get_subset_with_dup(index+1, num, arr)
+
+        get_subset_with_dup(0, nums, [])
+        return result
+```
+
+---
+
+#### 3. Palindrome Partitioning
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Recursion | Backtracking | At each position, try all possible palindromic partitions | O(2^n * n) | O(n) |
+
+**Problem Statement:**
+Given a string `s`, partition it so every substring is a palindrome, and return all possible partitionings.
+
+Example:
+```
+Input:  s = "aab"   ->  Output: [["a","a","b"],["aa","b"]]
+```
+
+**Solution:**
+```python
+# Time: O(2^n * n) | Space: O(n)
+
+class Solution:
+    result = []
+
+    def partition(self, s: str) -> list[list[str]]:
+        self.result = []
+        if len(s) == 1:
+            return [[s]]
+        return self.valid_palindrome_partition(s[0:1]+"|"+s[1:])
+
+    def is_valid_palindrome(self, arr: list) -> bool:
+        def is_palindrome(s, l, r):
+            if not s[l] == s[r]:
+                return False
+            if l < r:
+                return is_palindrome(s, l+1, r-1)
+            return True
+
+        for item in arr:
+            if not is_palindrome(item, 0, len(item)-1):
+                return False
+        return True
+
+    def valid_palindrome_partition(self, cur_seq: str):
+        if cur_seq[-1] == "|":
+            temp_arr = cur_seq[:len(cur_seq)-1].split("|")
+            if self.is_valid_palindrome(temp_arr):
+                self.result.append(temp_arr)
+            return
+
+        index = cur_seq.rfind("|")
+        self.valid_palindrome_partition(cur_seq[0:index+2]+"|"+cur_seq[index+2:])
+        self.valid_palindrome_partition(cur_seq[0:index]+cur_seq[index+1:index+2]+"|"+cur_seq[index+2:])
+        return self.result
+```
+
+---
+
+#### 4. N-Queens
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Backtracking | Constraint Satisfaction | For each row, try placing queen in each column. Check if safe (no attacks): same column, diagonal, anti-diagonal. If safe, place queen and recurse to next row. BACKTRACK by removing queen | O(n!) | O(n) |
+
+**Problem Statement:**
+Place `n` queens on an `n x n` board so no two attack each other. Return all distinct solutions as board configurations.
+
+Example:
+```
+Input:  n = 4   ->  Output: [[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
+```
+
+**Solution:**
+```python
+# Time: O(N!) | Space: O(N^2)
+# repo places queens column by column, checking left / left-up / left-down rays
+
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        grid = [["." for _ in range(n)] for _ in range(n)]
+        result = []
+
+        def can_queen_be_placed(row, col, grid):
+            if row < 0 or col < 0 or row >= n or col >= n:
+                return True
+            if grid[row][col] == "Q":
+                return False
+            # left
+            temp_col = col
+            while temp_col >= 0:
+                if grid[row][temp_col] == "Q":
+                    return False
+                temp_col -= 1
+            # left-up diagonal
+            temp_row, temp_col = row, col
+            while temp_row >= 0 and temp_col >= 0:
+                if grid[temp_row][temp_col] == "Q":
+                    return False
+                temp_row -= 1; temp_col -= 1
+            # left-down diagonal
+            temp_row, temp_col = row, col
+            while temp_row < n and temp_col >= 0:
+                if grid[temp_row][temp_col] == "Q":
+                    return False
+                temp_row += 1; temp_col -= 1
+            return True
+
+        def solveNQueensProblem(row, col, grid):
+            if col == n:
+                result.append(["".join(r) for r in grid])
+                return
+            if row == n:
+                return
+            if can_queen_be_placed(row, col, grid):
+                grid[row][col] = "Q"
+                solveNQueensProblem(0, col+1, grid)
+                grid[row][col] = "."             # backtrack
+                solveNQueensProblem(row+1, col, grid)
+            else:
+                solveNQueensProblem(row+1, col, grid)
+
+        solveNQueensProblem(0, 0, grid)
+        return result
+```
+
+---
+
+### String
+
+#### 1. Reverse Words in String
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| String | Two Pointers | Parse words from right to left, build result string | O(n) | O(n) |
+
+**Problem Statement:**
+Given an input string `s`, reverse the order of the words, collapsing multiple spaces and trimming leading/trailing spaces.
+
+Example:
+```
+Input:  s = "the sky is blue"   ->  Output: "blue is sky the"
+```
+
+**Solution:**
+```python
+# Time: O(N) | Space: O(N)
+
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        res = ""
+        n = len(s)
+        start, end = 0, 0
+        while start < n:
+            if s[start] == " ":
+                start += 1
+                end = start
+                continue
+            while not (end == n or s[end] == " "):
+                end += 1
+            res = s[start:end] + " " + res
+            start = end
+
+        return res[:-1]
+```
+
+---
+
+### Stack & Queue
+
+#### 1. Implement Stack using Arrays
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Stack | Array Implementation | Use array with top pointer, resize when needed | O(1) | O(n) |
+
+**Problem Statement:**
+Implement a stack (LIFO) with a fixed capacity supporting `push`, `pop`, `top`, `isEmpty`, and `isFull`.
+
+**Solution:**
+```python
+# Time: O(1) per op | Space: O(n)
+
+class Stack:
+    def __init__(self, n: int):
+        self.arr = []
+        self.max_length = n
+
+    def push(self, num: int):
+        if len(self.arr) < self.max_length:
+            self.arr.append(num)
+
+    def pop(self) -> int:
+        return self.arr.pop() if self.arr else -1
+
+    def top(self) -> int:
+        return self.arr[-1] if self.arr else -1
+
+    def isEmpty(self) -> int:
+        return 1 if len(self.arr) == 0 else 0
+
+    def isFull(self) -> int:
+        return 1 if len(self.arr) == self.max_length else 0
+```
+
+---
+
+#### 2. Implement Queue using Array
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Queue | Circular Array | Use front and rear pointers, wrap around using modulo | O(1) | O(n) |
+
+**Problem Statement:**
+Implement a queue (FIFO) using an array, supporting `enqueue` and `dequeue` (returns `-1` if empty), each in O(1).
+
+**Solution:**
+```python
+# Time: O(1) per op | Space: O(n)
+
+class Queue:
+    def __init__(self):
+        self.front = 0
+        self.rear = 0
+        self.arr = [0] * 100001
+
+    def enqueue(self, e: int) -> None:
+        self.arr[self.rear] = e
+        self.rear += 1
+
+    def dequeue(self) -> int:
+        if self.front == self.rear:
+            return -1
+        self.front += 1
+        return self.arr[self.front-1]
+```
+
+---
+
+#### 3. Implement Stack using Queue
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Stack | Queue Operations | Use one/two queues, move elements to simulate LIFO behavior | O(n) push | O(n) |
+
+**Problem Statement:**
+Implement a LIFO stack using only queues, supporting `push`, `pop`, `top`, and `empty`.
+
+**Solution:**
+```python
+# Time: O(N) push | Space: O(N)
+
+from collections import deque
+
+class MyStack:
+    def __init__(self):
+        self.queue_1 = deque()
+        self.queue_2 = deque()
+
+    def push(self, x: int) -> None:
+        self.queue_2.append(x)
+        while self.queue_1:                       # move all elements behind x
+            self.queue_2.append(self.queue_1.popleft())
+        self.queue_1, self.queue_2 = self.queue_2, self.queue_1
+
+    def pop(self) -> int:
+        return self.queue_1.popleft()
+
+    def top(self) -> int:
+        return self.queue_1[0]
+
+    def empty(self) -> bool:
+        return not self.queue_1
+```
+
+---
+
+#### 4. Implement Queue using Stacks
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Queue | Stack Operations | Use two stacks: one for enqueue, transfer to other for dequeue | O(1) amortized | O(n) |
+
+**Problem Statement:**
+Implement a FIFO queue using only stacks, supporting `push`, `pop`, `peek`, and `empty`.
+
+**Solution:**
+```python
+# Time: O(N) push | Space: O(N)
+
+from collections import deque
+
+class MyQueue:
+    def __init__(self):
+        self.stack_1 = deque()
+        self.stack_2 = deque()
+
+    def push(self, x: int) -> None:
+        while self.stack_1:
+            self.stack_2.append(self.stack_1.pop())
+        self.stack_1.append(x)                    # new element goes to the bottom
+        while self.stack_2:
+            self.stack_1.append(self.stack_2.pop())
+
+    def pop(self) -> int:
+        return self.stack_1.pop()
+
+    def peek(self) -> int:
+        return self.stack_1[-1]
+
+    def empty(self) -> bool:
+        return not self.stack_1
+```
+
+---
+
+#### 5. Valid Parentheses
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Stack | Matching Pairs | Use stack to match opening brackets with closing ones | O(n) | O(n) |
+
+**Problem Statement:**
+Given a string of `()[]{}`, determine if it is valid (brackets closed by the same type in the correct order).
+
+Example:
+```
+Input:  s = "()[]{}"   ->  Output: true
+Input:  s = "(]"       ->  Output: false
+```
+
+**Solution:**
+```python
+# Time: O(n) | Space: O(n)
+
+from collections import deque
+
+def isValid(s: str) -> bool:
+    stack = deque()
+    for curr_char in s:
+        if not len(stack) == 0:
+            if (curr_char == "}" and stack[-1] == "{"
+                    or curr_char == ")" and stack[-1] == "("
+                    or curr_char == "]" and stack[-1] == "["):
+                stack.pop()
+                continue
+        stack.append(curr_char)
+
+    return len(stack) == 0
+```
+
+---
+
+#### 6. Next Greater Element
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Stack | Monotonic Stack | Use stack to track elements waiting for next greater element | O(n) | O(n) |
+
+**Problem Statement:**
+Given `nums1` (a subset of `nums2`), for each element find its next greater element in `nums2`; `-1` if none.
+
+Example:
+```
+Input:  nums1 = [4,1,2], nums2 = [1,3,4,2]   ->  Output: [-1,3,-1]
+```
+
+**Solution:**
+```python
+# Time: O(M+N) | Space: O(N+M)
+
+from collections import deque
+
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        nge = self.get_nge(nums2)
+        return [nge.get(x) for x in nums1]
+
+    def get_nge(self, nums):
+        dq = deque()
+        nge = {}
+        for i in range(len(nums)-1, -1, -1):     # scan right to left
+            nge[nums[i]] = -1
+            while dq and dq[-1] <= nums[i]:
+                dq.pop()
+            if dq:
+                nge[nums[i]] = dq[-1]
+            dq.append(nums[i])
+        return nge
+```
+
+---
+
+#### 7. Sort a Stack
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Stack | Recursion | Use recursion to sort: remove top, sort remaining, insert in sorted position | O(n²) | O(n) |
+
+**Problem Statement:**
+Given a stack of `N` integers, sort it in descending order using recursion only (no loops).
+
+Example:
+```
+Input:  [5,-2,9,-7,3]   ->  Output: [9,5,3,-2,-7]
+```
+
+**Solution:**
+```python
+# Time: O(N^2) | Space: O(N)
+
+def sortStack(stack):
+    sort_stack(stack)
+
+def sort_stack(stack):
+    if not stack:
+        return
+    temp = stack.pop()
+    sort_stack(stack)
+    fit_element(stack, temp)
+
+def fit_element(stack, element):
+    if not stack:
+        stack.append(element)
+        return
+    if stack[-1] < element:
+        stack.append(element)
+    else:
+        temp = stack.pop()
+        fit_element(stack, element)
+        stack.append(temp)
+```
+
+---
+
+### Advanced Stack & Queue
+
+#### 1. Next Smaller Element
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Stack | Monotonic Stack | Similar to next greater, but maintain increasing stack | O(n) | O(n) |
+
+**Problem Statement:**
+Given an array `a`, for each element check whether its immediate right element is smaller. If so, replace it with that element; otherwise `-1`. The last element becomes `-1`.
+
+Example:
+```
+Input:  a = [4,7,8,2,3,1]   ->  Output: [-1,-1,2,-1,1,-1]
+```
+
+**Solution:**
+```python
+# Time: O(N) | Space: O(1)
+# (repo solves the "immediate smaller element" variant in place)
+
+def immediateSmaller(a: List[int]) -> None:
+    n = len(a)
+    for i in range(n-1):
+        if a[i] > a[i+1]:
+            a[i] = a[i+1]
+        else:
+            a[i] = -1
+    a[n-1] = -1
+```
+
+---
+
+#### 2. LRU Cache
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Design | Hash + Doubly LL | HashMap stores key->node mapping for O(1) access. Doubly LinkedList maintains usage order: head=most recent, tail=least recent. On GET: move to head. On PUT: add to head, remove tail if over capacity | O(1) | O(capacity) |
+
+**Problem Statement:**
+Design an LRU cache with `get` and `put` in O(1). On overflow, evict the least recently used key.
+
+Example:
+```
+capacity=2; put(1,1); put(2,2); get(1)->1; put(3,3) evicts 2; get(2)->-1
+```
+
+**Solution:**
+```python
+# Time: O(1) get/put | Space: O(capacity)
+# repo's clean version leans on Python's OrderedDict
+
+from collections import OrderedDict
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.ordered_dict = OrderedDict()
+        self.capacity = capacity
+        self.key_size = 0
+
+    def get(self, key: int) -> int:
+        value = self.ordered_dict.get(key)
+        if value is None:
+            return -1
+        del self.ordered_dict[key]
+        self.ordered_dict[key] = value       # move to most-recent end
+        return value
+
+    def put(self, key: int, value: int) -> None:
+        if self.ordered_dict.get(key) is not None:
+            del self.ordered_dict[key]
+            self.key_size -= 1
+        if self.key_size == self.capacity:
+            self.ordered_dict.popitem(last=False)   # evict least recent
+            self.key_size -= 1
+        self.ordered_dict[key] = value
+        self.key_size += 1
+```
+
+---
+
+#### 3. Largest Rectangle in Histogram
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Stack | Next/Prev Smaller | For each bar, find area using next smaller and previous smaller elements | O(n) | O(n) |
+
+**Problem Statement:**
+Given histogram bar heights (width 1 each), return the area of the largest rectangle.
+
+Example:
+```
+Input:  heights = [2,1,5,6,2,3]   ->  Output: 10
+```
+
+**Solution:**
+```python
+# Time: O(N) | Space: O(N)
+
+from collections import deque
+
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        dq = deque()
+        heights.append(float("-inf"))       # sentinel to flush the stack
+        n = len(heights)
+
+        area = 0
+        for i in range(n):
+            while dq and heights[dq[-1]] > heights[i]:
+                cur_index = dq.pop()
+                left_index = dq[-1] if dq else -1
+                area = max(area, heights[cur_index]*(i-(left_index+1)))
+            dq.append(i)
+
+        heights.pop()
+        return area
+```
+
+---
+
+#### 4. Sliding Window Maximum
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Queue | Deque | Use deque to maintain decreasing order of elements in current window | O(n) | O(k) |
+
+**Problem Statement:**
+Given `nums` and window size `k`, return the maximum of each sliding window as it moves left to right.
+
+Example:
+```
+Input:  nums = [1,3,-1,-3,5,3,6,7], k = 3   ->  Output: [3,3,5,5,6,7]
+```
+
+**Solution:**
+```python
+# Time: O(n) | Space: O(n)
+
+from collections import deque
+
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        result = []
+        dq = deque()
+
+        for i in range(len(nums)):
+            while dq and nums[dq[-1]] < nums[i]:      # keep deque decreasing
+                dq.pop()
+            dq.append(i)
+
+            window_start = i - (k - 1)
+            while dq and dq[0] < window_start:        # drop indices out of window
+                dq.popleft()
+
+            if i >= k-1:
+                result.append(nums[dq[0]])
+
+        return result
+```
+
+---
+
+#### 5. Min Stack
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Stack | Auxiliary Stack | Use additional stack to track minimum at each level | O(1) | O(n) |
+
+**Problem Statement:**
+Design a stack supporting `push`, `pop`, `top`, and `getMin` all in O(1).
+
+Example:
+```
+push(-2); push(0); push(-3); getMin()->-3; pop(); top()->0; getMin()->-2
+```
+
+**Solution:**
+```python
+# Time: O(1) all ops | Space: O(N)
+
+from collections import deque
+
+class MinStack:
+    def __init__(self):
+        self.min_stack = deque()
+        self.stack = deque()
+
+    def push(self, val: int) -> None:
+        self.stack.append(val)
+        if len(self.min_stack) == 0 or val < self.min_stack[-1]:
+            self.min_stack.append(val)
+        else:
+            self.min_stack.append(self.min_stack[-1])   # carry current min
+
+    def pop(self) -> None:
+        self.stack.pop()
+        self.min_stack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        if len(self.min_stack):
+            return self.min_stack[-1]
+```
+
+---
+
+#### 6. Rotten Oranges
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| BFS | Multi-source BFS | Start BFS from all rotten oranges simultaneously, track time | O(m*n) | O(m*n) |
+
+**Problem Statement:**
+In an `m x n` grid (0 empty, 1 fresh, 2 rotten), each minute fresh oranges adjacent to rotten ones rot. Return minutes until none are fresh, or `-1`.
+
+Example:
+```
+Input:  grid = [[2,1,1],[1,1,0],[0,1,1]]   ->  Output: 4
+```
+
+**Solution:**
+```python
+# Time: O(m*n) | Space: O(m*n)
+
+from collections import deque
+
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        dq = deque()
+        m, n = len(grid), len(grid[0])
+        visited = [[False if grid[i][j] == 1 else True for j in range(n)] for i in range(m)]
+        total_oranges = 0
+
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 2:
+                    total_oranges += 1
+                    dq.append((i, j, 0))
+                if grid[i][j] == 1:
+                    total_oranges += 1
+
+        cur_time = 0
+        total_queue_items = 0
+        while dq:
+            i, j, time = dq.popleft()
+            cur_time = time
+            total_queue_items += 1
+            self.add_fresh_tomatoes_queue(dq, i-1, j, visited, m, n, cur_time)
+            self.add_fresh_tomatoes_queue(dq, i, j+1, visited, m, n, cur_time)
+            self.add_fresh_tomatoes_queue(dq, i+1, j, visited, m, n, cur_time)
+            self.add_fresh_tomatoes_queue(dq, i, j-1, visited, m, n, cur_time)
+
+        return cur_time if total_oranges == total_queue_items else -1
+
+    def add_fresh_tomatoes_queue(self, dq, row_index, col_index, visited, m, n, cur_time):
+        if 0 <= row_index < m and 0 <= col_index < n and not visited[row_index][col_index]:
+            visited[row_index][col_index] = True
+            dq.append((row_index, col_index, cur_time+1))
+```
+
+---
+
+#### 7. Stock Span Problem
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Stack | Monotonic Stack | Use stack to store (price, index), find spans by comparing with previous greater elements | O(n) | O(n) |
+
+**Problem Statement:**
+Design a `StockSpanner`: for each day's price, return the number of consecutive days (up to today, going back) with price ≤ today's price.
+
+Example:
+```
+next: 100,80,60,70,60,75,85   ->  spans: 1,1,1,2,1,4,6
+```
+
+**Solution:**
+```python
+# Time: O(N) amortized | Space: O(N)
+
+from collections import deque
+
+class StockSpanner:
+    def __init__(self):
+        self.dq = deque()
+        self.count = 0
+
+    def next(self, price: int) -> int:
+        while self.dq and self.dq[-1][0] <= price:
+            self.dq.pop()
+        # distance to the previous strictly-greater price (or start)
+        res = self.count - self.dq[-1][1] if self.dq else self.count + 1
+        self.dq.append((price, self.count))
+        self.count += 1
+        return res
+```
+
+---
+
+### Binary Search Tree
+
+#### 1. Populate Next Right Pointers
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Tree | Level-order Traversal | Connect nodes at same level using BFS or recursion | O(n) | O(1) |
+
+**Problem Statement:**
+Given a perfect binary tree, populate each node's `next` pointer to point to its next right node at the same level (or `NULL`).
+
+Example:
+```
+Input:  root = [1,2,3,4,5,6,7]   ->  each level linked left-to-right
+```
+
+**Solution:**
+```python
+# Time: O(N) | Space: O(N)
+
+from collections import deque
+
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if not root:
+            return root
+
+        dq = deque()
+        prev_node_level = 0
+        dq.append((root, prev_node_level))
+        prev_node = None
+
+        while dq:
+            cur_node, cur_node_level = dq.popleft()
+            if cur_node and cur_node.left and cur_node.right:
+                dq.append((cur_node.left, cur_node_level+1))
+                dq.append((cur_node.right, cur_node_level+1))
+            if prev_node:
+                prev_node.next = None if cur_node_level > prev_node_level else cur_node
+            prev_node = cur_node
+            prev_node_level = cur_node_level
+
+        prev_node.next = None
+        return root
+```
+
+---
+
+#### 2. Search in BST
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| BST | Binary Search Property | Navigate left/right based on value comparison | O(log n) | O(log n) |
+
+**Problem Statement:**
+Given the root of a BST and an integer `val`, return the subtree rooted at the node with value `val`, or `null`.
+
+Example:
+```
+Input:  root = [4,2,7,1,3], val = 2   ->  Output: [2,1,3]
+```
+
+**Solution:**
+```python
+# Time: O(log N) | Space: O(1)
+
+class Solution:
+    def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        node = root
+        while node:
+            if node.val < val:
+                node = node.right
+            elif node.val > val:
+                node = node.left
+            else:
+                break
+        return node
+```
+
+---
+
+#### 3. Floor in BST
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| BST | Lower Bound | Track largest value <= target while traversing BST | O(log n) | O(log n) |
+
+**Problem Statement:**
+Given a BST and a value `X`, find the greatest node value that is smaller than or equal to `X` (the floor).
+
+Example:
+```
+Input:  BST {2,5,6,10,15}, X = 7   ->  Output: 6
+```
+
+**Solution:**
+```python
+# Time: O(H) | Space: O(1)
+
+def floorInBST(root, X):
+    def floor_in_bst(node, floor):
+        if not node:
+            return floor
+        if node.data > X:
+            return floor_in_bst(node.left, floor)
+        elif node.data < X:
+            floor = node.data                # candidate; look right for a bigger valid one
+            return floor_in_bst(node.right, floor)
+        else:
+            return node.data
+
+    return floor_in_bst(root, -1)
+```
+
+---
+
+### Binary Tree Advanced
+
+#### 1. All Tree Traversals in One
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Tree Traversal | Single Function | Use one recursive function to build all three traversal lists | O(n) | O(n) |
+
+**Problem Statement:**
+Given a binary tree, return its in-order, pre-order, and post-order traversals — all computed in a single traversal.
+
+Example:
+```
+Input:  tree 1(2, 3(6))   ->  in: [2,1,3,6]  pre: [1,2,3,6]  post: [2,6,3,1]
+```
+
+**Solution:**
+```python
+# Time: O(N) | Space: O(N)
+
+def getTreeTraversal(root):
+    pre_order, in_order, post_order = [], [], []
+
+    def single_traversal(cur_node):
+        if not cur_node:
+            return
+        pre_order.append(cur_node.data)      # before going left
+        single_traversal(cur_node.left)
+        in_order.append(cur_node.data)       # between left and right
+        single_traversal(cur_node.right)
+        post_order.append(cur_node.data)     # after both children
+
+    single_traversal(root)
+    return [in_order, pre_order, post_order]
+```
+
+---
+
+#### 2. Root to Node Path
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Tree Traversal | Path Tracking | Use recursion with path building to find all root-to-leaf paths | O(n) | O(h) |
+
+**Problem Statement:**
+Given a binary tree, find all root-to-leaf paths.
+
+Example:
+```
+Input:  1(2, 3(4(_,5(_,7)), 6))   ->  Output: [[1,2],[1,3,4,5,7],[1,3,6]]
+```
+
+**Solution:**
+```python
+# Time: O(N) | Space: O(H)
+
+class Solution:
+    def Paths(self, root: Optional['Node']) -> List[List[int]]:
+        res = []
+
+        def in_order_path(cur_node, path):
+            if not cur_node:
+                return
+            in_order_path(cur_node.left, path + [cur_node.data])
+            if not cur_node.left and not cur_node.right:      # leaf -> record path
+                res.append(path + [cur_node.data])
+            in_order_path(cur_node.right, path + [cur_node.data])
+
+        in_order_path(root, [])
+        return res
+```
+
+---
+
+#### 3. Left View Binary Tree
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Tree View | Level-order First | For each level, first node encountered is part of left view | O(n) | O(h) |
+
+**Problem Statement:**
+Given a binary tree, return its left view — the nodes visible when the tree is viewed from the left side.
+
+Example:
+```
+Input:  1(2, 3(4(_,5(_,7)), 6))   ->  Output: [1,2,4,5,7]
+```
+
+**Solution:**
+```python
+# Time: O(n) | Space: O(h)
+
+def LeftView(root):
+    def left_view(res, cur_node=root, cur_level=0):
+        if cur_node is None:
+            return
+        if cur_level == len(res):            # first node reached at this depth
+            res.append(cur_node.data)
+        left_view(res, cur_node.left, cur_level+1)
+        left_view(res, cur_node.right, cur_level+1)
+
+    res = []
+    left_view(res)
+    return res
+```
+
+---
+
+#### 4. Bottom View Binary Tree
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Tree View | Horizontal Distance | Track rightmost node at each horizontal distance using level-order | O(n) | O(n) |
+
+**Problem Statement:**
+Given a binary tree, print its bottom view left to right (the last node seen at each horizontal distance).
+
+Example:
+```
+Input:  2(7(2, 6(5, 11)), 5(_, 9(4, _)))   ->  Output: [2,5,6,4,9]
+```
+
+**Solution:**
+```python
+# Time: O(n) | Space: O(n)
+
+from collections import deque
+
+class Solution:
+    def bottomView(self, root):
+        if not root:
+            return []
+
+        queue = deque([(root, 0)])
+        res_dict = {}
+        while queue:
+            cur_node, ver_level = queue.popleft()
+            res_dict[ver_level] = cur_node.data      # overwrite -> keep the lowest node
+            if cur_node.left:
+                queue.append((cur_node.left, ver_level-1))
+            if cur_node.right:
+                queue.append((cur_node.right, ver_level+1))
+
+        return [res_dict[index] for index in sorted(res_dict)]
+```
+
+---
+
+#### 5. Top View Binary Tree
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Tree View | Horizontal Distance | Track first node at each horizontal distance using level-order | O(n) | O(n) |
+
+**Problem Statement:**
+Given a binary tree, print its top view (the first node seen at each horizontal distance from the top).
+
+Example:
+```
+Input:  10(20(40,60), 30(90,100))   ->  Output: [40,20,10,30,100]
+```
+
+**Solution:**
+```python
+# Time: O(N) + O(K log K) | Space: O(N)
+
+from collections import deque
+
+class Solution:
+    def topView(self, root):
+        queue = deque()
+        result_dict = {}
+        queue.append((root, 0))
+
+        while queue:
+            cur_node, line = queue.popleft()
+            if line not in result_dict:              # first node at this line stays
+                result_dict[line] = cur_node.data
+            if cur_node.left:
+                queue.append((cur_node.left, line-1))
+            if cur_node.right:
+                queue.append((cur_node.right, line+1))
+
+        return [result_dict[item] for item in sorted(result_dict)]
+```
+
+---
+
+#### 6. Vertical Order Traversal
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Tree Traversal | Coordinates | Sort nodes by (col, row, value) to get vertical column-wise order | O(n log n) | O(n) |
+
+**Problem Statement:**
+Given a binary tree, return its vertical order traversal (columns left to right; within a column, top to bottom; ties in the same cell sorted by value).
+
+Example:
+```
+Input:  root = [3,9,20,null,null,15,7]   ->  Output: [[9],[3,15],[20],[7]]
+```
+
+**Solution:**
+```python
+# Time: O(N) + O(K log K) | Space: O(N)
+
+from collections import deque
+
+class Solution:
+    def verticalTraversal(self, root: Optional[TreeNode]) -> List[List[int]]:
+        res_dict = {}
+        queue = deque([(root, 0)])
+
+        while queue:
+            size = len(queue)
+            row_dict = {}                    # values seen at this level, by column
+            for _ in range(size):
+                cur_node, ver_level = queue.popleft()
+                if not row_dict.get(ver_level):
+                    row_dict[ver_level] = [cur_node.val]
+                    if not res_dict.get(ver_level):
+                        res_dict[ver_level] = []
+                else:
+                    row_dict[ver_level].append(cur_node.val)
+                if cur_node.left:
+                    queue.append((cur_node.left, ver_level-1))
+                if cur_node.right:
+                    queue.append((cur_node.right, ver_level+1))
+
+            for key in row_dict:
+                if len(row_dict[key]) > 1:
+                    row_dict[key] = sorted(row_dict[key])    # same cell -> sort by value
+                res_dict[key] += row_dict[key]
+
+        return [res_dict[key] for key in sorted(res_dict)]
+```
+
+---
+
+#### 7. Maximum Width Binary Tree
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Tree Property | Level Indexing | Use position indices to calculate width, handle overflow with offset | O(n) | O(w) |
+
+**Problem Statement:**
+Given a binary tree, return its maximum width — the max over all levels of the distance between the leftmost and rightmost non-null nodes (counting the nulls between them).
+
+Example:
+```
+Input:  root = [1,3,2,5,3,null,9]   ->  Output: 4
+```
+
+**Solution:**
+```python
+# Time: O(N) | Space: O(N)
+
+from collections import deque
+
+class Solution:
+    def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        queue = deque([(root, 0)])           # (node, index as in a complete tree)
+        res = 0
+
+        while queue:
+            min_s_no, max_s_no = None, None
+            size = len(queue)
+            for _ in range(size):
+                cur_node, s_no = queue.popleft()
+                min_s_no = s_no if (min_s_no is None) or (s_no < min_s_no) else min_s_no
+                max_s_no = s_no if (max_s_no is None) or (s_no > max_s_no) else max_s_no
+                if cur_node.left:
+                    queue.append((cur_node.left, s_no * 2))
+                if cur_node.right:
+                    queue.append((cur_node.right, s_no * 2 + 1))
+
+            res = max(res, max_s_no - min_s_no + 1)
+
+        return res
+```
+
+---
+
+### Heaps
+
+#### 1. Implement Min Heap
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Heap | Array Implementation | Use array with heapify up/down, parent at (i-1)//2, children at 2*i+1, 2*i+2 | O(log n) | O(n) |
+
+**Problem Statement:**
+Implement a Min Heap supporting two queries: `0 X` inserts `X`; `1` prints and removes the minimum element.
+
+Example:
+```
+Insert 2, Insert 1, ExtractMin -> 1
+```
+
+**Solution:**
+```python
+# Time: O(log N) per op | Space: O(N)
+
+def minHeap(N: int, Q: [[]]) -> []:
+    min_heap = []
+    res = []
+
+    def get_parent(i): return (i-1) // 2
+    def get_left_child(i): return 2*i + 1
+    def get_right_child(i): return 2*i + 2
+    def is_index_in_heap(i): return 0 <= i < len(min_heap)
+
+    def heapify(cur_index):                  # sift down
+        left, right = get_left_child(cur_index), get_right_child(cur_index)
+        smallest = cur_index
+        if is_index_in_heap(left) and min_heap[left] < min_heap[smallest]:
+            smallest = left
+        if is_index_in_heap(right) and min_heap[right] < min_heap[smallest]:
+            smallest = right
+        if not smallest == cur_index:
+            min_heap[cur_index], min_heap[smallest] = min_heap[smallest], min_heap[cur_index]
+            heapify(smallest)
+
+    def check_with_par(cur_index):           # sift up
+        if cur_index <= 0:
+            return
+        par_index = get_parent(cur_index)
+        if min_heap[par_index] > min_heap[cur_index]:
+            min_heap[par_index], min_heap[cur_index] = min_heap[cur_index], min_heap[par_index]
+            check_with_par(par_index)
+
+    def insert(val):
+        min_heap.append(val)
+        check_with_par(len(min_heap)-1)
+
+    def pop_min():
+        if len(min_heap) == 1:
+            return min_heap.pop()
+        min_val = min_heap[0]
+        min_heap[0] = min_heap.pop()
+        heapify(0)
+        return min_val
+
+    for query in Q:
+        if len(query) == 1:
+            res.append(pop_min())
+        else:
+            insert(query[1])
+
+    return res
+```
+
+---
+
+### Graph Algorithms
+
+#### 1. BFS
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Graph Traversal | Level-order | Use queue to visit nodes level by level | O(V+E) | O(V) |
+
+**Problem Statement:**
+Given an adjacency list of a graph with `n` vertices, return the BFS traversal starting from vertex 0.
+
+Example:
+```
+Input:  adj = [[1,2,3],[2],[],[]]   ->  Output: [0,1,2,3]
+```
+
+**Solution:**
+```python
+# Time: O(N + 2E) | Space: O(N)
+
+from collections import deque
+
+def bfsTraversal(n: int, adj: List[List[int]]) -> List[int]:
+    dq = deque()
+    visited_nodes = [0] * n
+    res = []
+    dq.append(0)
+    while dq:
+        node = dq.popleft()
+        if not visited_nodes[node]:
+            visited_nodes[node] = 1
+            res.append(node)
+            for adjacent_node in adj[node]:
+                dq.append(adjacent_node)
+    return res
+```
+
+---
+
+#### 2. DFS
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Graph Traversal | Depth-first | Use recursion or stack to go deep before exploring siblings | O(V+E) | O(V) |
+
+**Problem Statement:**
+Given a connected undirected graph, perform a DFS traversal from vertex 0.
+
+Example:
+```
+Input:  V = 5, adj = [[2,3,1],[0],[0,4],[0],[2]]   ->  Output: [0,2,4,3,1]
+```
+
+**Solution:**
+```python
+# Time: O(V + 2E) | Space: O(V)
+
+class Solution:
+    def dfsOfGraph(self, V, adj):
+        visited_nodes = [0] * V
+        result = []
+
+        def dfs(cur_node):
+            if not visited_nodes[cur_node]:
+                visited_nodes[cur_node] = 1
+                result.append(cur_node)
+                for adj_node in adj[cur_node]:
+                    dfs(adj_node)
+
+        for node in range(V):
+            if not visited_nodes[node]:
+                dfs(node)
+        return result
+```
+
+---
+
+#### 3. Cycle Detection (Undirected BFS)
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Cycle Detection | BFS with Parent | If adjacent is visited and not parent, cycle exists | O(V+E) | O(V) |
+
+**Problem Statement:**
+Given an undirected graph with `V` vertices and `E` edges (no self-loops), return `true` if it contains a cycle (BFS, carrying each node's parent).
+
+Example:
+```
+Input:  4 vertices, edges 0-1,1-2,2-3,3-0   ->  Output: True
+```
+
+**Solution:**
+```python
+# Time: O(N + 2E) | Space: O(N)
+
+from collections import deque
+
+def bfs(node, parent_node, node_graph, visited_nodes):
+    dq = deque()
+    dq.append((node, parent_node))
+    while dq:
+        cur_node, parent_node = dq[0][0], dq[0][1]
+        if not visited_nodes[cur_node]:
+            visited_nodes[cur_node] = 1
+            dq.popleft()
+            for adj_node in node_graph[cur_node]:
+                if not adj_node == parent_node and not adj_node == cur_node:
+                    dq.append((adj_node, cur_node))
+        else:
+            return True
+    return False
+```
+
+---
+
+#### 4. Cycle Detection (Undirected DFS)
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Cycle Detection | DFS with Parent | If adjacent is visited and not parent, cycle exists | O(V+E) | O(V) |
+
+**Problem Statement:**
+Given an undirected graph with `V` vertices and `E` edges (no self-loops), return `true` if it contains a cycle (DFS passing the parent).
+
+Example:
+```
+Input:  4 vertices, edges 0-1,1-2,2-3,3-0   ->  Output: True
+```
+
+**Solution:**
+```python
+# Time: O(N + 2E) | Space: O(N)
+
+def dfs(node, parent_node, node_graph, visited_nodes):
+    res = False
+    if not visited_nodes[node]:
+        visited_nodes[node] = 1
+        for adj_node in node_graph[node]:
+            if not adj_node == parent_node and not adj_node == node:
+                if dfs(adj_node, node, node_graph, visited_nodes):
+                    res = True
+                    break
+    else:
+        res = True
+    return res
+```
+
+---
+
+#### 5. Cycle Detection (Directed DFS)
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Cycle Detection | DFS with Colors | Use 3 colors: white (unvisited), gray (visiting), black (visited) | O(V+E) | O(V) |
+
+**Problem Statement:**
+Detect a cycle in a directed graph via Course Schedule: return `true` if all courses can be finished.
+
+Example:
+```
+Input:  numCourses = 2, prerequisites = [[1,0],[0,1]]   ->  Output: False
+```
+
+**Solution:**
+```python
+# Time: O(V+E) | Space: O(V+E)
+# course_completed = black, per-DFS visited_nodes = gray
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: list[list[int]]) -> bool:
+        node_graph = [[] for i in range(numCourses)]
+        for main_course, pre_req_course in prerequisites:
+            node_graph[main_course].append(pre_req_course)
+
+        course_completed = [0] * numCourses
+
+        def courseFinish(node, visited_nodes):
+            if course_completed[node]:
+                return True
+            if not course_completed[node] and visited_nodes[node]:
+                return False                  # reached a gray node -> cycle
+            visited_nodes[node] = 1
+            for adj_node in node_graph[node]:
+                if not courseFinish(adj_node, visited_nodes):
+                    return False
+            course_completed[node] = True
+            return True
+
+        for item in range(numCourses):
+            if not course_completed[item]:
+                if not courseFinish(item, [0]*numCourses):
+                    return False
+        return True
+```
+
+---
+
+#### 6. Topological Sort (BFS - Kahn's)
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Topological Sort | Indegree | Start with 0 indegree nodes, reduce indegree of neighbors | O(V+E) | O(V) |
+
+**Problem Statement:**
+Given a DAG with `V` vertices, return a topological ordering using Kahn's algorithm (BFS on in-degrees).
+
+Example:
+```
+Input:  adj = [[],[0],[0],[0]]   ->  Output: [1,2,3,0]
+```
+
+**Solution:**
+```python
+# Time: O(V + E) | Space: O(E)
+
+from collections import deque
+
+class Solution:
+    def topoSort(self, V, adj):
+        in_degree = [0] * V
+        dq = deque()
+        result = []
+
+        for i in range(len(adj)):
+            for item in adj[i]:
+                in_degree[item] += 1
+        for i in range(len(in_degree)):
+            if in_degree[i] == 0:
+                dq.append(i)
+
+        while dq:
+            node = dq.popleft()
+            for adj_node in adj[node]:
+                in_degree[adj_node] -= 1
+                if in_degree[adj_node] == 0:
+                    dq.append(adj_node)
+            result.append(node)
+
+        return result
+```
+
+---
+
+#### 7. Topological Sort (DFS)
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Topological Sort | Finish Time | Add to result when finishing DFS (all neighbors processed) | O(V+E) | O(V) |
+
+**Problem Statement:**
+Given a DAG with `V` vertices and `E` edges, return any topological ordering using DFS.
+
+Example:
+```
+Input:  edges 0->1, 0->2   ->  Output: [0,2,1] (one valid order)
+```
+
+**Solution:**
+```python
+# Time: O(V + E) | Space: O(V)
+
+from collections import deque
+
+def topologicalSort(adj, v, e):
+    node_graph = [[] for i in range(v)]
+    for item in adj:
+        if item[0] is not None:
+            node_graph[item[0]].append(item[1])
+
+    visited_nodes = [0] * v
+    dq = deque()
+
+    def topoSort(node):
+        if visited_nodes[node]:
+            return
+        visited_nodes[node] = 1
+        for adj_node in node_graph[node]:
+            topoSort(adj_node)
+        dq.append(node)
+
+    for cur_node in range(v):
+        topoSort(cur_node)
+
+    res = []
+    while dq:
+        res.append(dq.pop())         # reverse finish order
+    return res
+```
+
+---
+
+### Dynamic Programming
+
+#### 1. Maximum Product Subarray
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Array DP | Track Min/Max | Track maxProduct and minProduct ending at current position. For each element: newMax = max(num, maxProduct*num, minProduct*num), newMin = min(num, maxProduct*num, minProduct*num). Update global max | O(n) | O(1) |
+
+**Problem Statement:**
+Given an integer array `nums`, find a contiguous subarray with the largest product and return that product.
+
+Example:
+```
+Input:  nums = [2,3,-2,4]   ->  Output: 6
+Input:  nums = [-2,0,-1]    ->  Output: 0
+```
+
+**Solution:**
+```python
+# Time: O(N) | Space: O(1)
+# prefix/suffix products: a max product ends at some prefix or suffix boundary
+
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        result = float("-inf")
+        prefix = 1
+        suffix = 1
+        n = len(nums)
+
+        for i in range(n):
+            prefix = prefix * nums[i]
+            suffix = suffix * nums[n-1-i]
+            result = max(result, max(prefix, suffix))
+            if prefix == 0:
+                prefix = 1                 # reset across zeros
+            if suffix == 0:
+                suffix = 1
+
+        return result
+```
+
+---
+
+#### 2. Min Path Sum (Grid)
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| 2D DP | Path Optimization | dp[i][j] = grid[i][j] + min(top, left) | O(m*n) | O(m*n) |
+
+**Problem Statement:**
+Given an `m x n` grid of non-negative numbers, find a top-left to bottom-right path (moving right/down) minimizing the sum along it.
+
+Example:
+```
+Input:  grid = [[1,3,1],[1,5,1],[4,2,1]]   ->  Output: 7
+```
+
+**Solution:**
+```python
+# Time: O(N*M) | Space: O(M*N)
+
+class Solution:
+    def minPathSum(self, grid: list[list[int]]) -> int:
+        m = len(grid)
+        n = len(grid[0])
+        memo = [[-1]*n for _ in range(m)]
+
+        def get_min_path_sum(i, j):
+            if i >= m or j >= n:
+                return float("inf")
+            if i == m-1 and j == n-1:
+                return grid[i][j]
+            if not memo[i][j] == -1:
+                return memo[i][j]
+            memo[i][j] = grid[i][j] + min(get_min_path_sum(i, j+1), get_min_path_sum(i+1, j))
+            return memo[i][j]
+
+        return get_min_path_sum(0, 0)
+```
+
+---
+
+### Trie
+
+#### 1. Implement Trie
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Trie | Prefix Tree | Use array of 26 children + end flag for each node | O(word_length) | O(total_chars) |
+
+**Problem Statement:**
+Implement a Trie with `insert`, `search` (exact word), and `startsWith` (prefix).
+
+**Solution:**
+```python
+# Time: O(word_length) per op | Space: O(total_chars)
+
+class Node:
+    def __init__(self):
+        self.links = [None] * 26
+        self.flag = False
+
+    def contains_key(self, ch): return self.links[ord(ch)-ord("a")]
+    def get(self, ch): return self.links[ord(ch)-ord("a")]
+    def put(self, ch, node): self.links[ord(ch)-ord("a")] = node
+    def set_end(self): self.flag = True
+    def is_end(self): return self.flag
+
+class Trie:
+    def __init__(self):
+        self.root = Node()
+
+    def insert(self, word: str) -> None:
+        node = self.root
+        for cur_char in word:
+            if not node.contains_key(cur_char):
+                node.put(cur_char, Node())
+            node = node.get(cur_char)
+        node.set_end()
+
+    def search(self, word: str) -> bool:
+        node = self.root
+        for cur_char in word:
+            if not node.contains_key(cur_char):
+                return False
+            node = node.get(cur_char)
+        return node.is_end()
+
+    def startsWith(self, prefix: str) -> bool:
+        node = self.root
+        for cur_char in prefix:
+            if not node.contains_key(cur_char):
+                return False
+            node = node.get(cur_char)
+        return True
+```
+
+---
+
+#### 2. Implement Trie II
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Trie | Count Tracking | Add count variables to track word frequency and prefix count | O(word_length) | O(total_chars) |
+
+**Problem Statement:**
+Implement a Trie supporting `insert`, `countWordsEqualTo`, `countWordsStartingWith`, and `erase` (words may repeat).
+
+**Solution:**
+```python
+# Time: O(word_length) per op | Space: O(total_chars)
+
+class TrieNode:
+    def __init__(self):
+        self.links = [None] * 26
+        self.end_with = 0
+        self.count_prefix = 0
+
+    def contains_key(self, ch): return self.links[ord(ch)-ord("a")] is not None
+    def get(self, ch): return self.links[ord(ch)-ord("a")]
+    def put(self, ch, node): self.links[ord(ch)-ord("a")] = node
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, word):
+        node = self.root
+        for cur_char in word:
+            if not node.contains_key(cur_char):
+                node.put(cur_char, TrieNode())
+            node = node.get(cur_char)
+            node.count_prefix += 1
+        node.end_with += 1
+
+    def countWordsEqualTo(self, word):
+        node = self.root
+        for cur_char in word:
+            if not node.contains_key(cur_char):
+                return 0
+            node = node.get(cur_char)
+        return node.end_with
+
+    def countWordsStartingWith(self, word):
+        node = self.root
+        for cur_char in word:
+            if not node.contains_key(cur_char):
+                return 0
+            node = node.get(cur_char)
+        return node.count_prefix
+
+    def erase(self, word):
+        node = self.root
+        for cur_char in word:
+            if not node.contains_key(cur_char):
+                return
+            node = node.get(cur_char)
+            node.count_prefix -= 1
+        node.end_with -= 1
+```
+
+---
+
+#### 3. Longest String with All Prefixes
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Trie | Prefix Chain | String is complete if all its prefixes exist in trie | O(total_chars) | O(total_chars) |
+
+**Problem Statement:**
+(Repo file solves *Longest Common Prefix* iteratively) Given an array of strings, find the longest common prefix among all of them.
+
+Example:
+```
+Input:  ["applejuice","applepie","apple"]   ->  Output: "apple"
+```
+
+**Solution:**
+```python
+# Time: O(N*M) | Space: O(1)  (iterative scan variant in repo)
+
+def longestCommonPrefix(arr, n):
+    result = ""
+    for i in range(len(arr[0])):
+        fir_elem_char = arr[0][i]
+        is_further_processing_req = True
+        ind = 1
+        while ind < len(arr):
+            if i >= len(arr[ind]) or not arr[ind][i] == fir_elem_char:
+                is_further_processing_req = False
+                break
+            ind += 1
+        if not is_further_processing_req:
+            break
+        else:
+            result += fir_elem_char
+    return result
+```
+
+---
+
+#### 4. Complete String
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Trie | Prefix Validation | Check if every prefix of string exists as complete word in trie | O(total_chars) | O(total_chars) |
+
+**Problem Statement:**
+Given an array of strings, find the longest string such that every prefix of it is also present in the array. Ties broken lexicographically; return `None` if no such string exists.
+
+Example:
+```
+Input:  ["n","ni","nin","ninj","ninja","ninga"]   ->  Output: "ninja"
+```
+
+**Solution:**
+```python
+# Time: O(N * Len) | Space: O(total_chars)
+
+class TrieNode:
+    def __init__(self):
+        self.links = [None] * 26
+        self.is_end_flag = False
+
+    def contains_key(self, ch): return self.links[ord(ch)-ord("a")] is not None
+    def get(self, ch): return self.links[ord(ch)-ord("a")]
+    def put(self, ch, node): self.links[ord(ch)-ord("a")] = node
+    def set_end(self): self.is_end_flag = True
+    def is_end(self): return self.is_end_flag
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, word):
+        node = self.root
+        for cur_char in word:
+            if not node.contains_key(cur_char):
+                node.put(cur_char, TrieNode())
+            node = node.get(cur_char)
+        node.set_end()
+
+    def search_complete_string(self, word):
+        node = self.root
+        for cur_char in word:
+            if not node.contains_key(cur_char):
+                return False
+            node = node.get(cur_char)
+            if not node.is_end():        # some prefix isn't itself a word
+                return False
+        return True
+
+def completeString(n: int, a: List[str]) -> str:
+    trie = Trie()
+    for word in a:
+        trie.insert(word)
+
+    result = ""
+    for word in a:
+        if trie.search_complete_string(word):
+            if len(word) > len(result):
+                result = word
+            elif len(word) == len(result):
+                result = word if word < result else result
+
+    return result if result else None
+```
+
+---
+
+#### 5. Number of Distinct Substrings
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Trie | Suffix Insertion | Insert all suffixes into trie, count total nodes created | O(n²) | O(n²) |
+
+**Problem Statement:**
+Given a string `S`, return the number of distinct substrings (including the empty substring) using a trie.
+
+Example:
+```
+Input:  S = "abc"   ->  Output: 7
+```
+
+**Solution:**
+```python
+# Time: O(n^2) | Space: O(n^2)
+# Insert every suffix into a trie; each new node created is one new distinct substring (+1 for empty).
+# (repo file provides the count-tracking Trie building block used for this.)
+
+class TrieNode:
+    def __init__(self):
+        self.links = [None] * 26
+
+    def contains_key(self, ch): return self.links[ord(ch)-ord("a")] is not None
+    def get(self, ch): return self.links[ord(ch)-ord("a")]
+    def put(self, ch, node): self.links[ord(ch)-ord("a")] = node
+
+def countDistinctSubstrings(s: str) -> int:
+    root = TrieNode()
+    count = 0
+    for i in range(len(s)):
+        node = root
+        for j in range(i, len(s)):
+            ch = s[j]
+            if not node.contains_key(ch):
+                node.put(ch, TrieNode())
+                count += 1               # a new node == a new distinct substring
+            node = node.get(ch)
+    return count + 1                     # +1 for the empty substring
+```
+
+---
+
+#### 6. Max XOR of Two Numbers
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Trie | Bit Trie | Build binary trie, for each number find max XOR by going opposite bits | O(n*32) | O(n*32) |
+
+**Problem Statement:**
+Given an integer array `nums`, return the maximum value of `nums[i] XOR nums[j]`.
+
+Example:
+```
+Input:  nums = [3,10,5,25,2,8]   ->  Output: 28
+```
+
+**Solution:**
+```python
+# Time: O(N*32) | Space: O(N*32)
+
+class TrieNode:
+    def __init__(self):
+        self.links = [None]*2
+
+    def contains_key(self, bit): return self.links[bit] is not None
+    def get(self, bit): return self.links[bit]
+    def put(self, bit, node): self.links[bit] = node
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, num):
+        node = self.root
+        for cur_char in '{:032b}'.format(num):
+            cur_bit = int(cur_char)
+            if not node.contains_key(cur_bit):
+                node.put(cur_bit, TrieNode())
+            node = node.get(cur_bit)
+
+    def find_max_xor(self, num):
+        node = self.root
+        result = ""
+        for cur_char in '{:032b}'.format(num):
+            cur_bit = int(cur_char)
+            reverse_bit = 1 - cur_bit
+            if node.contains_key(reverse_bit):
+                result += "1"            # opposite bit maximizes XOR
+                node = node.get(reverse_bit)
+            else:
+                result += "0"
+                node = node.get(cur_bit)
+        return int(result, 2)
+
+class Solution:
+    def findMaximumXOR(self, nums: List[int]) -> int:
+        trie = Trie()
+        for num in nums:
+            trie.insert(num)
+        result = float("-inf")
+        for num in nums:
+            result = max(result, trie.find_max_xor(num))
+        return result
+```
+
+---
+
+#### 7. Max XOR with Element from Array
+
+| Category | Pattern | Key Trick | Time | Space |
+|----------|---------|-----------|------|-------|
+| Trie | Offline Queries | Sort queries by limit, add numbers to trie as limit increases | O(q*32 + n*32) | O(n*32) |
+
+**Problem Statement:**
+Given `nums` and queries `[xi, mi]`, for each query return the max `nums[j] XOR xi` over all `nums[j] <= mi`, or `-1` if none qualify.
+
+Example:
+```
+Input:  nums = [0,1,2,3,4], queries = [[3,1],[1,3],[5,6]]   ->  Output: [3,3,7]
+```
+
+**Solution:**
+```python
+# Time: O(N log N + Q log Q) | Space: O(N+M)
+# reuses the bit-Trie above; process queries offline, sorted by limit
+
+class Solution:
+    def maximizeXor(self, nums: list[int], queries: list[List[int]]) -> list[int]:
+        trie = Trie()
+        for i in range(len(queries)):
+            queries[i].append(i)              # remember original index
+
+        queries.sort(key=lambda x: x[1])      # by limit m
+        nums.sort()
+
+        result = [-1]*len(queries)
+        old_index = 0
+        for item in queries:
+            limit = item[1]
+            while old_index < len(nums) and nums[old_index] <= limit:
+                trie.insert(nums[old_index])
+                old_index += 1
+            original_index = item[2]
+            if old_index == 0:
+                result[original_index] = -1
+            else:
+                result[original_index] = trie.find_max_xor(item[0])
+        return result
+```
+
+---
