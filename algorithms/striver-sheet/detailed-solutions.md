@@ -282,31 +282,24 @@ Input:  nums = [2,7,11,15], target = 9   ->  Output: [0,1]
 
 **Solution:**
 ```python
-# Time: O(n log n) | Space: O(n)
+# Time: O(n) | Space: O(n)
 # (repo file uses sort + two-pointer, then maps values back to original indices)
 import copy
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        original_input = copy.deepcopy(nums)
-        nums.sort()
-        i, j = 0, len(nums) - 1
-        fir_ind, sec_ind = -1, -1
-        while i < j:
-            if nums[i] + nums[j] == target:
-                break
-            elif nums[i] + nums[j] < target:
-                i += 1
-            elif nums[i] + nums[j] > target:
-                j -= 1
+        num_diff_dict = {}
+        n = len(nums)
 
-        for ind in range(len(original_input)):
-            if original_input[ind] == nums[i] and fir_ind == -1:
-                fir_ind = ind
-            elif original_input[ind] == nums[j]:
-                sec_ind = ind
+        for i in range(n):
+            cur_no = nums[i]
+            
+            if num_diff_dict.get(cur_no) is not None:
+                return [num_diff_dict[cur_no], i]
+            
+            num_diff_dict[target-cur_no] = i
+        
 
-        return [fir_ind, sec_ind]
 ```
 
 ---
