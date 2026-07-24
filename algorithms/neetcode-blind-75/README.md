@@ -141,6 +141,24 @@ Each solved problem lists its pattern, the key trick, and time/space complexity.
 | [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) | Kadane's Algorithm | At each position decide: start new subarray OR extend current (nums[i] vs cur_sum + nums[i]) | O(n) | O(1) |
 | [Jump Game](https://leetcode.com/problems/jump-game/) | Furthest Reachable | Track furthest index reachable so far. If current index i > reachable, return False. Else reachable = max(reachable, i + nums[i]). Survive the loop => True | O(n) | O(1) |
 
+## Intervals
+
+| Problem | Pattern | Key Trick | Time | Space |
+|---------|---------|-----------|------|-------|
+| [Insert Interval](https://leetcode.com/problems/insert-interval/) | Sort + Merge Scan | Append the new interval, sort by start time, then walk pairwise: merge current into next while next's start falls within current's range (min/max the bounds), else push current to result and advance | O(n log n) | O(n) |
+| [Merge Intervals](https://leetcode.com/problems/merge-intervals/) | Sort + Merge Scan | Sort by start time, then walk pairwise: merge current into next while they overlap (next start <= current end), else push current to result and move on | O(n log n) | O(n) |
+| [Non Overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/) | Greedy (Sort by End Time) | Sort by end time. Whenever the next interval's start is before the current interval's end (overlap), drop it and count an erasure — since sorted by end, the kept interval always has the smaller end | O(n log n) | O(1) |
+| [Meeting Rooms](https://leetcode.com/problems/meeting-rooms/) | NOT ATTEMPTED | — | — | — |
+| [Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/) | NOT ATTEMPTED | — | — | — |
+
+## Math & Geometry
+
+| Problem | Pattern | Key Trick | Time | Space |
+|---------|---------|-----------|------|-------|
+| [Rotate Image](https://leetcode.com/problems/rotate-image/) | Transpose + Reverse Rows | Transpose the matrix in place (swap matrix[r][c] with matrix[c][r] for c < r), then reverse each row to get a 90° clockwise rotation | O(m * n) | O(1) |
+| [Spiral Matrix](https://leetcode.com/problems/spiral-matrix/) | Directional Walk with Visited Grid | Walk in one of four directions (right -> bottom -> left -> top -> right), switching direction whenever the next cell is out of bounds or already visited, appending values in traversal order | O(m * n) | O(m * n) |
+| [Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/) | In-place Markers via First Row/Col | Use the matrix's own first row and first column as zero markers (with a separate flag for column 0 to avoid clobbering matrix[0][0]), then zero out cells in a second pass based on those markers | O(m * n) | O(1) |
+
 ## Bit Manipulation
 
 | Problem | Pattern | Key Trick | Time | Space |
@@ -149,6 +167,7 @@ Each solved problem lists its pattern, the key trick, and time/space complexity.
 | [Counting Bits](https://leetcode.com/problems/counting-bits/) | Bit Counting | For each number 0 to n, count 1-bits using modulo and right shift operations | O(n log n) | O(1) |
 | [Missing Number](https://leetcode.com/problems/missing-number/) | XOR Trick | XOR all indices (0 to n) with all array values. Missing number will remain as XOR cancels out pairs | O(n) | O(1) |
 | [Reverse Bits](https://leetcode.com/problems/reverse-bits/) | Bit-by-bit Reconstruction | Loop 32 times, shift result left then OR in last bit of n, right shift n each iteration | O(1) | O(1) |
+| [Sum of Two Integers](https://leetcode.com/problems/sum-of-two-integers/) | Bitwise Add (XOR + Carry) | XOR gives the sum without carry, AND+left-shift gives the carry; repeat until no carry remains, masking to 32 bits and converting back from two's complement if the result is negative | O(1) | O(1) |
 
 ---
 
