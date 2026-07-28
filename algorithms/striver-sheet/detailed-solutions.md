@@ -574,7 +574,7 @@ class Solution:
 
 | Category | Pattern | Key Trick | Time | Space |
 |----------|---------|-----------|------|-------|
-| Binary Search | Index Parity Check | Before single element: pairs start at even indices (0,2,4...). After single element: pairs start at odd indices. Check mid: if nums[mid] == nums[mid^1], single element is on right, else left | O(log n) | O(1) |
+| Binary Search | Index Parity Check | Before single element: pairs start at even indices (0,2,4...). After single element: pairs start at odd indices. Force mid to even; if nums[mid] == nums[mid+1], single element is on right, else it's at or before mid | O(log n) | O(1) |
 
 **Problem Statement:**
 Given a sorted array where every element appears exactly twice except one that appears once, return the single element. Must run in O(log n) time, O(1) space.
@@ -591,28 +591,26 @@ Input:  nums = [3,3,7,7,10,11,11]    ->  Output: 10
 
 class Solution:
     def singleNonDuplicate(self, nums: List[int]) -> int:
+        # soldier problem: A A B B C D D
+        #                  0 1 2 3 4 5 6
+        # If nums[even] == nums[even+1], the pair is intact and the single
+        # element lies to the right; otherwise it's at mid or to the left.
         n = len(nums)
+        left = 0
+        right = n - 1
 
-        if n == 1 or not nums[0] == nums[1]:
-            return nums[0]
-        if not nums[n-1] == nums[n-2]:
-            return nums[n-1]
+        while left < right:
+            mid = (left + right) // 2
 
-        low = 1
-        high = n - 2
-        while low <= high:
-            mid = (low + high) // 2
+            if mid % 2 != 0:
+                mid = mid - 1
 
-            if not nums[mid] == nums[mid-1] and not nums[mid] == nums[mid+1]:
-                return nums[mid]
-
-            # even mid pairing with next, or odd mid pairing with prev => single is to the right
-            if mid % 2 == 0 and nums[mid] == nums[mid+1]:
-                low = mid + 1
-            elif mid % 2 == 1 and nums[mid] == nums[mid-1]:
-                low = mid + 1
+            if nums[mid] == nums[mid+1]:
+                left = mid + 2
             else:
-                high = mid - 1
+                right = mid
+
+        return nums[left]
 ```
 
 ---
